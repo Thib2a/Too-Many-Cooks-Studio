@@ -17,6 +17,8 @@
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
+            padding: 20px; /* Added padding for better text visibility */
+            box-sizing: border-box;
         }
         .question-container {
             background: rgba(0, 0, 0, 0.6);
@@ -29,6 +31,7 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 10px;
             margin-top: 20px;
+            justify-items: center; /* Center the images horizontally */
         }
         .captcha-container img {
             width: 100%;
@@ -44,6 +47,10 @@
         .answer-container {
             margin-top: 20px;
         }
+        .validation {
+            color: lightgreen;
+            margin-top: 20px; /* Add space between button and validation message */
+        }
         @media (max-width: 600px) {
             .captcha-container {
                 grid-template-columns: repeat(2, 1fr);
@@ -51,6 +58,12 @@
             .captcha-container img {
                 max-width: 120px;
                 max-height: 120px;
+            }
+            .question-container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.2em; /* Reduce text size for mobile */
             }
         }
     </style>

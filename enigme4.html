@@ -82,19 +82,19 @@
     <div class="container">
         <h1>THE LAST ONE</h1>
         <div id="puzzle1" class="puzzle">
-            <p>Lors d'une course de vélo, un cycliste double le deuxième ? Il devient...</p>
+            <p>Lors d'une course de pousette, un concurent double le deuxième ? Il devient...</p>
             <input type="text" id="answer1" onkeypress="handleKeyPress(event, checkAnswer1)">
             <button onclick="checkAnswer1()">Soumettre</button>
             <p id="feedback1" class="message"></p>
         </div>
         <div id="puzzle2" class="puzzle">
-            <p>Quel chiffre obtient-on en multipliant tous les chiffres d'un clavier ?</p>
+            <p>Il y a 3 Mélusines dans un jardin d'enfants et tu en récupères 2. Combien de Mélusines possèdes-tu maintenant ?</p>
             <input type="text" id="answer2" onkeypress="handleKeyPress(event, checkAnswer2)">
             <button onclick="checkAnswer2()">Soumettre</button>
             <p id="feedback2" class="message"></p>
         </div>
         <div id="puzzle3" class="puzzle">
-            <p>Je suis d'abord grande, puis je diminue, qui suis-je ?</p>
+            <p>Quel mois de l'année compte 28 jours ?</p>
             <input type="text" id="answer3" onkeypress="handleKeyPress(event, checkAnswer3)">
             <button onclick="checkAnswer3()">Soumettre</button>
             <p id="feedback3" class="message"></p>
@@ -115,7 +115,7 @@
 
         function checkAnswer1() {
             const answer1 = document.getElementById('answer1').value.toLowerCase();
-            if (answer1 === '2e'|| answer1 === 'deuxième'|| answer1 === '2') {
+            if (answer1 === '2e'|| answer1 === 'deuxième') {
                 document.getElementById('feedback1').textContent = 'Correct! Passez à la prochaine énigme.';
                 document.getElementById('puzzle1').style.display = 'none';
                 document.getElementById('puzzle2').style.display = 'block';
@@ -126,7 +126,7 @@
 
         function checkAnswer2() {
             const answer2 = document.getElementById('answer2').value.toLowerCase();
-            if (answer2 === '0' || answer2 === 'zéro'|| answer2 === 'zero') {
+            if (answer2 === '2' || answer2 === 'deux') {
                 document.getElementById('feedback2').textContent = 'Correct! Passez à la prochaine énigme.';
                 document.getElementById('puzzle2').style.display = 'none';
                 document.getElementById('puzzle3').style.display = 'block';
@@ -137,7 +137,7 @@
 
         function checkAnswer3() {
             const answer3 = document.getElementById('answer3').value.toLowerCase();
-            if (answer3 === 'bougie') {
+            if (answer3 === 'tous'|| answer3 === 'Tous'|| answer3 === '12') {
                 document.getElementById('feedback3').textContent = 'Correct! Voici le message final.';
                 document.getElementById('puzzle3').style.display = 'none';
                 document.getElementById('finalMessage').style.display = 'block';
