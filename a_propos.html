@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: black url('images/a_propos.png') no-repeat center center;
+            background-size: contain;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        audio {
+            display: none;
+        }
+        .audio-control {
+            position: absolute;
+            top: 85%; /* Changez cette valeur pour déplacer verticalement */
+            left: 50%; /* Changez cette valeur pour déplacer horizontalement */
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-audio">
+        <source src="images/song_a_propos.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas la balise audio.
+    </audio>
+    <button class="audio-control" id="audio-control-button">Play</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('background-audio');
+            var audioControlButton = document.getElementById('audio-control-button');
+
+            audioControlButton.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    audioControlButton.textContent = 'Pause';
+                } else {
+                    audio.pause();
+                    audioControlButton.textContent = 'Play';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

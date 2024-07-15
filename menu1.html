@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Too Many Cooks 1.0</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial, sans-serif';
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .video-container {
+            width: 64%; /* 80% of 80% to achieve a 20% reduction */
+            max-width: 640px; /* Adjust the max-width accordingly */
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        @media (max-width: 600px) {
+            .video-container {
+                width: 90%;
+                max-width: 360px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted onended="redirectToPDF()">
+            <source src="images/Menu_Too_Many_Cooks_1.0.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+    </div>
+
+    <script>
+        function redirectToPDF() {
+            window.location.href = 'images/Menu_Too_Many_Cooks_1.0.pdf';
+        }
+    </script>
+</body>
+</html>

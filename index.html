@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Too Many Cooks. Studio</title>
+    <style>
+        :root {
+            --main-bg-color: #f0f0f0;
+            --main-color: #333;
+            --font-family: 'Arial, sans-serif';
+        }
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--main-bg-color);
+            color: var(--main-color);
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            background-color: var(--main-bg-color);
+        }
+        .logo video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .logo img {
+            max-width: 80%;
+            height: auto;
+            cursor: pointer;
+            z-index: 1;
+        }
+        .content {
+            padding: 20px;
+            background-color: var(--main-bg-color);
+        }
+        .spacer {
+            margin: 40px 0;
+        }
+        .posters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .posters img {
+            width: 100%;
+            max-width: 524px;
+            height: auto;
+            border: 5px solid var(--main-color);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+        .posters img:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+        .studio-productions, .our-partners {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--main-bg-color);
+        }
+        .studio-productions img, .our-partners img {
+            width: 24%;
+            height: auto;
+            cursor: default; /* désactive le curseur de la main */
+            pointer-events: none; /* désactive les zones cliquables */
+        }
+        .partners-logos-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: hidden; /* Masque le débordement pour un effet de défilement fluide */
+            background-color: var(--main-bg-color);
+        }
+        .partners-logos {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            animation: scroll 25s linear infinite; /* Animation de défilement */
+        }
+        .partners-logos:hover {
+            animation-play-state: paused; /* Stop l'animation au passage de la souris */
+        }
+        .partners-logos img {
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .partners-logos img:hover {
+            transform: scale(1.1);
+        }
+        .partner1 {
+            max-width: 240px;
+        }
+        .partner2 {
+            max-width: 380px;
+        }
+        .partner3 {
+            max-width: 140px;
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        @media (max-width: 600px) {
+            .logo img {
+                max-width: 70%;
+            }
+            .posters img {
+                max-width: 70%;
+            }
+            .studio-productions img, .our-partners img {
+                width: 65%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo" onclick="location.href='video.html'">
+        <video src="images/fond_video.mp4" autoplay muted loop></video>
+        <img src="images/logo.png" alt="Too Many Cooks. Studio">
+    </div>
+    <div class="spacer"></div>
+    <div class="content">
+        <div class="studio-productions">
+            <img src="images/studio_productions.png" alt="Studio Productions">
+        </div>
+        <div class="spacer"></div>
+        <div class="posters">
+            <img src="images/poster1.png" alt="Film Poster 1" onclick="location.href='menu1.html'">
+            <img src="images/poster2.png" alt="Film Poster 2" onclick="location.href='menu2.html'">
+            <img src="images/poster3.png" alt="Film Poster 3" onclick="location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'">
+        </div>
+        <div class="spacer"></div>
+        <div class="our-partners">
+            <img src="images/our_partners.png" alt="Our Partners">
+        </div>
+        <div class="partners-logos-container">
+            <div class="partners-logos">
+                <img class="partner1" src="images/partenaire1.png" alt="Partenaire 1" onclick="location.href='https://www.the-escapers.com/profil/too-many-cooks-corp'">
+                <img class="partner2" src="images/partenaire2.png" alt="Partenaire 2" onclick="location.href='https://fr.bensoriginal.com/'">
+                <img class="partner3" src="images/partenaire3.png" alt="Partenaire 3" onclick="location.href='a_propos.html'">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const posters = document.querySelectorAll('.posters img');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            posters.forEach(poster => observer.observe(poster));
+        });
+    </script>
+</body>
+</html>

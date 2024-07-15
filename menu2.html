@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouhaha Video</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .video-container {
+            width: 64%;
+            max-width: 576px;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        .clickable-overlay {
+            position: absolute;
+            top: 55%; /* 50% + 5% */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+            /* No background color to make it invisible */
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted playsinline>
+            <source src="images/Mouhaha.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+        <a href="enigme1.html" class="clickable-overlay"></a>
+    </div>
+</body>
+</html>
