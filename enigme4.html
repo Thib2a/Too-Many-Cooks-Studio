@@ -82,19 +82,19 @@
     <div class="container">
         <h1>THE LAST ONE</h1>
         <div id="puzzle1" class="puzzle">
-            <p>En utilisant le code ASCII de Mamadou SEGPA, trouvez la valeur numérique de 'C', 'F', et 'A'</p>
+            <p>Lors d'une course de vélo, un cycliste double le deuxième ? Il devient...</p>
             <input type="text" id="answer1" onkeypress="handleKeyPress(event, checkAnswer1)">
             <button onclick="checkAnswer1()">Soumettre</button>
             <p id="feedback1" class="message"></p>
         </div>
         <div id="puzzle2" class="puzzle">
-            <p>Je suis la monnaie préférée de Mamadou SEGPA</p>
+            <p>Quel chiffre obtient-on en multipliant tous les chiffres d'un clavier ?</p>
             <input type="text" id="answer2" onkeypress="handleKeyPress(event, checkAnswer2)">
             <button onclick="checkAnswer2()">Soumettre</button>
             <p id="feedback2" class="message"></p>
         </div>
         <div id="puzzle3" class="puzzle">
-            <p>Je suis l'organisme <strong>C</strong>hargé de l'accréditation des laboratoires, de leurs certi<strong>F</strong>ications et de leurs inspections en Fr<strong>A</strong>nce. Qui suis-je ?</p>
+            <p>Je suis d'abord grande, puis je diminue, qui suis-je ?</p>
             <input type="text" id="answer3" onkeypress="handleKeyPress(event, checkAnswer3)">
             <button onclick="checkAnswer3()">Soumettre</button>
             <p id="feedback3" class="message"></p>
@@ -115,7 +115,7 @@
 
         function checkAnswer1() {
             const answer1 = document.getElementById('answer1').value.toLowerCase();
-            if (answer1 === '202') {
+            if (answer1 === '2e'|| answer1 === 'deuxième'|| answer1 === '2') {
                 document.getElementById('feedback1').textContent = 'Correct! Passez à la prochaine énigme.';
                 document.getElementById('puzzle1').style.display = 'none';
                 document.getElementById('puzzle2').style.display = 'block';
@@ -126,7 +126,7 @@
 
         function checkAnswer2() {
             const answer2 = document.getElementById('answer2').value.toLowerCase();
-            if (answer2 === 'francs' || answer2 === 'franc') {
+            if (answer2 === '0' || answer2 === 'zéro'|| answer2 === 'zero') {
                 document.getElementById('feedback2').textContent = 'Correct! Passez à la prochaine énigme.';
                 document.getElementById('puzzle2').style.display = 'none';
                 document.getElementById('puzzle3').style.display = 'block';
@@ -137,7 +137,7 @@
 
         function checkAnswer3() {
             const answer3 = document.getElementById('answer3').value.toLowerCase();
-            if (answer3 === 'cfa') {
+            if (answer3 === 'bougie') {
                 document.getElementById('feedback3').textContent = 'Correct! Voici le message final.';
                 document.getElementById('puzzle3').style.display = 'none';
                 document.getElementById('finalMessage').style.display = 'block';
