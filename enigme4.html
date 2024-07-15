@@ -52,13 +52,35 @@
             font-size: 16px;
             margin-top: 10px;
         }
-        #puzzle2, #puzzle3, #finalMessage {
+        #puzzle2, #puzzle3, #finalMessage, #progressMessage, #bsodMessage {
             display: none;
         }
         .message {
             margin-top: 20px;
             font-size: 18px;
             text-align: center;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .progress-bar {
+            width: 0;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+        .bsod {
+            background-color: #0000aa;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
         }
         @media (max-width: 600px) {
             .container {
@@ -80,7 +102,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>THE LAST ONE</h1>
+        <h1 id="title">Série de questions afin de déterminer si vous êtes bien un humain :</h1>
         <div id="puzzle1" class="puzzle">
             <p>Lors d'une course de pousette, un concurent double le deuxième ? Il devient...</p>
             <input type="text" id="answer1" onkeypress="handleKeyPress(event, checkAnswer1)">
@@ -94,15 +116,26 @@
             <p id="feedback2" class="message"></p>
         </div>
         <div id="puzzle3" class="puzzle">
-            <p>Quel mois de l'année compte 28 jours ?</p>
+            <p>Qu'il y a t'il au début de Too Many Cooks ?</p>
             <input type="text" id="answer3" onkeypress="handleKeyPress(event, checkAnswer3)">
             <button onclick="checkAnswer3()">Soumettre</button>
             <p id="feedback3" class="message"></p>
         </div>
         <div id="finalMessage">
             <h2>Félicitations!</h2>
-            <p>Vous avez résolu toutes les énigmes. La somme finale en Francs CFA de Mamadou est: <strong>202</strong></p>
-            <p>Vous pouvez être fier de vous, bande de FDP !</p>
+            <p>Vous avez résolu toutes les énigmes.</p>
+            <p>Merci de patienter quelques instants, le menu est en cours de génération ! Ne rechargez pas la page !</p>
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar">0%</div>
+            </div>
+        </div>
+        <div id="progressMessage" class="message"></div>
+        <div id="bsodMessage" class="bsod">
+            <h2>OUPSI...</h2>
+            <p>L'IA en charge de réaliser les menus a rencontré un problème, redémarrage en cours de celle-ci, merci de patienter...</p>
+            <div class="progress-container">
+                <div id="progress-bar-bsod" class="progress-bar">0%</div>
+            </div>
         </div>
     </div>
     <script>
@@ -115,8 +148,8 @@
 
         function checkAnswer1() {
             const answer1 = document.getElementById('answer1').value.toLowerCase();
-            if (answer1 === '2e'|| answer1 === 'deuxième') {
-                document.getElementById('feedback1').textContent = 'Correct! Passez à la prochaine énigme.';
+            if (answer1 === '2e' || answer1 === 'deuxième') {
+                document.getElementById('feedback1').textContent = 'Correct !';
                 document.getElementById('puzzle1').style.display = 'none';
                 document.getElementById('puzzle2').style.display = 'block';
             } else {
@@ -127,7 +160,7 @@
         function checkAnswer2() {
             const answer2 = document.getElementById('answer2').value.toLowerCase();
             if (answer2 === '2' || answer2 === 'deux') {
-                document.getElementById('feedback2').textContent = 'Correct! Passez à la prochaine énigme.';
+                document.getElementById('feedback2').textContent = 'Correct !';
                 document.getElementById('puzzle2').style.display = 'none';
                 document.getElementById('puzzle3').style.display = 'block';
             } else {
@@ -137,16 +170,74 @@
 
         function checkAnswer3() {
             const answer3 = document.getElementById('answer3').value.toLowerCase();
-            if (answer3 === 'tous'|| answer3 === 'Tous'|| answer3 === '12') {
-                document.getElementById('feedback3').textContent = 'Correct! Voici le message final.';
+            if (answer3 === 'too' || answer3 === 'two' || answer3 === '2') {
+                document.getElementById('feedback3').textContent = 'Correct !';
                 document.getElementById('puzzle3').style.display = 'none';
                 document.getElementById('finalMessage').style.display = 'block';
-                setTimeout(() => {
-                    window.location.href = 'final_menu_complet.html';
-                }, 5000); // 5 seconds delay
+                document.getElementById('title').style.display = 'none';
+                setTimeout(startProgressBar, 5000); // Wait 5 seconds before starting the progress bar
             } else {
                 document.getElementById('feedback3').textContent = 'Incorrect, essayez encore.';
             }
+        }
+
+        function startProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 99) {
+                    clearInterval(interval);
+                    document.body.style.background = '#0000aa'; // Change background to blue
+                    document.getElementById('finalMessage').style.display = 'none';
+                    document.getElementById('bsodMessage').style.display = 'block';
+                    startBSODProgressBar();
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                    progressBar.textContent = width + '%';
+                }
+            }, 150); // 15 seconds to reach 99%
+        }
+
+        function startBSODProgressBar() {
+            const progressBarBSOD = document.getElementById('progress-bar-bsod');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 99) {
+                    clearInterval(interval);
+                    restartProgressBar();
+                } else {
+                    width++;
+                    progressBarBSOD.style.width = width + '%';
+                    progressBarBSOD.textContent = width + '%';
+                }
+            }, 150); // 5 seconds to reach 99%
+        }
+
+        function restartProgressBar() {
+            const progressBarBSOD = document.getElementById('progress-bar-bsod');
+            let width = 0;
+            progressBarBSOD.style.width = '0%';
+            progressBarBSOD.textContent = '0%';
+            const interval = setInterval(() => {
+                if (width >= 99) {
+                    clearInterval(interval);
+                    width = 50;
+                    progressBarBSOD.style.width = width + '%';
+                    progressBarBSOD.textContent = width + '%';
+                    setTimeout(() => {
+                        progressBarBSOD.style.width = '100%';
+                        progressBarBSOD.textContent = '100%';
+                        setTimeout(() => {
+                            window.location.href = 'final_menu_complet.html';
+                        }, 1000);
+                    }, 2000); // Delay for the fake restart
+                } else {
+                    width++;
+                    progressBarBSOD.style.width = width + '%';
+                    progressBarBSOD.textContent = width + '%';
+                }
+            }, 100); // 10 seconds to reach 99%, then back to 50%
         }
     </script>
 </body>

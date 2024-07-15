@@ -13,23 +13,38 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
+            overflow: auto;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        iframe {
-            width: 80%;
-            height: 90vh;
-            border: none;
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .menu-image {
+            width: 90%;
+            max-width: 350px; /* Limite la largeur maximale */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         @media (max-width: 600px) {
-            iframe {
-                width: 90%;
-                height: 80vh; /* Ajustement de la hauteur pour les petits écrans */
+            .container {
+                grid-template-columns: 1fr; /* Une colonne sur les petits écrans */
+            }
+            .menu-image {
+                width: 100%;
+                height: auto;
+                max-width: none;
             }
         }
     </style>
 </head>
 <body>
-    <iframe src="images/Menu_Too_Many_Cooks_2.0.pdf"></iframe>
+    <div class="container">
+        <img src="images/Affiche.png" alt="Affiche" class="menu-image">
+        <img src="images/Intro.png" alt="Intro" class="menu-image">
+        <img src="images/Menu.png" alt="Menu" class="menu-image">
+        <img src="images/TimeTable.png" alt="TimeTable" class="menu-image">
+    </div>
 </body>
 </html>
