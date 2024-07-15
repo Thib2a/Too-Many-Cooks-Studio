@@ -34,6 +34,16 @@
             cursor: pointer;
             /* No background color to make it invisible */
         }
+        @media (max-width: 600px) {
+            .video-container {
+                width: 90%; /* Ajuste la largeur pour les petits écrans */
+                max-width: 100%; /* Assure que la vidéo prend toute la largeur possible */
+            }
+            .clickable-overlay {
+                width: 100px;
+                height: 100px;
+            }
+        }
     </style>
 </head>
 <body>

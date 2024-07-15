@@ -64,9 +64,29 @@
             border: 5px solid var(--main-color);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .posters img:hover {
+        .posters img:hover, .posters img:active {
+            transform: scale(1.05);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+        .posters img::after {
+            content: 'Cliquez pour en savoir plus';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .posters img:hover::after, .posters img:active::after {
+            opacity: 1;
         }
         .studio-productions, .our-partners {
             display: flex;
