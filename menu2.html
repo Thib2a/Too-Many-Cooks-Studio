@@ -19,6 +19,7 @@
         .video-container {
             width: 64%;
             max-width: 576px;
+            position: relative;
         }
         video {
             width: 100%;
@@ -26,13 +27,30 @@
         }
         .clickable-overlay {
             position: absolute;
-            top: 55%; /* 50% + 5% */
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 150px;
             height: 150px;
             cursor: pointer;
-            /* No background color to make it invisible */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .clickable-overlay span {
+            font-size: 18px; /* Vous pouvez modifier cette valeur pour changer la taille du texte */
+            font-weight: bold;
+            color: red;
+            animation: blink 1s infinite;
+            display: none;
+        }
+        @keyframes blink {
+            0%, 50%, 100% {
+                opacity: 1;
+            }
+            25%, 75% {
+                opacity: 0;
+            }
         }
         @media (max-width: 600px) {
             .video-container {
@@ -43,16 +61,31 @@
                 width: 100px;
                 height: 100px;
             }
+            .clickable-overlay span {
+                font-size: 18px; /* Vous pouvez modifier cette valeur pour changer la taille du texte sur mobile */
+            }
         }
     </style>
 </head>
 <body>
     <div class="video-container">
-        <video autoplay muted playsinline>
+        <video id="mouhahaVideo" autoplay muted playsinline>
             <source src="images/Mouhaha.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la balise vidéo.
         </video>
-        <a href="enigme1.html" class="clickable-overlay"></a>
+        <a href="enigme1.html" class="clickable-overlay">
+            <span id="exitText">EXIT</span>
+        </a>
     </div>
+    <script>
+        const video = document.getElementById('mouhahaVideo');
+        const exitText = document.getElementById('exitText');
+
+        video.onended = function() {
+            setTimeout(() => {
+                exitText.style.display = 'block';
+            }, 10000); // Afficher le texte 10 secondes après la fin de la vidéo
+        };
+    </script>
 </body>
 </html>
