@@ -16,38 +16,21 @@
             overflow: hidden;
             color: white;
             text-align: center;
-            flex-direction: column;
-        }
-        .fallback-message {
-            display: none;
-            margin-top: 20px;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
         }
     </style>
 </head>
 <body>
+    <script>
+        function redirectToPDF() {
+            window.location.href = 'images/Menu_Too_Many_Cooks_2.0.pdf';
+        }
+
+        window.onload = redirectToPDF;
+    </script>
     <noscript>
-        <div class="fallback-message">
-            <p>Si le PDF ne s'affiche pas, cliquez <a href="images/Menu_Too_Many_Cooks_2.0.pdf" style="color: #4caf50;">ici</a> pour accéder au menu.</p>
+        <div>
+            <p>Si vous n'êtes pas redirigé automatiquement, cliquez <a href="images/Menu_Too_Many_Cooks_2.0.pdf" style="color: #4caf50;">ici</a> pour accéder au menu.</p>
         </div>
     </noscript>
-    <iframe id="pdfViewer" src="images/Menu_Too_Many_Cooks_2.0.pdf"></iframe>
-    <script>
-        window.onload = function() {
-            setTimeout(() => {
-                const iframe = document.getElementById('pdfViewer');
-                if (!iframe || iframe.contentDocument.body.childElementCount === 0) {
-                    document.querySelector('.fallback-message').style.display = 'block';
-                }
-            }, 3000); // Afficher le message de secours après 3 secondes si le PDF ne s'affiche pas
-        }
-    </script>
-    <div class="fallback-message">
-        <p>Si le PDF ne s'affiche pas, cliquez <a href="images/Menu_Too_Many_Cooks_2.0.pdf" style="color: #4caf50;">ici</a> pour accéder au menu.</p>
-    </div>
 </body>
 </html>
