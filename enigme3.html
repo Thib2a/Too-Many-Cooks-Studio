@@ -156,6 +156,7 @@
             const messageElement = document.getElementById("message");
             if (score === correctAnswers.length) {
                 messageElement.textContent = `Félicitations ! Vous avez obtenu ${score} sur 4 bonnes réponses.`;
+                messageElement.style.color = "lightgreen";
                 setTimeout(() => {
                     location.href = 'enigme4.html';
                 }, 2000);

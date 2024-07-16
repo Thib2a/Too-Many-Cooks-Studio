@@ -19,6 +19,8 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .logo {
             display: flex;
@@ -46,6 +48,7 @@
         .content {
             padding: 20px;
             background-color: var(--main-bg-color);
+            flex: 1;
         }
         .spacer {
             margin: 40px 0;
@@ -66,7 +69,7 @@
             cursor: pointer;
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: pulse 2s infinite; /* Added pulse animation */
+            animation: pulse 2s infinite;
         }
         .posters img:hover, .posters img:active {
             transform: scale(1.05);
@@ -107,17 +110,17 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            overflow: hidden; /* Masque le débordement pour un effet de défilement fluide */
+            overflow: hidden;
             background-color: var(--main-bg-color);
         }
         .partners-logos {
             display: flex;
             align-items: center;
             gap: 40px;
-            animation: scroll 25s linear infinite; /* Animation de défilement */
+            animation: scroll 25s linear infinite;
         }
         .partners-logos:hover {
-            animation-play-state: paused; /* Stop l'animation au passage de la souris */
+            animation-play-state: paused;
         }
         .partners-logos img {
             height: auto;
@@ -135,6 +138,24 @@
         }
         .partner3 {
             max-width: 140px;
+        }
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background-color: var(--main-bg-color);
+        }
+        .corner-logo {
+            width: 300px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .corner-logo:hover {
+            transform: scale(1.2);
         }
         @keyframes scroll {
             0% {
@@ -170,6 +191,9 @@
             .studio-productions img, .our-partners img {
                 width: 65%;
             }
+            .corner-logo {
+                width: 70%;
+            }
         }
     </style>
 </head>
@@ -197,11 +221,14 @@
             <div class="partners-logos">
                 <img class="partner1" src="images/partenaire1.png" alt="Partenaire 1" onclick="location.href='https://www.the-escapers.com/profil/too-many-cooks-corp'">
                 <img class="partner2" src="images/partenaire2.png" alt="Partenaire 2" onclick="location.href='https://fr.bensoriginal.com/'">
-                <img class="partner3" src="images/partenaire3.png" alt="Partenaire 3" onclick="location.href='a_propos.html'">
+                <img class="partner3" src="images/partenaire3.png" alt="Partenaire 3" onclick="location.href='https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/'">
             </div>
         </div>
     </div>
-
+    <div class="footer">
+        <img class="corner-logo" src="images/logo_gauche.png" alt="Logo Gauche" onclick="location.href='a_propos.html'">
+        <img class="corner-logo" src="images/logo_droit.png" alt="Logo Droit" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const posters = document.querySelectorAll('.posters img');

@@ -8,43 +8,46 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #070000;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: auto;
-            padding: 20px;
-            box-sizing: border-box;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            flex-direction: column;
         }
-        .container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+        .fallback-message {
+            display: none;
+            margin-top: 20px;
         }
-        .menu-image {
-            width: 90%;
-            max-width: 350px; /* Limite la largeur maximale */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        @media (max-width: 600px) {
-            .container {
-                grid-template-columns: 1fr; /* Une colonne sur les petits écrans */
-            }
-            .menu-image {
-                width: 100%;
-                height: auto;
-                max-width: none;
-            }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="images/Affiche.png" alt="Affiche" class="menu-image">
-        <img src="images/Intro.png" alt="Intro" class="menu-image">
-        <img src="images/Menu.png" alt="Menu" class="menu-image">
-        <img src="images/TimeTable.png" alt="TimeTable" class="menu-image">
+    <noscript>
+        <div class="fallback-message">
+            <p>Si le PDF ne s'affiche pas, cliquez <a href="images/Menu_Too_Many_Cooks_2.0.pdf" style="color: #4caf50;">ici</a> pour accéder au menu.</p>
+        </div>
+    </noscript>
+    <iframe id="pdfViewer" src="images/Menu_Too_Many_Cooks_2.0.pdf"></iframe>
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                const iframe = document.getElementById('pdfViewer');
+                if (!iframe || iframe.contentDocument.body.childElementCount === 0) {
+                    document.querySelector('.fallback-message').style.display = 'block';
+                }
+            }, 3000); // Afficher le message de secours après 3 secondes si le PDF ne s'affiche pas
+        }
+    </script>
+    <div class="fallback-message">
+        <p>Si le PDF ne s'affiche pas, cliquez <a href="images/Menu_Too_Many_Cooks_2.0.pdf" style="color: #4caf50;">ici</a> pour accéder au menu.</p>
     </div>
 </body>
 </html>

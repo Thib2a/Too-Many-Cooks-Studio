@@ -29,7 +29,6 @@
         .puzzle {
             margin: 20px 0;
             padding: 20px;
-            border: 1px solid #fff;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.1);
         }
@@ -52,7 +51,7 @@
             font-size: 16px;
             margin-top: 10px;
         }
-        #puzzle2, #puzzle3, #finalMessage, #progressMessage, #bsodMessage {
+        #puzzle2, #puzzle3, #finalMessage {
             display: none;
         }
         .message {
@@ -60,27 +59,17 @@
             font-size: 18px;
             text-align: center;
         }
-        .progress-container {
-            width: 100%;
-            background-color: #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 20px;
+        .final-message-text {
+            color: lightgreen;
+            font-weight: bold;
         }
-        .progress-bar {
-            width: 0;
-            height: 30px;
-            background-color: #4caf50;
+        .additional-message-text {
+            color: white;
+        }
+        .graphic-animation {
+            display: none;
+            color: white;
             text-align: center;
-            line-height: 30px;
-            color: white;
-        }
-        .bsod {
-            background-color: #0000aa;
-            color: white;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
         }
         @media (max-width: 600px) {
             .container {
@@ -101,41 +90,40 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 id="title">Série de questions afin de déterminer si vous êtes bien un humain :</h1>
+    <div class="container" id="mainContainer">
+        <h1 id="title">Nous devons déterminer encore une fois si vous êtes bien un humain, voici une série de questions :</h1>
         <div id="puzzle1" class="puzzle">
-            <p>Lors d'une course de pousette, un concurent double le deuxième ? Il devient...</p>
+            <p>Lors d'un rally de pousette, un concurent double le deuxième ? Il devient...</p>
             <input type="text" id="answer1" onkeypress="handleKeyPress(event, checkAnswer1)">
             <button onclick="checkAnswer1()">Soumettre</button>
             <p id="feedback1" class="message"></p>
         </div>
         <div id="puzzle2" class="puzzle">
-            <p>Il y a 3 Mélusines dans un jardin d'enfants et tu en récupères 2. Combien de Mélusines possèdes-tu maintenant ?</p>
+            <p>Il y a 3 Mélusines abandonnées dans un jardin d'enfants et tu en récupères 2.</p>
+            <p>Combien de Mélusines possèdes-tu maintenant ?</p>
             <input type="text" id="answer2" onkeypress="handleKeyPress(event, checkAnswer2)">
             <button onclick="checkAnswer2()">Soumettre</button>
             <p id="feedback2" class="message"></p>
         </div>
         <div id="puzzle3" class="puzzle">
-            <p>Qu'il y a t'il au début de Too Many Cooks ?</p>
+            <p>Combien font 1+1 ?</p>
             <input type="text" id="answer3" onkeypress="handleKeyPress(event, checkAnswer3)">
             <button onclick="checkAnswer3()">Soumettre</button>
             <p id="feedback3" class="message"></p>
         </div>
         <div id="finalMessage">
-            <h2>Félicitations!</h2>
-            <p>Vous avez résolu toutes les énigmes.</p>
-            <p>Merci de patienter quelques instants, le menu est en cours de génération ! Ne rechargez pas la page !</p>
-            <div class="progress-container">
-                <div id="progress-bar" class="progress-bar">0%</div>
-            </div>
+            <h2 class="final-message-text">Félicitations !</h2>
+            <p class="additional-message-text">Vous avez résolu toutes les énigmes !</p>
+            <p class="additional-message-text">Encore quelques instants, le menu va être généré par notre nouvelle IA "Bucolique/MenuGPT" !</p>
+            <p>Merci de patienter...</p>
         </div>
-        <div id="progressMessage" class="message"></div>
-        <div id="bsodMessage" class="bsod">
-            <h2>OUPSI...</h2>
-            <p>L'IA en charge de réaliser les menus a rencontré un problème, redémarrage en cours de celle-ci, merci de patienter...</p>
-            <div class="progress-container">
-                <div id="progress-bar-bsod" class="progress-bar">0%</div>
-            </div>
+        <div class="graphic-animation" id="graphicAnimation">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+                <circle cx="50" cy="50" r="40" stroke="#4caf50" stroke-width="10" fill="none">
+                    <animate attributeName="stroke-dasharray" values="0,251.2;251.2,0" dur="2s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+            <p>Génération du menu en cours...</p>
         </div>
     </div>
     <script>
@@ -170,74 +158,25 @@
 
         function checkAnswer3() {
             const answer3 = document.getElementById('answer3').value.toLowerCase();
-            if (answer3 === 'too' || answer3 === 'two' || answer3 === '2') {
+            if (answer3 === '2' || answer3 === 'deux') {
                 document.getElementById('feedback3').textContent = 'Correct !';
                 document.getElementById('puzzle3').style.display = 'none';
                 document.getElementById('finalMessage').style.display = 'block';
                 document.getElementById('title').style.display = 'none';
-                setTimeout(startProgressBar, 5000); // Wait 5 seconds before starting the progress bar
+                setTimeout(showGraphicAnimation, 10000); // Show final message for 10 seconds
             } else {
                 document.getElementById('feedback3').textContent = 'Incorrect, essayez encore.';
             }
         }
 
-        function startProgressBar() {
-            const progressBar = document.getElementById('progress-bar');
-            let width = 0;
-            const interval = setInterval(() => {
-                if (width >= 99) {
-                    clearInterval(interval);
-                    document.body.style.background = '#0000aa'; // Change background to blue
-                    document.getElementById('finalMessage').style.display = 'none';
-                    document.getElementById('bsodMessage').style.display = 'block';
-                    startBSODProgressBar();
-                } else {
-                    width++;
-                    progressBar.style.width = width + '%';
-                    progressBar.textContent = width + '%';
-                }
-            }, 150); // 15 seconds to reach 99%
-        }
-
-        function startBSODProgressBar() {
-            const progressBarBSOD = document.getElementById('progress-bar-bsod');
-            let width = 0;
-            const interval = setInterval(() => {
-                if (width >= 99) {
-                    clearInterval(interval);
-                    restartProgressBar();
-                } else {
-                    width++;
-                    progressBarBSOD.style.width = width + '%';
-                    progressBarBSOD.textContent = width + '%';
-                }
-            }, 150); // 5 seconds to reach 99%
-        }
-
-        function restartProgressBar() {
-            const progressBarBSOD = document.getElementById('progress-bar-bsod');
-            let width = 0;
-            progressBarBSOD.style.width = '0%';
-            progressBarBSOD.textContent = '0%';
-            const interval = setInterval(() => {
-                if (width >= 99) {
-                    clearInterval(interval);
-                    width = 50;
-                    progressBarBSOD.style.width = width + '%';
-                    progressBarBSOD.textContent = width + '%';
-                    setTimeout(() => {
-                        progressBarBSOD.style.width = '100%';
-                        progressBarBSOD.textContent = '100%';
-                        setTimeout(() => {
-                            window.location.href = 'final_menu_complet.html';
-                        }, 1000);
-                    }, 2000); // Delay for the fake restart
-                } else {
-                    width++;
-                    progressBarBSOD.style.width = width + '%';
-                    progressBarBSOD.textContent = width + '%';
-                }
-            }, 100); // 10 seconds to reach 99%, then back to 50%
+        function showGraphicAnimation() {
+            document.getElementById('finalMessage').style.display = 'none';
+            document.body.style.background = '#000'; // Change background to black
+            const graphicAnimation = document.getElementById('graphicAnimation');
+            graphicAnimation.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'final_menu_complet.html';
+            }, 15000); // Show graphic animation for 15 seconds
         }
     </script>
 </body>
