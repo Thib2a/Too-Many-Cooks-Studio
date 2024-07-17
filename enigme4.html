@@ -51,7 +51,7 @@
             font-size: 16px;
             margin-top: 10px;
         }
-        #puzzle2, #puzzle3, #finalMessage {
+        #puzzle2, #puzzle3, #finalMessage, #thankYouMessage {
             display: none;
         }
         .message {
@@ -65,6 +65,11 @@
         }
         .additional-message-text {
             color: white;
+        }
+        .thank-you-message-text {
+            color: lightgreen;
+            font-weight: bold;
+            margin-top: 20px;
         }
         .graphic-animation {
             display: none;
@@ -126,6 +131,10 @@
                 </circle>
             </svg>
             <p>Génération du menu en cours...</p>
+        </div>
+        <div id="thankYouMessage">
+            <h2 class="thank-you-message-text">Merci d'avoir joué avec nous, Tchibayoult et Uncle Ben's</h2>
+            <button onclick="goHome()">Accueil</button>
         </div>
     </div>
     <script>
@@ -196,6 +205,16 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            showThankYouMessage();
+        }
+
+        function showThankYouMessage() {
+            document.getElementById('graphicAnimation').style.display = 'none';
+            document.getElementById('thankYouMessage').style.display = 'block';
+        }
+
+        function goHome() {
+            window.location.href = 'index.html'; // Replace with your home page URL
         }
     </script>
 </body>
