@@ -12,7 +12,7 @@
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            background: url('images/fond1.png') no-repeat center center fixed;
+            background: url('fonds/fond1.png') no-repeat center center fixed;
             background-size: cover;
             color: white;
             font-family: Arial, sans-serif;
@@ -69,20 +69,22 @@
     </style>
 </head>
 <body>
+    <audio id="background-audio" src="sons/Josephine.mp3"></audio>
+
     <div class="question-container">
         <h1>Nous devons nous assurer que vous n'êtes pas un robot : complétez le reCaptcha.</h1>
         <h1>Cliquez sur toutes les images contenant un fraudeur fiscal</h1>       
         <div class="captcha-container" id="captcha-container">
-            <img src="images/fraudeur1.jpg" alt="Fraudeur 1" onclick="toggleSelection(this)">
-            <img src="images/mimi1.jpg" alt="Mimi 1" onclick="toggleSelection(this)">
-            <img src="images/fraudeur2.jpg" alt="Fraudeur 2" onclick="toggleSelection(this)">
-            <img src="images/mimi2.jpg" alt="Mimi 2" onclick="toggleSelection(this)">
-            <img src="images/fraudeur3.jpg" alt="Fraudeur 3" onclick="toggleSelection(this)">
-            <img src="images/mimi3.jpg" alt="Mimi 3" onclick="toggleSelection(this)">
-            <img src="images/fraudeur4.jpg" alt="Fraudeur 4" onclick="toggleSelection(this)">
-            <img src="images/mimi4.jpg" alt="Mimi 4" onclick="toggleSelection(this)">
-            <img src="images/mimi5.jpg" alt="Mimi 5" onclick="toggleSelection(this)">
-            <img src="images/mimi6.jpg" alt="Mimi 6" onclick="toggleSelection(this)">
+            <img src="images/fraudeur1.jpg" alt="Fraudeur 1" onclick="handleImageClick(this)">
+            <img src="images/mimi1.jpg" alt="Mimi 1" onclick="handleImageClick(this)">
+            <img src="images/fraudeur2.jpg" alt="Fraudeur 2" onclick="handleImageClick(this)">
+            <img src="images/mimi2.jpg" alt="Mimi 2" onclick="handleImageClick(this)">
+            <img src="images/fraudeur3.jpg" alt="Fraudeur 3" onclick="handleImageClick(this)">
+            <img src="images/mimi3.jpg" alt="Mimi 3" onclick="handleImageClick(this)">
+            <img src="images/fraudeur4.jpg" alt="Fraudeur 4" onclick="handleImageClick(this)">
+            <img src="images/mimi4.jpg" alt="Mimi 4" onclick="handleImageClick(this)">
+            <img src="images/fraudeur5.jpg" alt="Fraudeur 5" onclick="handleImageClick(this)">
+            <img src="images/mimi5.jpg" alt="Mimi 5" onclick="handleImageClick(this)">
         </div>
         <div class="answer-container">
             <button onclick="checkCaptcha()">Valider</button>
@@ -98,10 +100,12 @@
             }
         });
 
-        const correctImages = ["fraudeur1.jpg", "fraudeur2.jpg", "fraudeur3.jpg", "fraudeur4.jpg"];
+        const correctImages = ["fraudeur1.jpg", "fraudeur2.jpg", "fraudeur3.jpg", "fraudeur4.jpg", "fraudeur5.jpg"];
 
-        function toggleSelection(img) {
+        function handleImageClick(img) {
             img.classList.toggle("selected");
+            var audio = document.getElementById('background-audio');
+            audio.play();
         }
 
         function checkCaptcha() {

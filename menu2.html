@@ -7,63 +7,76 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial, sans-serif';
             background-color: #000;
+            color: #333;
+            text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            position: relative;
         }
         .video-container {
             width: 64%;
-            max-width: 576px;
-            position: relative;
+            max-width: 460px;
+        }
+        .large-video-container {
+            width: 80%; /* Largeur plus grande pour la deuxième vidéo */
+            max-width: 800px; /* Ajustez la largeur maximale selon vos besoins */
         }
         video {
             width: 100%;
             height: auto;
         }
-        .clickable-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .button-container {
+            margin-top: 20px;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 150px;
-            height: 150px;
-            cursor: pointer;
+            gap: 10px;
         }
         .click-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             padding: 10px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #686868; /* Fond noir */
-            border: none;
             border-radius: 5px;
-            cursor: pointer;
             display: none;
-            text-decoration: none; /* Supprime le souslignage */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold; /* Mettre le texte en gras */
         }
-        .click-button:hover, .click-button:focus {
-            text-decoration: none; /* Supprime le souslignage au survol et au focus */
+        #evacButton {
+            background-color: green;
+            color: white;
+        }
+        #evacButton:hover {
+            background-color: darkgreen;
+        }
+        #continueButton {
+            background-color: red;
+            color: white;
+        }
+        #continueButton:hover {
+            background-color: darkred;
+        }
+        #homeButton {
+            background-color: green;
+            color: white;
+        }
+        #homeButton:hover {
+            background-color: darkgreen;
+        }
+        #realContinueButton {
+            background-color: red;
+            color: white;
+        }
+        #realContinueButton:hover {
+            background-color: darkred;
+        }
+        .click-button:hover {
+            opacity: 0.8;
         }
         @media (max-width: 600px) {
-            .video-container {
-                width: 90%; /* Ajuste la largeur pour les petits écrans */
-                max-width: 100%; /* Assure que la vidéo prend toute la largeur possible */
-            }
-            .clickable-overlay {
-                width: 100px;
-                height: 100px;
+            .video-container, .large-video-container {
+                width: 100%;
+                max-width: 400px;
             }
             .click-button {
                 font-size: 16px;
@@ -73,25 +86,57 @@
     </style>
 </head>
 <body>
-    <div class="video-container">
-        <video id="mouhahaVideo" autoplay muted playsinline>
-            <source src="images/Mouhaha.mp4" type="video/mp4">
+    <div class="video-container" id="mouhahaContainer">
+        <video id="mouhahaVideo" autoplay muted playsinline onended="showButtons()">
+            <source src="videos/Mouhaha.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la balise vidéo.
         </video>
-        <a href="enigme1.html" class="clickable-overlay">
-            <!-- La zone cliquable est là dès le début -->
-        </a>
-        <button id="exitButton" class="click-button" onclick="location.href='enigme1.html'">EXIT</button>
     </div>
-    <script>
-        const video = document.getElementById('mouhahaVideo');
-        const exitButton = document.getElementById('exitButton');
+    <div class="large-video-container" id="mauvietteContainer" style="display: none;">
+        <video id="mauvietteVideo" controls>
+            <source src="videos/mauviette.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+    </div>
+    <div class="button-container" id="buttonContainer">
+        <a href="javascript:void(0);" class="click-button" id="evacButton" onclick="showMauviette()">On évacue !</a>
+        <a href="enigme1.html" class="click-button" id="continueButton">On continue !</a>
+    </div>
+    <div class="button-container" id="mauvietteButtonContainer" style="display: none;">
+        <button id="homeButton" class="click-button" onclick="window.location.href='index.html'">Accueil</button>
+        <a href="enigme1.html" class="click-button" id="realContinueButton">On continue pour de vrai ?</a>
+    </div>
 
-        video.onended = function() {
+    <script>
+        function showButtons() {
             setTimeout(() => {
-                exitButton.style.display = 'block';
-            }, 10000); // Afficher le bouton 10 secondes après la fin de la vidéo
-        };
+                document.getElementById('evacButton').style.display = 'block';
+                document.getElementById('continueButton').style.display = 'block';
+            }, 3000); // Afficher les boutons 3 secondes après la fin de la vidéo
+        }
+
+        function showMauviette() {
+            // Masquer les boutons "On évacue !" et "On continue !"
+            document.getElementById('evacButton').style.display = 'none';
+            document.getElementById('continueButton').style.display = 'none';
+
+            // Masquer le conteneur de la première vidéo et afficher le conteneur de la deuxième vidéo
+            document.getElementById('mouhahaContainer').style.display = 'none';
+            const mauvietteContainer = document.getElementById('mauvietteContainer');
+            mauvietteContainer.style.display = 'block';
+
+            const mauvietteVideo = document.getElementById('mauvietteVideo');
+            mauvietteVideo.addEventListener('ended', () => {
+                document.getElementById('homeButton').style.display = 'block';
+                document.getElementById('realContinueButton').style.display = 'block';
+                document.getElementById('mauvietteButtonContainer').style.display = 'flex';
+            });
+
+            mauvietteVideo.play().catch(error => {
+                console.error('La lecture automatique a été empêchée:', error);
+                mauvietteVideo.controls = true; // Afficher les contrôles si la lecture automatique échoue
+            });
+        }
     </script>
 </body>
 </html>

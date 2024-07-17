@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('images/fond4.png') no-repeat center center fixed;
+            background: url('fonds/fond4.png') no-repeat center center fixed;
             background-size: cover;
             padding: 20px;
             margin: 0;
@@ -90,23 +90,25 @@
     </style>
 </head>
 <body>
+    <audio id="background-audio" src="sons/La_Chanson_de_Mimi.mp3" loop></audio>
+
     <div class="container" id="mainContainer">
         <h1 id="title">Nous devons déterminer encore une fois si vous êtes bien un humain, voici une série de questions :</h1>
         <div id="puzzle1" class="puzzle">
-            <p>Lors d'un rally de pousette, un concurent double le deuxième ? Il devient...</p>
+            <p>Il y a 3 Mélusines abandonnées dans un jardin d'enfants et tu en récupères 2.</p>
+            <p>Combien de Mélusines possèdes-tu maintenant ?</p>
             <input type="text" id="answer1" onkeypress="handleKeyPress(event, checkAnswer1)">
             <button onclick="checkAnswer1()">Soumettre</button>
             <p id="feedback1" class="message"></p>
         </div>
         <div id="puzzle2" class="puzzle">
-            <p>Il y a 3 Mélusines abandonnées dans un jardin d'enfants et tu en récupères 2.</p>
-            <p>Combien de Mélusines possèdes-tu maintenant ?</p>
+            <p>Combien font 1 + 2 - 3 + 4 - 2 ?</p>
             <input type="text" id="answer2" onkeypress="handleKeyPress(event, checkAnswer2)">
             <button onclick="checkAnswer2()">Soumettre</button>
             <p id="feedback2" class="message"></p>
         </div>
         <div id="puzzle3" class="puzzle">
-            <p>Combien font 1+1 ?</p>
+            <p>Quel était la réponse à la première question ?</p>
             <input type="text" id="answer3" onkeypress="handleKeyPress(event, checkAnswer3)">
             <button onclick="checkAnswer3()">Soumettre</button>
             <p id="feedback3" class="message"></p>
@@ -114,7 +116,7 @@
         <div id="finalMessage">
             <h2 class="final-message-text">Félicitations !</h2>
             <p class="additional-message-text">Vous avez résolu toutes les énigmes !</p>
-            <p class="additional-message-text">Encore quelques instants, le menu va être généré par notre nouvelle IA "Bucolique/MenuGPT" !</p>
+            <p class="additional-message-text">Encore quelques instants, le menu va être généré par notre nouvelle IA "CooksGPT 1.0" !</p>
             <p>Merci de patienter...</p>
         </div>
         <div class="graphic-animation" id="graphicAnimation">
@@ -127,6 +129,14 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('background-audio');
+            document.body.addEventListener('click', function() {
+                audio.volume = 1; // Set volume
+                audio.play();
+            });
+        });
+
         function handleKeyPress(event, callback) {
             if (event.key === 'Enter') {
                 event.preventDefault();
@@ -136,7 +146,7 @@
 
         function checkAnswer1() {
             const answer1 = document.getElementById('answer1').value.toLowerCase();
-            if (answer1 === '2e' || answer1 === 'deuxième') {
+            if (answer1 === '2' || answer1 === 'deux') {
                 document.getElementById('feedback1').textContent = 'Correct !';
                 document.getElementById('puzzle1').style.display = 'none';
                 document.getElementById('puzzle2').style.display = 'block';
@@ -175,8 +185,17 @@
             const graphicAnimation = document.getElementById('graphicAnimation');
             graphicAnimation.style.display = 'block';
             setTimeout(() => {
-                window.location.href = 'final_menu_complet.html';
+                downloadPDF();
             }, 15000); // Show graphic animation for 15 seconds
+        }
+
+        function downloadPDF() {
+            const link = document.createElement('a');
+            link.href = 'PDF/Menu_Too_Many_Cooks_2.0.pdf'; // Path to the PDF in the PDF folder at the root
+            link.download = 'Menu_Too_Many_Cooks_2.0.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>

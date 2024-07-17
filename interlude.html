@@ -31,14 +31,14 @@
         }
         .click-button {
             position: absolute;
-            top: 50%;
+            top: 60%;
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 10px 20px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: bold; /* Mettre le texte en gras */
             color: #fff;
-            background-color: #000000; /* Fond rouge */
+            background-color: #000000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -59,13 +59,14 @@
 <body>
     <div class="video-container">
         <video id="video" autoplay muted>
-            <source src="images/Affiche_Too_Many_Cooks_2.0.mp4" type="video/mp4">
+            <source src="videos/Affiche_Too_Many_Cooks_2.0.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la balise vidéo.
         </video>
     </div>
     <button id="clickButton" class="click-button" onclick="showImage()">Suite...</button>
     <div class="image-container hidden">
         <img src="images/scream.png" alt="Scream" id="screamImage" style="width: 100%; height: auto;">
+        <audio id="screamAudio" src="sons/scream.mp3"></audio>
     </div>
 
     <script>
@@ -73,20 +74,24 @@
         const clickButton = document.getElementById('clickButton');
         const videoContainer = document.querySelector('.video-container');
         const imageContainer = document.querySelector('.image-container');
+        const screamAudio = document.getElementById('screamAudio');
+
+        screamAudio.volume = 0.1; // Réduire le volume de 90%
 
         video.onended = function() {
             setTimeout(() => {
                 clickButton.style.display = 'block';
-            }, 10000); // Afficher le bouton 6 secondes après la fin de la vidéo
+            }, 5000); // Afficher le bouton 5 secondes après la fin de la vidéo
         };
 
         function showImage() {
             clickButton.style.display = 'none';
             videoContainer.style.display = 'none';
             imageContainer.classList.remove('hidden');
+            screamAudio.play(); // Jouer l'audio
             setTimeout(() => {
                 window.location.href = 'menu2.html';
-            }, 3000); // Rediriger vers la page après 5 secondes
+            }, 3000); // Rediriger vers la page après 3 secondes
         }
     </script>
 </body>

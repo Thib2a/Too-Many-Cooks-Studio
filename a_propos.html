@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: black url('images/a_propos.png') no-repeat center center;
+            background: black url('fonds/a_propos.png') no-repeat center center;
             background-size: contain;
             display: flex;
             justify-content: center;
@@ -20,11 +20,15 @@
         audio {
             display: none;
         }
-        .audio-control {
+        .button-container {
             position: absolute;
             top: 85%; /* Changez cette valeur pour déplacer verticalement */
-            left: 50%; /* Changez cette valeur pour déplacer horizontalement */
+            left: 50%;
             transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px; /* Espacement entre les boutons */
+        }
+        .audio-control, .home-button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
@@ -32,15 +36,19 @@
             color: white;
             border: none;
             border-radius: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <audio id="background-audio">
-        <source src="images/song_a_propos.mp3" type="audio/mpeg">
+        <source src="sons/song_a_propos.mp3" type="audio/mpeg">
         Votre navigateur ne supporte pas la balise audio.
     </audio>
-    <button class="audio-control" id="audio-control-button">Play</button>
+    <div class="button-container">
+        <button class="audio-control" id="audio-control-button">Play</button>
+        <button class="home-button" onclick="window.location.href='index.html'">Accueil</button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

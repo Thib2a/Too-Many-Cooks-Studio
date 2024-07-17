@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Too Many Cooks. Studio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
-        
         :root {
             --main-bg-color: #f0f0f0;
             --main-color: #333;
             --font-family: 'Arial, sans-serif';
-            --arrow-color: #ccc; /* gris clair pour la flèche */
-            --scary-font: 'Creepster', cursive; /* Exemple de police effrayante */
+            --arrow-color: #ccc;
         }
         body {
             margin: 0;
@@ -33,7 +30,7 @@
             height: 100vh;
             position: relative;
             background-color: var(--main-bg-color);
-            animation: fadeIn 8s forwards; /* Durée du fondu du premier logo */
+            animation: fadeIn 5s forwards;
         }
         .logo video {
             position: absolute;
@@ -51,7 +48,7 @@
         }
         .arrow-down {
             position: absolute;
-            bottom: 20px;
+            bottom: 80px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1;
@@ -116,8 +113,8 @@
         .studio-productions img, .our-partners img {
             width: 24%;
             height: auto;
-            cursor: default; /* désactive le curseur de la main */
-            pointer-events: none; /* désactive les zones cliquables */
+            cursor: default;
+            pointer-events: none;
         }
         .partners-logos-container {
             display: flex;
@@ -131,7 +128,7 @@
             display: flex;
             align-items: center;
             gap: 40px;
-            animation: scroll 25s linear infinite;
+            animation: scroll 18s linear infinite;
         }
         .partners-logos:hover {
             animation-play-state: paused;
@@ -155,7 +152,6 @@
         }
         .partner4 {
             max-width: 360px;
-            
         }
         .footer {
             display: flex;
@@ -177,10 +173,10 @@
         }
         @keyframes scroll {
             0% {
-                transform: translateX(-100%);
+                transform: translateX(100%);
             }
             100% {
-                transform: translateX(100%);
+                transform: translateX(-100%);
             }
         }
         @keyframes fadeIn {
@@ -234,28 +230,27 @@
             z-index: 0;
         }
         .interlude img {
-            max-width: 75%; /* Taille du deuxième logo */
+            max-width: 70%;
             height: auto;
             position: absolute;
             z-index: 1;
             opacity: 0;
-            transition: opacity 15s; /* Durée du fondu du deuxième logo */
+            transition: opacity 10s;
             cursor: pointer;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="logo">
-        <video src="images/fond_video.mp4" autoplay muted loop></video>
-        <img src="images/logo.png" alt="Too Many Cooks. Studio">
+        <video src="videos/fond_video.mp4" autoplay muted loop></video>
+        <img src="logos/logo.png" alt="Too Many Cooks. Studio">
         <div class="arrow-down">
             <div></div>
         </div>
     </div>
     <div class="interlude" id="interlude">
-        <video src="images/fondvideo2.mp4" muted loop></video>
-        <img src="images/cliquez.png" alt="Cliquez" onclick="location.href='interlude.html'">
+        <video src="videos/fondvideo2.mp4" muted loop></video>
+        <img src="logos/cliquez.png" alt="Cliquez" onclick="location.href='interlude.html'">
         <div class="arrow-down">
             <div></div>
         </div>
@@ -263,30 +258,30 @@
     <div class="spacer"></div>
     <div class="content">
         <div class="studio-productions">
-            <img src="images/studio_productions.png" alt="Studio Productions">
+            <img src="logos/studio_productions.png" alt="Studio Productions">
         </div>
         <div class="spacer"></div>
         <div class="posters">
-            <img src="images/poster1.png" alt="Film Poster 1" onclick="location.href='menu1.html'">
-            <img src="images/poster2.png" alt="Film Poster 2" onclick="location.href='menu2.html'">
-            <img src="images/poster3.png" alt="Film Poster 3" onclick="location.href='menu3.html'">
+            <img src="fonds/poster1.png" alt="Film Poster 1" onclick="location.href='menu1.html'">
+            <img src="fonds/poster2.png" alt="Film Poster 2" onclick="location.href='interlude.html'">
+            <img src="fonds/poster3.png" alt="Film Poster 3" onclick="location.href='https://www.youtube.com/watch?v=uHgt8giw1LY'">
         </div>
         <div class="spacer"></div>
         <div class="our-partners">
-            <img src="images/our_partners.png" alt="Our Partners">
+            <img src="logos/our_partners.png" alt="Our Partners">
         </div>
         <div class="partners-logos-container">
-            <div class="partners-logos">
-                <img class="partner1" src="images/partenaire1.png" alt="Partenaire 1" onclick="location.href='https://www.the-escapers.com/profil/too-many-cooks-corp'">
-                <img class="partner2" src="images/partenaire2.png" alt="Partenaire 2" onclick="location.href='https://fr.bensoriginal.com/'">
-                <img class="partner3" src="images/partenaire4.png" alt="Partenaire 3" onclick="location.href='https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/'">
-                <img class="partner4" src="images/partenaire3.png" alt="Partenaire 4" onclick="location.href='https://www.youtube.com/watch?v=QrGrOK8oZG8'">
+            <div class="partners-logos" id="partnersLogos">
+                <img class="partner1" src="logos/partenaire1.png" alt="Partenaire 1" onclick="redirectAndRestartAnimation('https://www.the-escapers.com/profil/too-many-cooks-corp')">
+                <img class="partner2" src="logos/partenaire2.png" alt="Partenaire 2" onclick="redirectAndRestartAnimation('https://fr.bensoriginal.com/')">
+                <img class="partner3" src="logos/partenaire4.png" alt="Partenaire 3" onclick="redirectAndRestartAnimation('https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/')">
+                <img class="partner4" src="logos/partenaire3.png" alt="Partenaire 4" onclick="redirectAndRestartAnimation('https://www.youtube.com/watch?v=QrGrOK8oZG8')">
             </div>
         </div>
     </div>
     <div class="footer">
-        <img class="corner-logo" src="images/reseaux.png" alt="Image reseaux" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
-        <img class="corner-logo" src="images/droits.png" alt="Droits réservé" onclick="location.href='a_propos.html'">
+        <img class="corner-logo" src="logos/reseaux.png" alt="Image reseaux" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
+        <img class="corner-logo" src="logos/droits.png" alt="Droits réservé" onclick="location.href='a_propos.html'">
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -304,7 +299,6 @@
 
             posters.forEach(poster => observer.observe(poster));
 
-            // Ajouter l'intersection observer pour lancer la vidéo interlude
             const interlude = document.getElementById('interlude');
             const interludeObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -319,7 +313,6 @@
 
             interludeObserver.observe(interlude);
 
-            // Détecter le scroll et lancer le fondu du deuxième logo
             let logoFadedIn = false;
             const interludeLogo = document.querySelector('.interlude img');
 
@@ -333,6 +326,19 @@
             window.addEventListener('scroll', fadeInLogo);
             window.addEventListener('touchmove', fadeInLogo);
         });
+
+        window.addEventListener('pageshow', () => {
+            const partnersLogos = document.getElementById('partnersLogos');
+            partnersLogos.style.animation = 'none';
+            partnersLogos.offsetHeight;
+            partnersLogos.style.animation = null;
+        });
+
+        function redirectAndRestartAnimation(url) {
+            const partnersLogos = document.getElementById('partnersLogos');
+            localStorage.setItem('partnersLogosAnimation', window.getComputedStyle(partnersLogos).animation);
+            window.location.href = url;
+        }
     </script>
 </body>
 </html>
