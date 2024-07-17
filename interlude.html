@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interlude</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial, sans-serif';
+            background-color: #000; /* Fond noir */
+            color: #fff;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .video-container, .image-container {
+            width: 64%;
+            max-width: 640px;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .click-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #000000; /* Fond rouge */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        @media (max-width: 600px) {
+            .video-container {
+                width: 100%;
+                max-width: 560px;
+            }
+            .click-button {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="video" autoplay muted>
+            <source src="images/Affiche_Too_Many_Cooks_2.0.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+    </div>
+    <button id="clickButton" class="click-button" onclick="showImage()">Suite...</button>
+    <div class="image-container hidden">
+        <img src="images/scream.png" alt="Scream" id="screamImage" style="width: 100%; height: auto;">
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const clickButton = document.getElementById('clickButton');
+        const videoContainer = document.querySelector('.video-container');
+        const imageContainer = document.querySelector('.image-container');
+
+        video.onended = function() {
+            setTimeout(() => {
+                clickButton.style.display = 'block';
+            }, 10000); // Afficher le bouton 6 secondes après la fin de la vidéo
+        };
+
+        function showImage() {
+            clickButton.style.display = 'none';
+            videoContainer.style.display = 'none';
+            imageContainer.classList.remove('hidden');
+            setTimeout(() => {
+                window.location.href = 'menu2.html';
+            }, 3000); // Rediriger vers la page après 5 secondes
+        }
+    </script>
+</body>
+</html>

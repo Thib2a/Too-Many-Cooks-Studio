@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mouhaha Video</title>
+    <title>Mouhaha</title>
     <style>
         body {
             margin: 0;
@@ -30,27 +30,31 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
-            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
         }
-        .clickable-overlay span {
-            font-size: 18px; /* Vous pouvez modifier cette valeur pour changer la taille du texte */
+        .click-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            font-size: 18px;
             font-weight: bold;
-            color: red;
-            animation: blink 1s infinite;
+            color: #fff;
+            background-color: #686868; /* Fond noir */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             display: none;
+            text-decoration: none; /* Supprime le souslignage */
         }
-        @keyframes blink {
-            0%, 50%, 100% {
-                opacity: 1;
-            }
-            25%, 75% {
-                opacity: 0;
-            }
+        .click-button:hover, .click-button:focus {
+            text-decoration: none; /* Supprime le souslignage au survol et au focus */
         }
         @media (max-width: 600px) {
             .video-container {
@@ -61,8 +65,9 @@
                 width: 100px;
                 height: 100px;
             }
-            .clickable-overlay span {
-                font-size: 18px; /* Vous pouvez modifier cette valeur pour changer la taille du texte sur mobile */
+            .click-button {
+                font-size: 16px;
+                padding: 8px 16px;
             }
         }
     </style>
@@ -74,17 +79,18 @@
             Votre navigateur ne supporte pas la balise vidéo.
         </video>
         <a href="enigme1.html" class="clickable-overlay">
-            <span id="exitText">EXIT</span>
+            <!-- La zone cliquable est là dès le début -->
         </a>
+        <button id="exitButton" class="click-button" onclick="location.href='enigme1.html'">EXIT</button>
     </div>
     <script>
         const video = document.getElementById('mouhahaVideo');
-        const exitText = document.getElementById('exitText');
+        const exitButton = document.getElementById('exitButton');
 
         video.onended = function() {
             setTimeout(() => {
-                exitText.style.display = 'block';
-            }, 10000); // Afficher le texte 10 secondes après la fin de la vidéo
+                exitButton.style.display = 'block';
+            }, 10000); // Afficher le bouton 10 secondes après la fin de la vidéo
         };
     </script>
 </body>

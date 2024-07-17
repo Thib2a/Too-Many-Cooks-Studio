@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Too Many Cooks. Studio</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+        
         :root {
             --main-bg-color: #f0f0f0;
             --main-color: #333;
             --font-family: 'Arial, sans-serif';
+            --arrow-color: #ccc; /* gris clair pour la flèche */
+            --scary-font: 'Creepster', cursive; /* Exemple de police effrayante */
         }
         body {
             margin: 0;
@@ -29,6 +33,7 @@
             height: 100vh;
             position: relative;
             background-color: var(--main-bg-color);
+            animation: fadeIn 8s forwards; /* Durée du fondu du premier logo */
         }
         .logo video {
             position: absolute;
@@ -42,8 +47,34 @@
         .logo img {
             max-width: 80%;
             height: auto;
-            cursor: pointer;
             z-index: 1;
+        }
+        .arrow-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        .arrow-down div {
+            width: 30px;
+            height: 30px;
+            border-left: 5px solid var(--arrow-color);
+            border-bottom: 5px solid var(--arrow-color);
+            transform: rotate(-45deg);
+            margin: 5px 0;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) rotate(-45deg);
+            }
+            40% {
+                transform: translateY(-10px) rotate(-45deg);
+            }
+            60% {
+                transform: translateY(-5px) rotate(-45deg);
+            }
         }
         .content {
             padding: 20px;
@@ -74,23 +105,6 @@
         .posters img:hover, .posters img:active {
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-        }
-        .posters img::after {
-            content: 'Cliquez pour en savoir plus';
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .posters img:hover::after, .posters img:active::after {
-            opacity: 1;
         }
         .studio-productions, .our-partners {
             display: flex;
@@ -137,7 +151,11 @@
             max-width: 380px;
         }
         .partner3 {
-            max-width: 140px;
+            max-width: 150px;
+        }
+        .partner4 {
+            max-width: 360px;
+            
         }
         .footer {
             display: flex;
@@ -166,7 +184,10 @@
             }
         }
         @keyframes fadeIn {
-            to {
+            0% {
+                opacity: 0;
+            }
+            100% {
                 opacity: 1;
             }
         }
@@ -195,12 +216,49 @@
                 width: 70%;
             }
         }
+        .interlude {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--main-bg-color);
+        }
+        .interlude video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .interlude img {
+            max-width: 75%; /* Taille du deuxième logo */
+            height: auto;
+            position: absolute;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 15s; /* Durée du fondu du deuxième logo */
+            cursor: pointer;
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="logo" onclick="location.href='video.html'">
+    <div class="logo">
         <video src="images/fond_video.mp4" autoplay muted loop></video>
         <img src="images/logo.png" alt="Too Many Cooks. Studio">
+        <div class="arrow-down">
+            <div></div>
+        </div>
+    </div>
+    <div class="interlude" id="interlude">
+        <video src="images/fondvideo2.mp4" muted loop></video>
+        <img src="images/cliquez.png" alt="Cliquez" onclick="location.href='interlude.html'">
+        <div class="arrow-down">
+            <div></div>
+        </div>
     </div>
     <div class="spacer"></div>
     <div class="content">
@@ -211,7 +269,7 @@
         <div class="posters">
             <img src="images/poster1.png" alt="Film Poster 1" onclick="location.href='menu1.html'">
             <img src="images/poster2.png" alt="Film Poster 2" onclick="location.href='menu2.html'">
-            <img src="images/poster3.png" alt="Film Poster 3" onclick="location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'">
+            <img src="images/poster3.png" alt="Film Poster 3" onclick="location.href='menu3.html'">
         </div>
         <div class="spacer"></div>
         <div class="our-partners">
@@ -221,13 +279,14 @@
             <div class="partners-logos">
                 <img class="partner1" src="images/partenaire1.png" alt="Partenaire 1" onclick="location.href='https://www.the-escapers.com/profil/too-many-cooks-corp'">
                 <img class="partner2" src="images/partenaire2.png" alt="Partenaire 2" onclick="location.href='https://fr.bensoriginal.com/'">
-                <img class="partner3" src="images/partenaire3.png" alt="Partenaire 3" onclick="location.href='https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/'">
+                <img class="partner3" src="images/partenaire4.png" alt="Partenaire 3" onclick="location.href='https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/'">
+                <img class="partner4" src="images/partenaire3.png" alt="Partenaire 4" onclick="location.href='https://www.youtube.com/watch?v=QrGrOK8oZG8'">
             </div>
         </div>
     </div>
     <div class="footer">
-        <img class="corner-logo" src="images/logo_gauche.png" alt="Logo Gauche" onclick="location.href='a_propos.html'">
-        <img class="corner-logo" src="images/logo_droit.png" alt="Logo Droit" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
+        <img class="corner-logo" src="images/reseaux.png" alt="Image reseaux" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
+        <img class="corner-logo" src="images/droits.png" alt="Droits réservé" onclick="location.href='a_propos.html'">
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -244,6 +303,35 @@
             });
 
             posters.forEach(poster => observer.observe(poster));
+
+            // Ajouter l'intersection observer pour lancer la vidéo interlude
+            const interlude = document.getElementById('interlude');
+            const interludeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = interlude.querySelector('video');
+                        video.play();
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            interludeObserver.observe(interlude);
+
+            // Détecter le scroll et lancer le fondu du deuxième logo
+            let logoFadedIn = false;
+            const interludeLogo = document.querySelector('.interlude img');
+
+            const fadeInLogo = () => {
+                if (!logoFadedIn) {
+                    interludeLogo.style.opacity = '1';
+                    logoFadedIn = true;
+                }
+            };
+
+            window.addEventListener('scroll', fadeInLogo);
+            window.addEventListener('touchmove', fadeInLogo);
         });
     </script>
 </body>
