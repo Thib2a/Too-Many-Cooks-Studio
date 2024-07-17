@@ -76,7 +76,7 @@
         @media (max-width: 600px) {
             .video-container, .large-video-container {
                 width: 100%;
-                max-width: 360px;
+                max-width: 350px;
             }
             .click-button {
                 font-size: 16px;
@@ -93,10 +93,11 @@
         </video>
     </div>
     <div class="large-video-container" id="mauvietteContainer" style="display: none;">
-        <video id="mauvietteVideo">
+        <video id="mauvietteVideo" muted>
             <source src="videos/mauviette.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la balise vidéo.
         </video>
+        <audio id="mauvietteAudio" src="sons/mauviette.mp3"></audio>
     </div>
     <div class="button-container" id="buttonContainer">
         <a href="javascript:void(0);" class="click-button" id="evacButton" onclick="showMauviette()">On évacue !</a>
@@ -126,15 +127,22 @@
             mauvietteContainer.style.display = 'block';
 
             const mauvietteVideo = document.getElementById('mauvietteVideo');
+            const mauvietteAudio = document.getElementById('mauvietteAudio');
+
             mauvietteVideo.addEventListener('ended', () => {
                 document.getElementById('homeButton').style.display = 'block';
                 document.getElementById('realContinueButton').style.display = 'block';
                 document.getElementById('mauvietteButtonContainer').style.display = 'flex';
             });
 
+            // Jouer la vidéo en mode muted et lancer l'audio séparément
             mauvietteVideo.play().catch(error => {
                 console.error('La lecture automatique a été empêchée:', error);
                 mauvietteVideo.controls = true; // Afficher les contrôles si la lecture automatique échoue
+            });
+
+            mauvietteAudio.play().catch(error => {
+                console.error('La lecture automatique de l\'audio a été empêchée:', error);
             });
         }
     </script>
