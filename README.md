@@ -1,4 +1,3 @@
-# Too-Many-Cooks-Studio
+# Too Many Cooks. Studio
 # By Tchibayoult avec l'aide d'Uncle Ben's
-#"Forcer la mise à jour de GitHub Pages".
-# 2e Forçage pour l'HTTPS
+# Version 1.0 le 18/07/24
