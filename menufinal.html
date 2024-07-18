@@ -123,10 +123,10 @@
             <img src="logos/cooksgpt.png" alt="Logo">
         </div>
         Génération terminée du "Menu Bucolique 2.0"<br><br>
-        Faites votre choix :
+        N'hésitez pas à visiter le reste du site, vous y trouverez plein de surprises !
         <div class="button-container" id="buttonContainer">
             <button onclick="downloadPDF()">Télécharger en PDF</button>
-            <button onclick="viewPDF()">Visualiser ici</button>
+            <button onclick="visitSite()">Visiter le site</button>
         </div>
     </div>
     <iframe id="pdfViewer" src="PDF/Menu_Too_Many_Cooks_2.0.pdf"></iframe>
@@ -165,9 +165,8 @@
             document.body.removeChild(link);
         }
 
-        function viewPDF() {
-            document.getElementById('finalMessage').style.display = 'none';
-            document.getElementById('pdfViewer').style.display = 'block';
+        function visitSite() {
+            window.location.href = 'accueil2.html';
         }
     </script>
 </body>
