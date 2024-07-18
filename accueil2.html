@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Too Many Cooks. Studio - Accueil</title>
+    <title>TMS. Accueil</title>
     <style>
         :root {
             --main-bg-color: #f0f0f0;
@@ -86,7 +86,7 @@
                 max-width: 70%; /* Taille du logo pour les petits écrans */
             }
             .arrow-down {
-                bottom: 50px;
+                bottom: 90px;
             }
             .arrow-down div {
                 width: 20px;
@@ -228,7 +228,7 @@
 <body>
     <!-- Section de la vidéo avec le logo et la flèche vers le bas -->
     <div class="logo">
-        <video src="videos/fond_video.mp4" autoplay muted loop></video>
+        <video id="introVideo" autoplay muted loop></video>
         <img src="logos/logo.png" alt="Too Many Cooks. Studio">
         <div class="arrow-down">
             <div></div>
@@ -264,6 +264,16 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Script pour choisir aléatoirement une vidéo d'intro
+            const videoSources = [
+                'videos/accueil2-1.mp4',
+                'videos/accueil2-2.mp4' // Ajoutez ici d'autres vidéos si nécessaire
+            ];
+            const introVideo = document.getElementById('introVideo');
+            const randomIndex = Math.floor(Math.random() * videoSources.length);
+            introVideo.src = videoSources[randomIndex];
+            introVideo.play();
+
             // Observer pour animer l'apparition des posters lorsqu'ils entrent dans le viewport
             const posters = document.querySelectorAll('.posters img');
             const observer = new IntersectionObserver((entries) => {
