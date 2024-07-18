@@ -23,6 +23,9 @@
             color: white;
             text-align: left; /* Rétablir l'alignement du texte à gauche dans le conteneur */
         }
+        .quiz-container h1, .quiz-container h2 {
+            text-align: center; /* Centrer les titres */
+        }
         .question {
             display: flex;
             align-items: center;
@@ -92,7 +95,7 @@
     <audio id="background-audio" src="sons/melenchon.mp3"></audio>
 
     <div class="quiz-container">
-        <h1>Testons vos connaissances des programmes des extrêmes</h1>
+        <h1>Bien, maintenant testons vos connaissances des programmes des extrêmes</h1>
         <h2>Front Populaire ou Front National ?</h2>
         
         <div class="question">
@@ -131,7 +134,7 @@
         <div class="question">
             <img src="images/sarouel.jpg" alt="Illustration pour la question 4">
             <div class="question-content">
-                <p>Proposition 4 : Instaurer la cuisson au Woke comme la nouvelle norme dans les cantines scolaires et proposer des cours de naturopathie aux élèves en difficulté</p>
+                <p>Proposition 4 : Instaurer la cuisson au Woke comme la nouvelle norme dans les cantines scolaires et proposer des cours de Naturopathie aux élèves en difficulté</p>
                 <div class="choices">
                     <label><input type="radio" name="q4" value="A"> Front Populaire</label>
                     <label><input type="radio" name="q4" value="B"> Front National</label>
@@ -165,13 +168,13 @@
             }
             const messageElement = document.getElementById("message");
             if (score === correctAnswers.length) {
-                messageElement.textContent = `Félicitations ! Vous avez obtenu ${score} sur 4 bonnes réponses.`;
+                messageElement.textContent = `Bien ! Deuxième test réussi !`;
                 messageElement.style.color = "lightgreen";
                 setTimeout(() => {
                     location.href = 'enigme4.html';
                 }, 2000);
             } else {
-                messageElement.textContent = `Vous avez obtenu ${score} sur 4 bonnes réponses. Réessayez.`;
+                messageElement.textContent = `${score} sur 4 bonnes réponses. Ignare !`;
             }
         }
     </script>

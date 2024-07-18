@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Too Many Cooks. Studio - Accueil</title>
+    <style>
+        :root {
+            --main-bg-color: #f0f0f0;
+            --main-color: #333;
+            --font-family: 'Arial, sans-serif';
+            --arrow-color: #ccc;
+        }
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--main-bg-color);
+            color: var(--main-color);
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            background-color: var(--main-bg-color);
+            animation: fadeIn 5s forwards;
+        }
+        .logo video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .logo img {
+            max-width: 60%; /* Taille du logo principal */
+            height: auto;
+            z-index: 1;
+        }
+        .arrow-down {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        .arrow-down div {
+            width: 30px;
+            height: 30px;
+            border-left: 5px solid var(--arrow-color);
+            border-bottom: 5px solid var(--arrow-color);
+            transform: rotate(-45deg);
+            margin: 5px 0;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) rotate(-45deg);
+            }
+            40% {
+                transform: translateY(-10px) rotate(-45deg);
+            }
+            60% {
+                transform: translateY(-5px) rotate(-45deg);
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @media (max-width: 600px) {
+            .logo img {
+                max-width: 70%; /* Taille du logo pour les petits écrans */
+            }
+            .arrow-down {
+                bottom: 50px;
+            }
+            .arrow-down div {
+                width: 20px;
+                height: 20px;
+                border-left: 3px solid var(--arrow-color);
+                border-bottom: 3px solid var(--arrow-color);
+            }
+        }
+        .content {
+            padding: 20px;
+            background-color: var(--main-bg-color);
+            flex: 1;
+        }
+        .spacer {
+            margin: 40px 0;
+        }
+        .posters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .posters img {
+            width: 100%;
+            max-width: 524px;
+            height: auto;
+            border: 5px solid var(--main-color);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        .posters img:hover, .posters img:active {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+        .studio-productions, .our-partners {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--main-bg-color);
+        }
+        .studio-productions img, .our-partners img {
+            width: 24%;
+            height: auto;
+            cursor: default;
+            pointer-events: none;
+        }
+        .partners-logos-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--main-bg-color);
+        }
+        .partners-logos {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            animation: scroll 25s linear infinite;
+        }
+        .partners-logos:hover {
+            animation-play-state: paused;
+        }
+        .partners-logos img {
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .partners-logos img:hover {
+            transform: scale(1.1);
+        }
+        .partner1 {
+            max-width: 240px;
+        }
+        .partner2 {
+            max-width: 380px;
+        }
+        .partner3 {
+            max-width: 150px;
+        }
+        .partner4 {
+            max-width: 360px;
+        }
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background-color: var(--main-bg-color);
+        }
+        .corner-logo {
+            width: 300px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .corner-logo:hover {
+            transform: scale(1.2);
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @media (max-width: 600px) {
+            .posters img {
+                max-width: 70%;
+            }
+            .studio-productions img, .our-partners img {
+                width: 65%;
+            }
+            .corner-logo {
+                width: 70%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Section de la vidéo avec le logo et la flèche vers le bas -->
+    <div class="logo">
+        <video src="videos/fond_video.mp4" autoplay muted loop></video>
+        <img src="logos/logo.png" alt="Too Many Cooks. Studio">
+        <div class="arrow-down">
+            <div></div>
+        </div>
+    </div>
+    <!-- Contenu principal du site -->
+    <div class="content">
+        <div class="studio-productions">
+            <img src="logos/studio_productions.png" alt="Studio Productions">
+        </div>
+        <div class="spacer"></div>
+        <div class="posters">
+            <img src="fonds/poster1.png" alt="Film Poster 1" onclick="location.href='menu1.html'">
+            <img src="fonds/poster2.png" alt="Film Poster 2" onclick="location.href='interlude.html'">
+            <img src="fonds/poster3.png" alt="Film Poster 3" onclick="location.href='https://www.youtube.com/watch?v=uHgt8giw1LY'">
+        </div>
+        <div class="spacer"></div>
+        <div class="our-partners">
+            <img src="logos/our_partners.png" alt="Our Partners">
+        </div>
+        <div class="partners-logos-container">
+            <div class="partners-logos" id="partnersLogos">
+                <img class="partner1" src="logos/partenaire1.png" alt="Partenaire 1" onclick="redirectAndRestartAnimation('https://www.the-escapers.com/profil/too-many-cooks-corp')">
+                <img class="partner2" src="logos/partenaire2.png" alt="Partenaire 2" onclick="redirectAndRestartAnimation('https://fr.bensoriginal.com/')">
+                <img class="partner3" src="logos/partenaire4.png" alt="Partenaire 3" onclick="redirectAndRestartAnimation('https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/')">
+                <img class="partner4" src="logos/partenaire3.png" alt="Partenaire 4" onclick="redirectAndRestartAnimation('https://www.youtube.com/watch?v=QrGrOK8oZG8')">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <img class="corner-logo" src="logos/reseaux.png" alt="Image reseaux" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
+        <img class="corner-logo" src="logos/droits.png" alt="Droits réservé" onclick="location.href='a_propos.html'">
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observer pour animer l'apparition des posters lorsqu'ils entrent dans le viewport
+            const posters = document.querySelectorAll('.posters img');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            posters.forEach(poster => observer.observe(poster));
+        });
+
+        // Redémarre l'animation des logos des partenaires après le retour sur la page
+        window.addEventListener('pageshow', () => {
+            const partnersLogos = document.getElementById('partnersLogos');
+            partnersLogos.style.animation = 'none';
+            partnersLogos.offsetHeight;
+            partnersLogos.style.animation = null;
+        });
+
+        // Redirection et redémarrage de l'animation
+        function redirectAndRestartAnimation(url) {
+            const partnersLogos = document.getElementById('partnersLogos');
+            localStorage.setItem('partnersLogosAnimation', window.getComputedStyle(partnersLogos).animation);
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

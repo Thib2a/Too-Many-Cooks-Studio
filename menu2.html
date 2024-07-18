@@ -43,24 +43,17 @@
             font-weight: bold;
         }
         #evacButton {
-            background-color: green;
-            color: white;
-        }
-        #evacButton:hover {
-            background-color: darkgreen;
-        }
-        #continueButton {
             background-color: red;
             color: white;
         }
-        #continueButton:hover {
+        #evacButton:hover {
             background-color: darkred;
         }
-        #homeButton {
+        #continueButton {
             background-color: green;
             color: white;
         }
-        #homeButton:hover {
+        #continueButton:hover {
             background-color: darkgreen;
         }
         #realContinueButton {
@@ -100,44 +93,49 @@
         <audio id="mauvietteAudio" src="sons/mauviette.mp3"></audio>
     </div>
     <div class="button-container" id="buttonContainer">
-        <a href="javascript:void(0);" class="click-button" id="evacButton" onclick="showMauviette()">On évacue !</a>
-        <a href="enigme1.html" class="click-button" id="continueButton">On continue !</a>
+        <a href="javascript:void(0);" class="click-button" id="evacButton" onclick="showMauviette()">J'abandonne...</a>
+        <a href="enigme1.html" class="click-button" id="continueButton">Ça me tente !</a>
     </div>
     <div class="button-container" id="mauvietteButtonContainer" style="display: none;">
-        <button id="homeButton" class="click-button" onclick="window.location.href='index.html'">Accueil</button>
-        <a href="enigme1.html" class="click-button" id="realContinueButton">On continue pour de vrai ?</a>
+        <a href="https://letmegooglethat.com/?q=Comment+vaincre+ses+peurs+%3F" class="click-button" id="realContinueButton">La sortie est par là...</a>
     </div>
 
     <script>
+        // Fonction pour afficher les boutons après la fin de la vidéo "Mouhaha"
         function showButtons() {
             setTimeout(() => {
                 document.getElementById('evacButton').style.display = 'block';
                 document.getElementById('continueButton').style.display = 'block';
-            }, 3000);
+            }, 3000); // Affiche les boutons après 3 secondes
         }
 
+        // Fonction pour afficher la vidéo et l'audio "Mauviette"
         function showMauviette() {
+            // Cache les boutons et la vidéo "Mouhaha"
             document.getElementById('evacButton').style.display = 'none';
             document.getElementById('continueButton').style.display = 'none';
             document.getElementById('mouhahaContainer').style.display = 'none';
             
+            // Affiche la vidéo "Mauviette"
             const mauvietteContainer = document.getElementById('mauvietteContainer');
             mauvietteContainer.style.display = 'block';
 
             const mauvietteVideo = document.getElementById('mauvietteVideo');
             const mauvietteAudio = document.getElementById('mauvietteAudio');
 
+            // Affiche le bouton "La sortie est par là..." après la fin de la vidéo "Mauviette"
             mauvietteVideo.addEventListener('ended', () => {
-                document.getElementById('homeButton').style.display = 'block';
                 document.getElementById('realContinueButton').style.display = 'block';
                 document.getElementById('mauvietteButtonContainer').style.display = 'flex';
             });
 
+            // Lecture de la vidéo "Mauviette"
             mauvietteVideo.play().catch(error => {
                 console.error('La lecture automatique a été empêchée:', error);
-                mauvietteVideo.controls = true;
+                mauvietteVideo.controls = true; // Affiche les contrôles de la vidéo en cas d'erreur
             });
 
+            // Lecture de l'audio "Mauviette"
             mauvietteAudio.play().catch(error => {
                 console.error('La lecture automatique de l\'audio a été empêchée:', error);
             });

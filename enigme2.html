@@ -51,14 +51,19 @@
             object-fit: contain;
         }
         @media (max-width: 600px) {
+            .rebus {
+                flex-direction: column; /* Aligner les images en colonne sur mobile */
+                align-items: center; /* Centrer les images */
+            }
             .rebus img {
                 max-width: 120px; /* Augmenté */
                 max-height: 120px; /* Augmenté */
             }
             .answerInput {
                 font-size: 1em;
-                width: 100%;
+                width: calc(100% - 20px); /* Assurer que le champ de saisie ne dépasse pas */
                 max-width: none;
+                box-sizing: border-box;
             }
             .question-container {
                 padding: 10px;
@@ -68,7 +73,9 @@
 </head>
 <body>
     <div class="question-container">
-        <h1>Résolvez le rébus suivant</h1>
+        <h1>Bravo à toi, humain !</h1>
+        <h2>Nous pouvons passer aux choses sérieuses...</h2>
+        <p>Résolvez le rébus suivant :</p>
         <div class="rebus">
             <img src="images/rebus1.jpg" alt="Rébus 1">
             <img src="images/rebus2.jpg" alt="Rébus 2">
@@ -85,7 +92,7 @@
         function checkAnswer() {
             const answer = document.getElementById('answer').value.trim();
             if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-                document.getElementById('validation').textContent = "Félicitations ! Vous avez trouvé la bonne réponse.";
+                document.getElementById('validation').textContent = "Premier test réussi !";
                 setTimeout(() => {
                     location.href = 'enigme3.html';
                 }, 2000);

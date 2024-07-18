@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Too Many Cooks. Studio</title>
+    <title>Too Many Cooks. Studio - New Production</title>
     <style>
         :root {
             --main-bg-color: #f0f0f0;
@@ -42,7 +42,7 @@
             z-index: 0;
         }
         .logo img {
-            max-width: 80%;
+            max-width: 60%; /* Taille du logo principal */
             height: auto;
             z-index: 1;
         }
@@ -73,112 +73,6 @@
                 transform: translateY(-5px) rotate(-45deg);
             }
         }
-        .content {
-            padding: 20px;
-            background-color: var(--main-bg-color);
-            flex: 1;
-        }
-        .spacer {
-            margin: 40px 0;
-        }
-        .posters {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-        .posters img {
-            width: 100%;
-            max-width: 524px;
-            height: auto;
-            border: 5px solid var(--main-color);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-        .posters img:hover, .posters img:active {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-        }
-        .studio-productions, .our-partners {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background-color: var(--main-bg-color);
-        }
-        .studio-productions img, .our-partners img {
-            width: 24%;
-            height: auto;
-            cursor: default;
-            pointer-events: none;
-        }
-        .partners-logos-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            overflow: hidden;
-            background-color: var(--main-bg-color);
-        }
-        .partners-logos {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            animation: scroll 25s linear infinite;
-        }
-        .partners-logos:hover {
-            animation-play-state: paused;
-        }
-        .partners-logos img {
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .partners-logos img:hover {
-            transform: scale(1.1);
-        }
-        .partner1 {
-            max-width: 240px;
-        }
-        .partner2 {
-            max-width: 380px;
-        }
-        .partner3 {
-            max-width: 150px;
-        }
-        .partner4 {
-            max-width: 360px;
-        }
-        .footer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px;
-            background-color: var(--main-bg-color);
-        }
-        .corner-logo {
-            width: 300px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .corner-logo:hover {
-            transform: scale(1.2);
-        }
-        @keyframes scroll {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -187,29 +81,24 @@
                 opacity: 1;
             }
         }
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.02);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
         @media (max-width: 600px) {
             .logo img {
-                max-width: 70%;
+                max-width: 70%; /* Taille du logo pour les petits écrans */
             }
-            .posters img {
-                max-width: 70%;
+            .arrow-down {
+                bottom: 50px;
             }
-            .studio-productions img, .our-partners img {
-                width: 65%;
+            .arrow-down div {
+                width: 20px;
+                height: 20px;
+                border-left: 3px solid var(--arrow-color);
+                border-bottom: 3px solid var(--arrow-color);
             }
-            .corner-logo {
-                width: 70%;
+            .bottom-logos img {
+                width: 80px; /* Taille des boutons OUI et NON pour les petits écrans */
+            }
+            .moveable-oui, .moveable-non {
+                top: -30px; /* Ajustement pour les petits écrans */
             }
         }
         .interlude {
@@ -230,13 +119,48 @@
             z-index: 0;
         }
         .interlude img {
-            max-width: 70%;
+            max-width: 60%; /* Taille du 2e logo */
             height: auto;
             position: absolute;
             z-index: 1;
             opacity: 0;
             transition: opacity 10s;
+        }
+        .bottom-logos {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            gap: 10vw; /* Utilisation des unités relatives pour un meilleur ajustement */
+            opacity: 0;
+            transition: opacity 5s;
+        }
+        .bottom-logos img {
+            width: 12vw; /* Taille des boutons OUI et NON en unités relatives */
+            height: auto;
             cursor: pointer;
+            animation: pulse 3s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .moveable-oui {
+            position: relative;
+            top: -50px; /* Ajustez cette valeur pour déplacer l'image "oui" verticalement */
+        }
+        .moveable-non {
+            position: relative;
+            top: -50px; /* Ajustez cette valeur pour déplacer l'image "non" verticalement */
         }
     </style>
 </head>
@@ -250,59 +174,20 @@
     </div>
     <div class="interlude" id="interlude">
         <video src="videos/fondvideo2.mp4" muted loop></video>
-        <img src="logos/cliquez.png" alt="Cliquez" onclick="location.href='interlude.html'">
-        <div class="arrow-down">
-            <div></div>
-        </div>
+        <img src="logos/new_production.png" alt="Cliquez">
     </div>
-    <div class="spacer"></div>
-    <div class="content">
-        <div class="studio-productions">
-            <img src="logos/studio_productions.png" alt="Studio Productions">
-        </div>
-        <div class="spacer"></div>
-        <div class="posters">
-            <img src="fonds/poster1.png" alt="Film Poster 1" onclick="location.href='menu1.html'">
-            <img src="fonds/poster2.png" alt="Film Poster 2" onclick="location.href='interlude.html'">
-            <img src="fonds/poster3.png" alt="Film Poster 3" onclick="location.href='https://www.youtube.com/watch?v=uHgt8giw1LY'">
-        </div>
-        <div class="spacer"></div>
-        <div class="our-partners">
-            <img src="logos/our_partners.png" alt="Our Partners">
-        </div>
-        <div class="partners-logos-container">
-            <div class="partners-logos" id="partnersLogos">
-                <img class="partner1" src="logos/partenaire1.png" alt="Partenaire 1" onclick="redirectAndRestartAnimation('https://www.the-escapers.com/profil/too-many-cooks-corp')">
-                <img class="partner2" src="logos/partenaire2.png" alt="Partenaire 2" onclick="redirectAndRestartAnimation('https://fr.bensoriginal.com/')">
-                <img class="partner3" src="logos/partenaire4.png" alt="Partenaire 3" onclick="redirectAndRestartAnimation('https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/')">
-                <img class="partner4" src="logos/partenaire3.png" alt="Partenaire 4" onclick="redirectAndRestartAnimation('https://www.youtube.com/watch?v=QrGrOK8oZG8')">
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <img class="corner-logo" src="logos/reseaux.png" alt="Image reseaux" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
-        <img class="corner-logo" src="logos/droits.png" alt="Droits réservé" onclick="location.href='a_propos.html'">
+    <div class="bottom-logos" id="bottom-logos">
+        <img src="logos/oui.png" alt="Oui" onclick="location.href='interlude.html'" class="moveable-oui">
+        <img src="logos/non.png" alt="Non" onclick="location.href='https://letmegooglethat.com/?q=Comment+vaincre+ses+peurs+%3F'" class="moveable-non">
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const posters = document.querySelectorAll('.posters img');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
-
-            posters.forEach(poster => observer.observe(poster));
-
+            // Sélectionne l'élément de l'interlude et crée un observateur d'intersection
             const interlude = document.getElementById('interlude');
             const interludeObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
+                        // Lit la vidéo de l'interlude lorsque l'élément entre dans le viewport
                         const video = interlude.querySelector('video');
                         video.play();
                     }
@@ -315,30 +200,24 @@
 
             let logoFadedIn = false;
             const interludeLogo = document.querySelector('.interlude img');
+            const bottomLogos = document.getElementById('bottom-logos');
 
-            const fadeInLogo = () => {
+            // Fonction pour afficher les logos en bas après le fondu de l'interlude
+            const fadeInLogos = () => {
                 if (!logoFadedIn) {
                     interludeLogo.style.opacity = '1';
                     logoFadedIn = true;
+
+                    setTimeout(() => {
+                        bottomLogos.style.opacity = '1';
+                    }, 10000);  // Délai correspondant à la transition du logo
                 }
             };
 
-            window.addEventListener('scroll', fadeInLogo);
-            window.addEventListener('touchmove', fadeInLogo);
+            // Ajoute des écouteurs d'événements pour déclencher le fondu des logos en bas lors du défilement ou du mouvement tactile
+            window.addEventListener('scroll', fadeInLogos);
+            window.addEventListener('touchmove', fadeInLogos);
         });
-
-        window.addEventListener('pageshow', () => {
-            const partnersLogos = document.getElementById('partnersLogos');
-            partnersLogos.style.animation = 'none';
-            partnersLogos.offsetHeight;
-            partnersLogos.style.animation = null;
-        });
-
-        function redirectAndRestartAnimation(url) {
-            const partnersLogos = document.getElementById('partnersLogos');
-            localStorage.setItem('partnersLogosAnimation', window.getComputedStyle(partnersLogos).animation);
-            window.location.href = url;
-        }
     </script>
 </body>
 </html>

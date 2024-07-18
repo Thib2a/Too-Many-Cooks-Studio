@@ -38,7 +38,7 @@
             border-radius: 5px;
             padding: 10px;
             margin: 10px 0;
-            width: calc(100% - 22px); /* Adjust for padding and border */
+            width: calc(100% - 22px); /* Ajuster pour le padding et la bordure */
             color: black;
         }
         button {
@@ -71,6 +71,28 @@
             font-weight: bold;
             margin-top: 20px;
         }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px; /* Augmenter l'espacement entre les logos */
+            margin-top: 20px;
+        }
+        .logo-container img {
+            cursor: pointer;
+            animation: pulse 4s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
         .graphic-animation {
             display: none;
             color: white;
@@ -91,14 +113,17 @@
                 width: 100%;
                 padding: 12px 0;
             }
+            .logo-container img {
+                width: 80px;
+            }
         }
     </style>
 </head>
 <body>
-    <audio id="background-audio" src="sons/La_Chanson_de_Mimi.mp3" loop></audio>
+    <audio id="background-audio" src="sons/La_Chanson_de_Mimi.mp3"></audio>
 
     <div class="container" id="mainContainer">
-        <h1 id="title">Nous devons déterminer encore une fois si vous êtes bien un humain, voici une série de questions :</h1>
+        <h1 id="title">Dernière ligne droite ! Voici une série de questions hardues :</h1>
         <div id="puzzle1" class="puzzle">
             <p>Il y a 3 Mélusines abandonnées dans un jardin d'enfants et tu en récupères 2.</p>
             <p>Combien de Mélusines possèdes-tu maintenant ?</p>
@@ -119,32 +144,37 @@
             <p id="feedback3" class="message"></p>
         </div>
         <div id="finalMessage">
-            <h2 class="final-message-text">Félicitations !</h2>
-            <p class="additional-message-text">Vous avez résolu toutes les énigmes !</p>
-            <p class="additional-message-text">Encore quelques instants, le menu va être généré par notre nouvelle IA "CooksGPT 1.0" !</p>
-            <p>Merci de patienter...</p>
-        </div>
-        <div class="graphic-animation" id="graphicAnimation">
-            <svg viewBox="0 0 100 100" width="100" height="100">
-                <circle cx="50" cy="50" r="40" stroke="#4caf50" stroke-width="10" fill="none">
-                    <animate attributeName="stroke-dasharray" values="0,251.2;251.2,0" dur="2s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
-            <p>Génération du menu en cours...</p>
-        </div>
-        <div id="thankYouMessage">
-            <h2 class="thank-you-message-text">Merci d'avoir joué avec nous !</h2> 
-            <p class="additional-message-text">Tchibayoult et Uncle Ben's</p>
-            <p class="additional-message-text">2024 - Tous droits réservés</p>
-            <button onclick="goHome()">Accueil</button>
+            <h2 class="final-message-text">Bravo ! Vous avez réussi tout les tests !</h2>
+            <p>Cette année, une partie de l'argent que vous nous avez transmis à été injecté dans l'élaboration de ce site internet (sans parler de la coke et des putes)</p>
+            <p>Mais également dans la création d'une nouvelle inteligence artificielle dédié à la réalisation de menus pour des weekends bucoliques</p>
+            <p>Si vous souhaitez la tester, cliquez sur le bouton dédié !</p>
+            <p>Nous vous invitons également à visiter le reste du site, vous y trouverez nos anciennes productions et plein de surprises !</p>
+            <p>Tchibayoult et Uncle Ben's</p>
+            <div class="logo-container">
+                <a href="menufinal.html"><img src="logos/cooksgpt.png" alt="CooksGPT" data-width="210" data-height="220"></a>
+                <a href="accueil2.html"><img src="logos/accueil2.png" alt="Accueil" data-width="260" data-height="100"></a>
+            </div>
         </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const audio = document.getElementById('background-audio');
             document.body.addEventListener('click', function() {
-                audio.volume = 1; // Set volume
+                audio.volume = 1; // Régler le volume
                 audio.play();
+            });
+
+            // Appliquer les tailles des logos
+            const logos = document.querySelectorAll('.logo-container img');
+            logos.forEach(logo => {
+                const width = logo.getAttribute('data-width');
+                const height = logo.getAttribute('data-height');
+                if (width) {
+                    logo.style.width = width + 'px';
+                }
+                if (height) {
+                    logo.style.height = height + 'px';
+                }
             });
         });
 
@@ -184,39 +214,9 @@
                 document.getElementById('puzzle3').style.display = 'none';
                 document.getElementById('finalMessage').style.display = 'block';
                 document.getElementById('title').style.display = 'none';
-                setTimeout(showGraphicAnimation, 10000); // Show final message for 10 seconds
             } else {
                 document.getElementById('feedback3').textContent = 'Incorrect, essayez encore.';
             }
-        }
-
-        function showGraphicAnimation() {
-            document.getElementById('finalMessage').style.display = 'none';
-            document.body.style.background = '#000'; // Change background to black
-            const graphicAnimation = document.getElementById('graphicAnimation');
-            graphicAnimation.style.display = 'block';
-            setTimeout(() => {
-                downloadPDF();
-            }, 15000); // Show graphic animation for 15 seconds
-        }
-
-        function downloadPDF() {
-            const link = document.createElement('a');
-            link.href = 'PDF/Menu_Too_Many_Cooks_2.0.pdf'; // Path to the PDF in the PDF folder at the root
-            link.download = 'Menu_Too_Many_Cooks_2.0.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showThankYouMessage();
-        }
-
-        function showThankYouMessage() {
-            document.getElementById('graphicAnimation').style.display = 'none';
-            document.getElementById('thankYouMessage').style.display = 'block';
-        }
-
-        function goHome() {
-            window.location.href = 'index.html'; // Replace with your home page URL
         }
     </script>
 </body>

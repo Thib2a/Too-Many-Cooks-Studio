@@ -72,8 +72,8 @@
     <audio id="background-audio" src="sons/Josephine.mp3"></audio>
 
     <div class="question-container">
-        <h1>Nous devons nous assurer que vous n'êtes pas un robot : complétez le reCaptcha.</h1>
-        <h1>Cliquez sur toutes les images contenant un fraudeur fiscal</h1>       
+        <h1>Tout d'abord, nous devons nous assurer que vous n'êtes pas un robot : complétez le reCaptcha.</h1>
+        <p>Cliquez sur toutes les images contenant un fraudeur ou une fraudeuse fiscal<p>       
         <div class="captcha-container" id="captcha-container">
             <img src="images/fraudeur1.jpg" alt="Fraudeur 1" onclick="handleImageClick(this)">
             <img src="images/mimi1.jpg" alt="Mimi 1" onclick="handleImageClick(this)">
@@ -116,7 +116,7 @@
             const allSelected = selectedImageSources.length === correctImages.length;
 
             if (allCorrect && allSelected) {
-                document.getElementById('validation').textContent = "Félicitations ! Vous avez réussi le captcha.";
+                document.getElementById('validation').textContent = "Captcha validé ! Merci de patienter...";
                 setTimeout(() => {
                     location.href = 'enigme2.html';
                 }, 2000);
