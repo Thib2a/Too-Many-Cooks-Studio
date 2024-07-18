@@ -189,6 +189,7 @@
             height: auto;
             cursor: pointer;
             transition: transform 0.3s ease;
+            animation: pulse 2s infinite; /* Ajouter la classe de pulsation ici */
         }
         .corner-logo:hover {
             transform: scale(1.2);
@@ -259,8 +260,8 @@
         </div>
     </div>
     <div class="footer">
-        <img class="corner-logo" src="logos/reseaux.png" alt="Image reseaux" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
-        <img class="corner-logo" src="logos/droits.png" alt="Droits réservé" onclick="location.href='a_propos.html'">
+        <img class="corner-logo pulsing" src="logos/reseaux.png" alt="Image reseaux" onclick="location.href='https://www.facebook.com/Pet.Alert.Fr.31/?locale=fr_FR'">
+        <img class="corner-logo pulsing" src="logos/droits.png" alt="Droits réservé" onclick="location.href='a_propos.html'">
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
