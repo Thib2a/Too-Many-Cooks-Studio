@@ -146,6 +146,9 @@
                 border-left: 3px solid var(--arrow-color);
                 border-bottom: 3px solid var(--arrow-color);
             }
+            .partners-logos-container {
+                padding: 0; /* Supprime les marges pour les petits écrans */
+            }
         }
         .content {
             padding: 20px;
@@ -235,6 +238,8 @@
             width: 100%;
             overflow: hidden;
             background-color: var(--main-bg-color);
+            margin-left: auto;
+            margin-right: auto;
         }
         .partners-logos {
             display: flex;
@@ -465,8 +470,8 @@
         window.addEventListener('pageshow', () => {
             const partnersLogos = document.getElementById('partnersLogos');
             partnersLogos.style.animation = 'none';
-            partnersLogos.offsetHeight;
-            partnersLogos.style.animation = null;
+            void partnersLogos.offsetHeight; // Relance le reflow pour redémarrer l'animation
+            partnersLogos.style.animation = 'scroll 22s linear infinite';
         });
 
         function redirectAndRestartAnimation(url) {
