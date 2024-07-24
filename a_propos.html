@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À Propos</title>
@@ -8,7 +10,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: black url('fonds/a_propos.png') no-repeat center center;
+            background: black url('fonds/a_propos.webp') no-repeat center center;
             background-size: contain;
             display: flex;
             justify-content: center;
@@ -38,17 +40,9 @@
             border-radius: 5px;
             font-weight: bold;
         }
-        /* Media query pour les écrans de moins de 768px de largeur */
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .button-container {
-                top: 78%; /* Ajustez cette valeur pour les mobiles */
-            }
-        }
-        /* Media query pour les écrans de moins de 480px de largeur */
-        @media (max-width: 480px) {
-            .button-container {
-                top: 70%; /* Ajustez cette valeur pour les petits mobiles */
-                flex-direction: column; /* Afficher les boutons en colonne */
+                top: 77%; /* Ajustez cette valeur pour les mobiles */
                 gap: 5px; /* Réduire l'espacement entre les boutons */
             }
             .audio-control, .home-button {
