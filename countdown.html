@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        #countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            gap: 15px;
+        }
+        .count {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            font-size: 2.5rem;
+        }
+        .label {
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button {
+            background: #ccc;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 5px;
+            display: inline-block;
+        }
+        .button:hover {
+            background: #aaa;
+        }
+        @media (max-width: 600px) {
+            #countdown {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .count {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Soon...</h1>
+    <h2>D'autres surprises arrivent avant le jour J, patience...</h2>
+    <h3></h3>
+    <div id="countdown">
+        <div class="count"><span id="days">00</span><span class="label">Jours</span></div>
+        <div class="count"><span id="hours">00</span><span class="label">Heures</span></div>
+        <div class="count"><span id="minutes">00</span><span class="label">Minutes</span></div>
+        <div class="count"><span id="seconds">00</span><span class="label">Secondes</span></div>
+    </div>
+    <div class="button-container">
+        <a href="index2.html" class="button">Accueil</a>
+    </div>
+    <script>
+        function updateCountdown() {
+            const eventDate = new Date('July 11, 2025 16:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
