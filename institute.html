@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TMC. Institute</title>
+  <link rel="icon" href="images/favicon-institute.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="images/favicon-institute.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&family=Sora:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Sora', sans-serif;
+      background-color: #f4f6fc;
+      color: #444;
+      text-align: center;
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+    /* ===================
+       Section Logo + Vidéo
+       =================== */
+    .logo {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background-color: #1e1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 5s forwards;
+      z-index: 1; 
+    }
+    .logo video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0; 
+    }
+    .logo img {
+      width: 60%;
+      max-width: 500px;
+      height: auto;
+      z-index: 1;
+    }
+    .arrow-down {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+    .arrow-down div {
+      width: 30px;
+      height: 30px;
+      border-left: 5px solid #f4f6fc;
+      border-bottom: 5px solid #f4f6fc;
+      transform: rotate(-45deg);
+      margin: 5px 0;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(-45deg); }
+      40% { transform: translateY(-10px) rotate(-45deg); }
+      60% { transform: translateY(-5px) rotate(-45deg); }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Ancre pour le Back to Top */
+    #introAnchor {
+      width: 100%;
+      height: 1px;
+    }
+
+    /* Conteneur principal */
+    .main-wrapper {
+      position: relative;
+      z-index: 2; 
+    }
+
+    /* ===================
+       Sections (général)
+       =================== */
+    .section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ===================
+       Footer
+       =================== */
+    .footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -100px;
+      margin-bottom: -500px;
+      gap: 100px;
+      padding: 20px;
+      background: #f4f6fc;
+    }
+    .footer img {
+      height: 60px; 
+      width: auto;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .footer {
+        flex-direction: column;
+      }
+    }
+    
+    /* Animation bounce pour le logo du footer */
+    @keyframes footerBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .footer-logo.bounce {
+      animation: footerBounce 3s infinite;
+    }
+    /* Logo supplémentaire dans le footer */
+    .footer-logo.extra {
+      max-height: 20px;
+    }
+
+    /* ===================
+       Logos de sections
+       =================== */
+    .spa-logo, .soins-logo, .praticiens-logo, .avis-logo, .info-logo, .equipements-logo {
+      max-width: 630px;
+      width: 100%;
+      height: auto;
+    }
+    .equipements-logo {
+      display: auto;
+      margin-top: 80px;
+      margin-bottom: -100px; 
+    }
+    .avis-additional-logo {
+      display: block;
+      margin: 20px auto;
+      max-width: 200px;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ===================
+       Section SPA
+       =================== */
+    #spa {
+      max-width: 2000px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+    .spa-section {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
+    }
+    .spa-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+    .spa-text {
+      width: 50%;
+      text-align: justify;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 1s ease-in-out;
+    }
+    .spa-text.left {
+      transform: translateX(-100px);
+    }
+    .spa-text.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .spa-text h2 {
+      margin-bottom: 10px;
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 22px;
+      color: #222;
+    }
+    .spa-text p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .spa-image {
+      width: 50%;
+      position: relative; 
+    }
+    .spa-image img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 1s ease-in-out;
+      cursor: pointer;
+    }
+    .spa-image img.right {
+      transform: translateX(-100px);
+    }
+    .spa-image img.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    @media (min-width: 769px) {
+      .spa-image img:hover {
+        transform: scale(1.05);
+      }
+    }
+    @media (max-width: 768px) {
+      .spa-row {
+        flex-direction: column;
+      }
+      .spa-text, .spa-image {
+        width: 100%;
+        text-align: center;
+      }
+      .spa-text p, .spa-text h2 {
+        text-align: center;
+      }
+      .spa-text { order: 1; }
+      .spa-image { order: 2; }
+      #spa .spa-text.visible {
+        max-width: 90vw !important;
+        text-align: center !important;
+        padding: 0 10px !important;
+      }
+    }
+
+    /* ===================
+       Bouton de téléchargement
+       =================== */
+    .download-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #442a00;
+      color: #f4f6fc;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+    .download-btn:hover {
+      background-color: #5b3700;
+    }
+    .clickable {
+      cursor: pointer;
+    }
+
+    /* ===================
+       Animation menu Soins (bounce + zoom)
+       =================== */
+    .menu-image {
+      opacity: 0;
+      transform: translateX(100px);
+      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    }
+    .menu-image.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    @media (max-width: 768px) {
+      .menu-image.visible {
+        animation: zoomMobile 4s infinite 1s;
+      }
+    }
+    @keyframes zoomMobile {
+      0%, 100% {
+        transform: translateX(0) scale(1);
+      }
+      50% {
+        transform: translateX(0) scale(1.01);
+      }
+    }
+    @media (min-width: 769px) {
+      .menu-image.clickable:hover {
+        animation: none;
+        transform: scale(1.05);
+      }
+    }
+
+    /* ===================
+       Espacements entre sections
+       =================== */
+    .soins-logo {
+      display: auto;
+      margin-top: -50px;
+      margin-bottom: 30px;
+    }
+    #praticiens {
+      margin-top: -50px;
+      margin-bottom: 80px;
+    }
+    .praticiens-logo {
+      display: block;
+      margin: 0 auto 40px;
+    }
+    #avis {
+      margin-top: -130px;
+      margin-bottom: 150px;
+    }
+    .avis-logo {
+      display: block;
+      margin: 0 auto 40px;
+    }
+    #info {
+      margin-top: 30px;
+      margin-bottom: 25px; 
+    }
+    .info-logo {
+      display: block;
+      margin: 0 auto 0px;
+    }
+
+    /* ===================
+       Modal (pour Carte des soins & carrousels)
+       =================== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 5px;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f4f6fc;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ===================
+       Section Experts
+       =================== */
+    .experts-intro {
+      margin: 20px auto;
+      max-width: 800px;
+      line-height: 1.6;
+      font-family: 'Sora', sans-serif;
+      color: #444;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: all 1s ease-in-out;
+    }
+    .experts-intro.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .expert-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0px;
+      margin-top: 40px;
+    }
+    .expert-row.right {
+      flex-direction: row-reverse;
+    }
+    .expert-photo {
+      width: 35%;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 1s ease-in-out;
+      text-align: center; 
+    }
+    .expert-photo.left {
+      transform: translateX(-100px);
+    }
+    .expert-photo.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .team-member-img {
+      width: 292px;
+      height: 292px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #442a00;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .team-member-img:hover,
+    .team-member-img:active {
+      transform: scale(1.10);
+    }
+    .expert-text {
+      width: 50%;
+      text-align: justify;
+      font-family: 'Sora', sans-serif;
+      color: #444;
+      font-size: 16px;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 1s ease-in-out;
+    }
+    .expert-text.left {
+      transform: translateX(-100px);
+      text-align: left;
+    }
+    .expert-text.right {
+      text-align: right;
+    }
+    .expert-text.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    @media (max-width: 768px) {
+      .expert-row {
+        flex-direction: column !important;
+      }
+      .expert-photo,
+      .expert-text {
+        width: 100% !important;
+        text-align: center !important;
+      }
+    }
+
+    /* ===================
+       Avis Clients (en grille)
+       =================== */
+    .reviews-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 10px;
+      margin-bottom: 20px;
+      justify-items: center; 
+    }
+    .review-card {
+      background: #f4f6fc;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      padding: 20px;
+      text-align: center; 
+      transition: transform 0.3s;
+      font-family: 'Sora', sans-serif;
+      color: #444;
+      width: 92%;
+      max-width: 1000px; 
+    }
+    .review-card:hover {
+      transform: scale(1.05);
+    }
+    .review-card .stars {
+      color: #FFD700;
+      font-size: 18px;
+      margin-bottom: 8px;
+      display: block;
+      text-align: center;
+    }
+    .review-card .author {
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    /* ===================
+       Section Info (FAQ + Contact + Maps)
+       =================== */
+    .info-content {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 25px auto;
+      max-width: 1000px;
+    }
+    .info-faq {
+      flex: 1;
+      min-width: 250px;
+      text-align: left;
+    }
+    .info-contact {
+      flex: 1;
+      min-width: 250px;
+      text-align: left;
+    }
+    .info-faq h3 {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    .info-contact h3 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .faq-item {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+      color: #444;
+      outline: none;
+    }
+    .faq-question:hover {
+      color: #222;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+    .info-contact p {
+      text-align: justify;
+      white-space: pre-line;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #444;
+    }
+    @media (max-width: 768px) {
+      .info-content {
+        flex-direction: column;
+      }
+      .info-faq, .info-contact {
+        width: 100%;
+      }
+    }
+    .map-container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 20px auto;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+    .map-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* =======================
+       BOUTONS DE NAV CARROUSEL
+       ======================= */
+    .prev-btn, .next-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      color: #442a00;
+      border: none;
+      border-radius: 100%;
+      padding: 3px;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 9999;
+      transition: all 1s ease-in-out;
+    }
+    .prev-btn {
+      left: 10px;
+      transform: translateX(-50px) translateY(-50%);
+      opacity: 0;
+    }
+    .next-btn {
+      right: 10px;
+      transform: translateX(50px) translateY(-50%);
+      opacity: 0;
+    }
+    .prev-btn.visible, .next-btn.visible {
+      transform: translateX(0) translateY(-50%);
+      opacity: 1;
+    }
+    .prev-btn:hover, .next-btn:hover {
+      color: #fff;
+    }
+
+    /* =======================
+       BOUTON BACK TO TOP
+       ======================= */
+    .back-to-top {
+      position: fixed;
+      bottom: 25px;
+      right: 10px;
+      width: 50px;
+      height: 50px;
+      background-color: #442a00; 
+      color: #f4f6fc;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 0;
+      text-align: center;
+      z-index: 9999; 
+      transition: background-color 0.3s ease;
+    }
+    .back-to-top:hover {
+      background-color: #5b3700;
+    }
+
+    /* =======================
+       BOUTON CONTACT
+       ======================= */
+    .test-btn {
+      background-color: #442a00; 
+      color: #f4f6fc;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+    .test-btn:hover {
+      background-color: #5b3700;
+    }
+
+    /* =======================
+       MODAL POUR BOUTON CONTACT
+       ======================= */
+    #testModal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+    }
+    #testModalContent {
+      background-color: #fff;
+      color: #222;
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      border-radius: 5px;
+      position: relative;
+      text-align: center;
+    }
+    #testModalClose {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* =======================
+       BOUTONS DANS L'INTRO (NAV BUTTONS)
+       ======================= */
+    .nav-btn {
+      background-color: #7B3F00; 
+      color: #f4f6fc;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      opacity: 0.9;
+      transition: background-color 0.3s ease, opacity 0.3s ease, transform 1s ease, opacity 1s ease;
+      display: inline-block;
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    .nav-btn.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .nav-btn:hover {
+      opacity: 1;
+      background-color: #8C4D00;
+    }
+  </style>
+</head>
+<body>
+  <!-- SECTION LOGO + VIDÉO -->
+  <div class="logo">
+    <video id="introVideo" autoplay muted loop>
+      <source src="videos/accueil-institute-1.mp4" data-random type="video/mp4">
+      <source src="videos/accueil-institute-2.mp4" data-random type="video/mp4">
+      <source src="videos/fallback.ogg" type="video/ogg">
+      Votre navigateur ne supporte pas la vidéo HTML5.
+    </video>
+    <img src="logos/logoInstitute.png" alt="Too Many Cooks. Institute">
+    <div class="arrow-down"><div></div></div>
+  </div>
+
+  <!-- Ancre pour le Back to Top -->
+  <div id="introAnchor"></div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-wrapper">
+    <!-- Section Intro -->
+    <div id="spa">
+      <img class="spa-logo" src="logos/spa.png" alt="Accueil">
+      <div class="spa-text" style="max-width: 2000px; margin: 0 auto; padding: 0 40px; text-align: justify; line-height: 1; letter-spacing: 0px;">
+        <p style="font-size: 18px; line-height: 1.8; text-align: center;">Bienvenue au Too Many Cooks. Institute</p>
+        <p style="font-size: 18px; line-height: 1.8;">
+          Au cœur du quartier emblématique de la Goutte d’Or, niché entre les voies désaffectées du RER B et un repaire à crackhead encore actif. Notre institut vous accueille dans un calme troublant, venez parcourir ses couloirs végétalisés et ses salons aux décors authentiques.
+        </p>
+        <p style="font-size: 18px; line-height: 1.8; text-align: right">
+          On a hâte de vous accueillir. Le reste dépend de vous.
+        </p>
+      </div>
+
+      <!-- Séparateur au-dessus des boutons -->
+      <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 80%;">
+
+      <!-- BOUTONS DE NAVIGATION -->
+      <div id="navButtons" style="margin: 20px 0;">
+        <button class="nav-btn" onclick="document.getElementById('spa').scrollIntoView({behavior:'smooth'})">Nos Equipements</button>
+        <button class="nav-btn" onclick="document.getElementById('soins').scrollIntoView({behavior:'smooth'})">Nos Soins</button>
+        <button class="nav-btn" onclick="document.getElementById('praticiens').scrollIntoView({behavior:'smooth'})">Nos Experts</button>
+        <button class="nav-btn" onclick="document.getElementById('avis').scrollIntoView({behavior:'smooth'})">Vos Témoignages</button>
+        <button class="nav-btn" onclick="document.getElementById('info').scrollIntoView({behavior:'smooth'})">Infos - Contact</button>
+      </div>
+
+      <!-- Séparateur en dessous des boutons -->
+      <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 80%;">
+
+      <!-- LOGO EQUIPEMENTS -->
+      <img class="equipements-logo" src="logos/equipements.png" alt="Equipements">
+    </div>
+
+    <!-- Section SPA (Hydrothermal, Fitness, Massage) -->
+    <div class="spa-section" style="margin-top: 50px;">
+      <!-- Espace Hydrothermal -->
+      <div class="spa-row">
+        <div class="spa-text">
+          <h2>Espace Hydrothermal</h2>
+          <p>
+            Les équipements dernière génération de notre espace d’hydrothérapie sauront séduire les néophytes comme les plus érudits. Soucieux de notre impact écologique, et afin de réduire notre consommation d’eau, la piscine a été vidée.
+          </p>
+          <p>
+            Nous n’utilisons aucun produit chimique dans le jacuzzi et le hammam, l’eau n’est pas traitée. Les symptômes de la gale ou de la dengue peuvent apparaitre après votre baignade.
+          </p>
+          <p style="font-style: italic;">
+            Nous déclinons toute responsabilité en cas de décès.
+          </p>
+        </div>
+        <!-- Carrousel Hydrothermal -->
+        <div class="spa-image carousel">
+          <button class="prev-btn">&#10094;</button>
+          <img src="images/hydro1.jpg" class="carousel-image" alt="Espace Hydrothermal">
+          <button class="next-btn">&#10095;</button>
+        </div>
+      </div>
+
+      <!-- Espace Fitness -->
+      <div class="spa-row">
+        <!-- Carrousel Fitness -->
+        <div class="spa-image carousel right">
+          <button class="prev-btn">&#10094;</button>
+          <img src="images/fitness1.jpg" class="carousel-image" alt="Espace Fitness">
+          <button class="next-btn">&#10095;</button>
+        </div>
+        <div class="spa-text right">
+          <h2>Espace Fitness et Relaxation</h2>
+          <p>
+            Une zone de remise en forme pensée pour libérer le corps et l’esprit dans un décor singulier entre art nouveau et brutalisme. Ce design éblouissant, signé par Philippe Starck, est une invitation à la relaxation.
+          </p>
+          <p>
+            Profitez des vélos elliptiques et tapis « Upcyclés » à partir de sac à dos BasicFit saisis par la justice. Le salon « Chill Zone » est spécialement conçu pour les plus fainéants d’entre vous : accessible via un monte escalier Stannah, service de livraison « Gourmet » assuré par nos hôtesses en uniforme Deliveroo et musique d’ambiance douce et relaxante.
+          </p>
+          <p style="font-style: italic;">
+            Nouveauté : le solarium est à présent ouvert de 22h à minuit pour éviter les lésions cutanées liés aux rayons UV.
+          </p>
+        </div>
+      </div>
+
+      <!-- Espace Massage -->
+      <div class="spa-row">
+        <div class="spa-text">
+          <h2>Espace Massage</h2>
+          <p>
+            Evacuez les tensions entre les mains nos praticiens talentueux qui exercent dans notre espace massage tout équipé. Du massage thaïlandais à l’extraction d’une dent de sagesse, vous trouverez sans aucun doute le soin qu’il vous faut.
+          </p>
+          <p>
+            Baignés dans la lumière naturelle et les fragrances tropicales, nos salons de massage ne sont pas soumis aux obligations en matière d’hygiène et de sécurité incendie. 
+          </p>
+          <p style="font-style: italic;">
+            Nous proposons une assurance décès et invalidité lors de la réservation. Voir condition en magasin, jeu sans obligation d’achat.
+          </p>
+        </div>
+        <!-- Carrousel Massage -->
+        <div class="spa-image carousel">
+          <button class="prev-btn">&#10094;</button>
+          <img src="images/massage1.jpg" class="carousel-image" alt="Espace Massage">
+          <button class="next-btn">&#10095;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal pour la Carte des Soins -->
+    <div id="menuModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="menuModalImg">
+    </div>
+
+    <!-- Modal pour agrandir les images (Carrousel) -->
+    <div id="carouselModal" class="modal">
+      <span class="close" id="carouselModalClose">&times;</span>
+      <img class="modal-content" id="carouselModalImg">
+      <button id="carouselPrev" style="position:absolute; top:50%; left:20px; transform:translateY(-50%); background:none; border:none; color:#f4f6fc; font-size:24px; cursor:pointer;">&#10094;</button>
+      <button id="carouselNext" style="position:absolute; top:50%; right:20px; transform:translateY(-50%); background:none; border:none; color:#f4f6fc; font-size:24px; cursor:pointer;">&#10095;</button>
+    </div>
+
+    <!-- Section "Nos Soins" -->
+    <div class="section" id="soins">
+      <img class="soins-logo" src="logos/soins.webp" alt="Nos Soins">
+      <div class="spa-row">
+        <div class="spa-text left">
+          <h2>Notre carte des Soins</h2>
+          <p>
+            Chez Too Many Cooks. Institute, chaque soin est une expérience calibrée pour opérer en profondeur — très en profondeur.
+          </p>
+          <p>
+            Nos praticiens, sélectionnés pour leur profil unique, ont conçu des protocoles d’intervention où les cris intérieurs deviennent un outil de libération, et le silence un vecteur de transformation.
+          </p>
+          <p>
+            Qu’il s’agisse d’un simple massage régénérant ou d’un rituel de détoxification mentale à base de cris silencieux, une chose est sûre : vous en sortirez différent... voire transformé.
+          </p>
+        </div>
+        <div class="spa-image">
+          <img src="PDF/menu_soins.webp" alt="Carte des soins" class="menu-image clickable">
+          <a href="PDF/menu_soins.pdf" target="_blank">
+            <button class="download-btn">Télécharger la carte</button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Praticiens ("Nos Experts") -->
+    <div class="section" id="praticiens">
+      <img class="praticiens-logo" src="logos/praticiens.png" alt="Nos Experts">
+      <p class="experts-intro">
+        Nos praticiens disposent d’une expertise. Ce n’est peut-être pas celle que vous attendiez, mais elle est bien réelle. Leurs méthodes ne sont pas validées. Mais leurs résultats ne laissent personne indemne.
+      </p>
+      <!-- Premier expert : tout à droite -->
+      <div class="expert-row right">
+        <div class="expert-photo right">
+          <img class="team-member-img" src="images/masseur1.jpg" alt="Titouan" tabindex="0">
+        </div>
+        <div class="expert-text right">
+          <h2>Titouan</h2>
+          <p style="font-style: italic;">
+            Formé sur le tas, il ne connait pas les techniques du massage mais fait de son mieux et apprend à maitriser sa force.
+          </p>
+          <p style="font-style: italic;">
+            Originaire de la banlieue de Roubaix et autodidacte, il s’est formé en massant les pieds de sa mère, caissière chez Desigual, aujourd’hui décédée.
+          </p>
+        </div>
+      </div>
+      <!-- Deuxième expert : tout à gauche -->
+      <div class="expert-row">
+        <div class="expert-photo left">
+          <img class="team-member-img" src="images/masseur2.jpg" alt="Josiane" tabindex="0">
+        </div>
+        <div class="expert-text left">
+          <h2>Josiane</h2>
+          <p style="font-style: italic;">
+            Passionnée de nécrologie et de permaculture, Josiane propose une prestation connectée à la terre et à la nature. Elle repère les blocages que la médecine conventionnelle préfère ignorer.
+          </p>
+          <p style="font-style: italic;">
+            Ne vous fiez pas à son bracelet électronique, certes ses méthodes novatrices et subversives ne conviennent pas aux juges bienpensants, mais ils vous assureront des résultats sans pareils.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Avis (en grille) -->
+    <div class="section" id="avis">
+      <img class="avis-logo" src="logos/avis.png" alt="Avis">
+      <div class="reviews-container">
+        <div class="review-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>“Une expérience inoubliable, j’y retournerai jamais !”</p>
+          <p class="author">- Gérard D. -</p>
+        </div>
+        <div class="review-card">
+          <div class="stars">⭐</div>
+          <p>“Mon mec a oublié son caleçon sale et personne n'a accepté de nous le renvoyer par la poste. SAV de Merde !”</p>
+          <p class="author">- Wejdene -</p>
+        </div>
+        <div class="review-card">
+          <div class="stars">⭐⭐⭐⭐</div>
+          <p>“Très disruptif, j’ai perdu le sommeil pendant 3 jours... ce qui était le but.”</p>
+          <p class="author">- Pierre P. -</p>
+        </div>
+        <div class="review-card">
+          <div class="stars">⭐⭐</div>
+          <p>“J’ai pleuré deux fois. Une fois de douleur, une fois de soulagement. Je ne sais plus dans quel ordre.”</p>
+          <p class="author">- Mireille M. -</p>
+        </div>
+        <div class="review-card">
+          <div class="stars">⭐⭐⭐</div>
+          <p>“Un concept innovant, je ne comprends pas tout mais ça a changé ma vie.”</p>
+          <p class="author">- Evelyne D. -</p>
+        </div>
+        <div class="review-card">
+          <div class="stars">⭐</div>
+          <p>“Titouan m'a cassé la clavicule alors que j'avais réservé un massage des pieds. Je ne recommande pas.”</p>
+          <p class="author">- Anonyme -</p>
+        </div>
+        <div class="review-card">
+          <div class="stars">⭐⭐</div>
+          <p>“Un praticien m’a simplement fait asseoir sur une chaise haute, et m’a dit : ‘Tu es déjà au sommet’. J’ai fondu en larmes.”</p>
+          <p class="author">- Mimi M. -</p>
+        </div>
+
+        <img class="avis-additional-logo" src="logos/avis-extra.webp" alt="Logo additionnel Avis">
+
+        <div class="review-card">
+          <div class="stars">⭐⭐⭐⭐⭐⭐</div>
+          <p>“J’ai perdu un rein pendant mon soin. Heureusement j’en avais deux.”</p>
+          <p class="author">- Bernard K.-</p>
+        </div>
+      </div>
+
+    <!-- Section Info (FAQ + Contact + Maps) -->
+    <div class="section" id="info">
+      <img class="info-logo" src="logos/info.png" alt="Infos">
+      <div class="info-content">
+        <!-- FAQ à gauche -->
+        <div class="info-faq">
+          <h3>FAQ</h3>
+          <div class="faq-item">
+            <button class="faq-question">Dois-je apporter ma poire à lavement ?</button>
+            <div class="faq-answer">
+              <p>Non, vous pouvez chier autour de la piscine. Interdit de courir en revanche.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Y a-t-il des soins adaptés aux personnes sensibles ?</button>
+            <div class="faq-answer">
+              <p>Non.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Je souffre d'un ulcère duodénal après mon soin, est-ce normal ?</button>
+            <div class="faq-answer">
+              <p>Absolument. Nous offrons une expérience inoubliable qui s'accompagne généralement de troubles gastriques, allant de la chiasse fulgurente à l'ulcère.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Comment déclarer mon incapacité temporaire de travail (ITT) après mon soin ?</button>
+            <div class="faq-answer">
+              <p>Vous avez droit à une indemnité, n'oubliez pas de vous déclarer via le formulaire cerfa 5269 accessible sur Ameli.fr</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Puis-je venir accompagné(e) de mon enfant ?</button>
+            <div class="faq-answer">
+              <p>Bien sûr. Les enfants sont tolérés, à condition de les déposer à l'entrée de l'institut. Pas d'inquiétude, ils seront pris en charge par les résidents extérieurs trainant sur les voies ferrées.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Que faire en cas de disparition d’un proche m'accompagnant durant un soin ?</button>
+            <div class="faq-answer">
+              <p>Nous ne pouvons malheureusement pas fournir d’informations à ce sujet, conformément à notre politique de confidentialité.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Contact à droite -->
+        <div class="info-contact">
+          <h3>Contact</h3>
+          <p>
+            📞 Nous contacter : 07-56-89-28-17 (2,02€ la minute)
+            📧 reservation@toomanycooks-institute.lol<br>
+            Vous pouvez nous contacter à toute heure…
+            Mais personne ne vous répondra avant la tombée de la nuit.
+          </p>
+          <div style="text-align:center;">
+            <button class="test-btn" onclick="openTestModal()">Contacter immédiatement un expert</button>
+          </div>
+          <p>
+            📌 Où nous trouver ?<br>
+            Depuis le parking de la gare du Nord au niveau -3, suivez l'odeur d'urine des crackheads. Une fois dehors, traversez les voies ferrées sur 2km vers le Nord (faites vite, vous pourriez vous faire pincer très fort).<br>
+            Descendez l’escalier central au milieu des voies, jonché de seringues usagées, puis suivez les néons vacillants. Au bout du couleur emprunter la porte sans poignée...
+          </p>
+        </div>
+      </div>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.0951387926248!2d2.3533505767795675!3d48.89452399816246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f0065da028f%3A0xf835e1d356ed389f!2sToo%20Many%20Cooks.%20Institute!5e0!3m2!1sfr!2sbe!4v1743104976110!5m2!1sfr!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+
+    <!-- MODAL POUR LE BOUTON CONTACT -->
+    <div id="testModal">
+      <div id="testModalContent">
+        <span id="testModalClose">&times;</span>
+        <p id="expertMessage">Désolé, tous nos experts sont actuellement en pleine séance de massage intensive. Réessayez demain, ou mieux, l'année prochaine.</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <!-- Logo gauche avec animation bounce -->
+      <a href="https://www.instagram.com/too.many.cooks.corp/" target="_blank">
+        <img class="footer-logo bounce" src="logos/reseaux.png" alt="Réseaux sociaux">
+      </a>
+      <!-- Logo "Accueil" existant -->
+      <img class="footer-logo" src="logos/home.png" alt="Accueil" onclick="window.location.href='index.html';">
+      <!-- Nouveau logo Crédits à droite -->
+      <img class="footer-logo extra" src="logos/credits.png" alt="Logo Crédits">
+    </div>
+  </div> <!-- Fin main-wrapper -->
+
+  <!-- BOUTON BACK TO TOP -->
+  <button class="back-to-top" onclick="document.getElementById('introAnchor').scrollIntoView({ behavior: 'smooth' });">↑</button>
+
+  <!-- Scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Animation au scroll pour images, textes, flèches et boutons de navigation
+      const images = document.querySelectorAll('.spa-image, .spa-image img, .menu-image, .expert-photo, .team-member-img');
+      const texts = document.querySelectorAll('.spa-text, .expert-text, .experts-intro');
+      const arrows = document.querySelectorAll('.prev-btn, .next-btn');
+      const navButtons = document.querySelectorAll('.nav-btn');
+      
+      function checkScroll() {
+        images.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.75) {
+            el.classList.add('visible');
+          }
+        });
+        texts.forEach(txt => {
+          const rect = txt.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.75) {
+            txt.classList.add('visible');
+          }
+        });
+        arrows.forEach(arrow => {
+          const rect = arrow.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.75) {
+            arrow.classList.add('visible');
+          }
+        });
+        navButtons.forEach(btn => {
+          const rect = btn.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.75) {
+            btn.classList.add('visible');
+          }
+        });
+      }
+      window.addEventListener('scroll', checkScroll);
+      checkScroll();
+
+      // FAQ Accordion
+      const faqButtons = document.querySelectorAll('.faq-question');
+      faqButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          this.parentElement.classList.toggle('active');
+        });
+      });
+
+      // Choix aléatoire pour la vidéo d'accueil
+      const videoElement = document.getElementById("introVideo");
+      const randomSources = Array.from(videoElement.querySelectorAll('source[data-random]'));
+      if (randomSources.length > 1) {
+        const randomIndex = Math.floor(Math.random() * randomSources.length);
+        const chosenSource = randomSources[randomIndex];
+        randomSources.forEach(src => {
+          if (src !== chosenSource) src.remove();
+        });
+        videoElement.load();
+        videoElement.play();
+      }
+    });
+
+    // Modal pour la Carte des Soins
+    const menuImage = document.querySelector('.menu-image');
+    const menuModal = document.getElementById('menuModal');
+    const menuModalImg = document.getElementById('menuModalImg');
+    const closeBtn = document.querySelector('#menuModal .close');
+    if (menuImage) {
+      menuImage.addEventListener('click', function() {
+        menuModal.style.display = 'block';
+        menuModalImg.src = menuImage.src;
+      });
+    }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        menuModal.style.display = 'none';
+      });
+    }
+    if (menuModal) {
+      menuModal.addEventListener('click', function(e) {
+        if (e.target === menuModal) {
+          menuModal.style.display = 'none';
+        }
+      });
+    }
+
+    // ========== Carrousel In-Page (flèches) ==========
+    const carousels = document.querySelectorAll('.carousel');
+    const carouselImages = [
+      ["images/hydro1.jpg", "images/hydro2.jpg", "images/hydro3.jpg", "images/hydro4.jpg"],
+      ["images/fitness1.jpg", "images/fitness2.jpg", "images/fitness3.jpg", "images/fitness4.jpg"],
+      ["images/massage1.jpg", "images/massage2.jpg", "images/massage3.jpg", "images/massage4.jpg"]
+    ];
+
+    carousels.forEach((carousel, index) => {
+      let currentImageIndex = 0;
+      const imgElement = carousel.querySelector('.carousel-image');
+      const prevBtn = carousel.querySelector('.prev-btn');
+      const nextBtn = carousel.querySelector('.next-btn');
+
+      function updateImage() {
+        imgElement.src = carouselImages[index][currentImageIndex];
+      }
+
+      prevBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + carouselImages[index].length) % carouselImages[index].length;
+        updateImage();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % carouselImages[index].length;
+        updateImage();
+      });
+    });
+
+    // ========== Modal pour agrandir l'image (au clic) ==========
+    let currentCarousel = 0;
+    let currentImageIndex = 0;
+    document.querySelectorAll('.carousel-image').forEach((img) => {
+      img.addEventListener('click', () => {
+        const carouselContainer = img.closest('.carousel');
+        const allCarousels = Array.from(document.querySelectorAll('.carousel'));
+        currentCarousel = allCarousels.indexOf(carouselContainer);
+        const src = img.src;
+        currentImageIndex = carouselImages[currentCarousel].indexOf(src);
+        if (currentImageIndex < 0) currentImageIndex = 0;
+        openCarouselModal();
+      });
+    });
+    function openCarouselModal() {
+      const modal = document.getElementById('carouselModal');
+      const modalImg = document.getElementById('carouselModalImg');
+      modal.style.display = 'block';
+      modalImg.src = carouselImages[currentCarousel][currentImageIndex];
+    }
+    const carouselModalClose = document.getElementById('carouselModalClose');
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
+    if (carouselModalClose) {
+      carouselModalClose.addEventListener('click', () => {
+        document.getElementById('carouselModal').style.display = 'none';
+      });
+    }
+    if (carouselPrev) {
+      carouselPrev.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + carouselImages[currentCarousel].length) % carouselImages[currentCarousel].length;
+        document.getElementById('carouselModalImg').src = carouselImages[currentCarousel][currentImageIndex];
+      });
+    }
+    if (carouselNext) {
+      carouselNext.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % carouselImages[currentCarousel].length;
+        document.getElementById('carouselModalImg').src = carouselImages[currentCarousel][currentImageIndex];
+      });
+    }
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('carouselModal');
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    /* --- BOUTON CONTACT (POPUP) --- */
+    const testModal = document.getElementById('testModal');
+    const testModalClose = document.getElementById('testModalClose');
+    function openTestModal() {
+      testModal.style.display = 'block';
+    }
+    window.openTestModal = openTestModal; 
+    if (testModalClose) {
+      testModalClose.onclick = function() {
+        testModal.style.display = 'none';
+      };
+    }
+    testModal.onclick = function(e) {
+      if (e.target === testModal) {
+        testModal.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
