@@ -332,33 +332,43 @@
     /* ===================
        Modal (pour Carte des soins & carrousels)
        =================== */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 99999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-    .modal-content {
-      margin: auto;
-      display: block;
-      max-width: 80%;
-      max-height: 80%;
-      border-radius: 5px;
-    }
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #f4f6fc;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+       .modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.85);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #f4f6fc;
+  cursor: pointer;
+  z-index: 10000;
+}
+
 
     /* ===================
        Section Experts
@@ -710,6 +720,68 @@
       opacity: 1;
       background-color: #8C4D00;
     }
+
+    @media (max-width: 768px) {
+  .prev-btn, .next-btn {
+    font-size: 24px;
+    padding: 5px;
+    top: 45%;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #442a00;
+    border-radius: 50%;
+  }
+
+  .prev-btn {
+    left: -10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .next-btn {
+    right: -10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+}
+
+.modal-care {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.85);
+  box-sizing: border-box;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+  overflow: auto;
+}
+
+.modal-content-care {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  margin: auto;
+  display: block;
+}
+
+.close-care {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #f4f6fc;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+
+
   </style>
 </head>
 <body>
@@ -828,9 +900,9 @@
     </div>
 
     <!-- Modal pour la Carte des Soins -->
-    <div id="menuModal" class="modal">
-      <span class="close">&times;</span>
-      <img class="modal-content" id="menuModalImg">
+    <div id="menuModal" class="modal-care">
+      <span class="close-care">&times;</span>
+      <img class="modal-content-care" id="menuModalImg">
     </div>
 
     <!-- Modal pour agrandir les images (Carrousel) -->
@@ -1110,28 +1182,29 @@
     });
 
     // Modal pour la Carte des Soins
-    const menuImage = document.querySelector('.menu-image');
-    const menuModal = document.getElementById('menuModal');
-    const menuModalImg = document.getElementById('menuModalImg');
-    const closeBtn = document.querySelector('#menuModal .close');
-    if (menuImage) {
-      menuImage.addEventListener('click', function() {
-        menuModal.style.display = 'block';
-        menuModalImg.src = menuImage.src;
-      });
+const menuImage = document.querySelector('.menu-image');
+const menuModal = document.getElementById('menuModal');
+const menuModalImg = document.getElementById('menuModalImg');
+const closeCare = document.querySelector('.close-care');
+
+if (menuImage) {
+  menuImage.addEventListener('click', function() {
+    menuModal.style.display = 'flex';
+    menuModalImg.src = menuImage.src;
+  });
+}
+if (closeCare) {
+  closeCare.addEventListener('click', function() {
+    menuModal.style.display = 'none';
+  });
+}
+if (menuModal) {
+  menuModal.addEventListener('click', function(e) {
+    if (e.target === menuModal) {
+      menuModal.style.display = 'none';
     }
-    if (closeBtn) {
-      closeBtn.addEventListener('click', function() {
-        menuModal.style.display = 'none';
-      });
-    }
-    if (menuModal) {
-      menuModal.addEventListener('click', function(e) {
-        if (e.target === menuModal) {
-          menuModal.style.display = 'none';
-        }
-      });
-    }
+  });
+}
 
     // ========== Carrousel In-Page (flèches) ==========
     const carousels = document.querySelectorAll('.carousel');
@@ -1162,52 +1235,49 @@
       });
     });
 
-    // ========== Modal pour agrandir l'image (au clic) ==========
     let currentCarousel = 0;
-    let currentImageIndex = 0;
-    document.querySelectorAll('.carousel-image').forEach((img) => {
-      img.addEventListener('click', () => {
-        const carouselContainer = img.closest('.carousel');
-        const allCarousels = Array.from(document.querySelectorAll('.carousel'));
-        currentCarousel = allCarousels.indexOf(carouselContainer);
-        const src = img.src;
-        currentImageIndex = carouselImages[currentCarousel].indexOf(src);
-        if (currentImageIndex < 0) currentImageIndex = 0;
-        openCarouselModal();
-      });
-    });
-    function openCarouselModal() {
-      const modal = document.getElementById('carouselModal');
-      const modalImg = document.getElementById('carouselModalImg');
-      modal.style.display = 'block';
-      modalImg.src = carouselImages[currentCarousel][currentImageIndex];
-    }
-    const carouselModalClose = document.getElementById('carouselModalClose');
-    const carouselPrev = document.getElementById('carouselPrev');
-    const carouselNext = document.getElementById('carouselNext');
-    if (carouselModalClose) {
-      carouselModalClose.addEventListener('click', () => {
-        document.getElementById('carouselModal').style.display = 'none';
-      });
-    }
-    if (carouselPrev) {
-      carouselPrev.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex - 1 + carouselImages[currentCarousel].length) % carouselImages[currentCarousel].length;
-        document.getElementById('carouselModalImg').src = carouselImages[currentCarousel][currentImageIndex];
-      });
-    }
-    if (carouselNext) {
-      carouselNext.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex + 1) % carouselImages[currentCarousel].length;
-        document.getElementById('carouselModalImg').src = carouselImages[currentCarousel][currentImageIndex];
-      });
-    }
-    window.addEventListener('click', (e) => {
-      const modal = document.getElementById('carouselModal');
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
+let currentImageIndex = 0;
+
+const carouselModal = document.getElementById('carouselModal');
+const carouselModalImg = document.getElementById('carouselModalImg');
+const carouselModalClose = document.getElementById('carouselModalClose');
+const carouselPrev = document.getElementById('carouselPrev');
+const carouselNext = document.getElementById('carouselNext');
+
+document.querySelectorAll('.carousel-image').forEach((img) => {
+  img.addEventListener('click', () => {
+    const carouselContainer = img.closest('.carousel');
+    const allCarousels = Array.from(document.querySelectorAll('.carousel'));
+    currentCarousel = allCarousels.indexOf(carouselContainer);
+    currentImageIndex = carouselImages[currentCarousel].indexOf(img.src);
+    if (currentImageIndex < 0) currentImageIndex = 0;
+
+    carouselModal.classList.add('active');
+    carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
+  });
+});
+
+function closeCarouselModal() {
+  carouselModal.classList.remove('active');
+}
+
+carouselModalClose.addEventListener('click', closeCarouselModal);
+carouselModal.addEventListener('click', (e) => {
+  if (e.target === carouselModal) {
+    closeCarouselModal();
+  }
+});
+
+carouselPrev.addEventListener('click', () => {
+  currentImageIndex = (currentImageIndex - 1 + carouselImages[currentCarousel].length) % carouselImages[currentCarousel].length;
+  carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
+});
+
+carouselNext.addEventListener('click', () => {
+  currentImageIndex = (currentImageIndex + 1) % carouselImages[currentCarousel].length;
+  carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
+});
+
 
     /* --- BOUTON CONTACT (POPUP) --- */
     const testModal = document.getElementById('testModal');
