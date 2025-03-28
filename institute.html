@@ -9,19 +9,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&family=Sora:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    /* Règle globale pour le dimensionnement */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
       margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    body {
       font-family: 'Sora', sans-serif;
       background-color: #f4f6fc;
       color: #444;
       text-align: center;
-      overflow-x: hidden;
       font-size: 16px;
     }
+
     /* ===================
        Section Logo + Vidéo
        =================== */
-    .logo {
+    header.logo {
       position: relative;
       width: 100%;
       height: 100vh;
@@ -32,14 +40,14 @@
       animation: fadeIn 5s forwards;
       z-index: 1; 
     }
-    .logo video {
+    header.logo video {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
       object-fit: cover;
       z-index: 0; 
     }
-    .logo img {
+    header.logo img {
       width: 60%;
       max-width: 500px;
       height: auto;
@@ -77,8 +85,10 @@
       height: 1px;
     }
 
-    /* Conteneur principal */
-    .main-wrapper {
+    /* ===================
+       Conteneur principal
+       =================== */
+    main.main-wrapper {
       position: relative;
       z-index: 2; 
     }
@@ -86,7 +96,7 @@
     /* ===================
        Sections (général)
        =================== */
-    .section {
+    section.section {
       padding: 80px 20px;
       max-width: 1000px;
       margin: 0 auto;
@@ -95,28 +105,25 @@
     /* ===================
        Footer
        =================== */
-    .footer {
+    footer.footer {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: -100px;
-      margin-bottom: -500px;
       gap: 100px;
       padding: 20px;
       background: #f4f6fc;
     }
-    .footer img {
-      height: 60px; 
+    footer.footer img {
+      height: 60px;
       width: auto;
       cursor: pointer;
     }
     @media (max-width: 768px) {
-      .footer {
+      footer.footer {
         flex-direction: column;
+        gap: 20px;
       }
     }
-    
-    /* Animation bounce pour le logo du footer */
     @keyframes footerBounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
@@ -124,7 +131,6 @@
     .footer-logo.bounce {
       animation: footerBounce 3s infinite;
     }
-    /* Logo supplémentaire dans le footer */
     .footer-logo.extra {
       max-height: 20px;
     }
@@ -137,11 +143,12 @@
       width: 100%;
       height: auto;
     }
+    /* Centrage du logo “Nos équipements” */
     .equipements-logo {
-      display: auto;
-      margin-top: 80px;
-      margin-bottom: -100px; 
+      display: block;
+      margin: 80px auto 20px auto; /* centré horizontalement */
     }
+
     .avis-additional-logo {
       display: block;
       margin: 20px auto;
@@ -151,12 +158,12 @@
     }
 
     /* ===================
-       Section SPA
+       Section SPA (Intro et Carrousels)
        =================== */
-    #spa {
+    section#spa {
       max-width: 100%;
-      margin: 0 auto;
-      padding: 80px 20px;
+      margin: 50px auto;
+      padding: 0px 20px;
     }
     .spa-section {
       display: flex;
@@ -198,13 +205,13 @@
     }
     .spa-image {
       width: 50%;
-      position: relative; 
+      position: relative;
     }
     .spa-image img {
       width: 100%;
       max-width: 450px;
       border-radius: 8px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
       opacity: 0;
       transform: translateX(100px);
       transition: all 1s ease-in-out;
@@ -235,7 +242,7 @@
       }
       .spa-text { order: 1; }
       .spa-image { order: 2; }
-      #spa .spa-text.visible {
+      .spa-text.visible {
         max-width: 90vw !important;
         text-align: center !important;
         padding: 0 10px !important;
@@ -300,82 +307,111 @@
        Espacements entre sections
        =================== */
     .soins-logo {
-      display: auto;
       margin-top: -50px;
-      margin-bottom: 30px;
+      margin-bottom: 50px
     }
     #praticiens {
       margin-top: -50px;
-      margin-bottom: 80px;
+      margin-bottom: 0px;
     }
     .praticiens-logo {
       display: block;
-      margin: 0 auto 40px;
+      margin: 0 auto 50px auto;
     }
     #avis {
-      margin-top: -130px;
-      margin-bottom: 150px;
+      margin-top: -50px;
+      margin-bottom: 0px;
     }
     .avis-logo {
       display: block;
-      margin: 0 auto 40px;
+      margin: 0 auto 50px auto;
     }
     #info {
-      margin-top: 30px;
-      margin-bottom: 25px; 
+      margin-top: -50px;
+      margin-bottom: 0px;
     }
     .info-logo {
       display: block;
-      margin: 0 auto 0px;
+      margin: 0 auto 50px auto;
     }
 
     /* ===================
        Modal (pour Carte des soins & carrousels)
        =================== */
-       .modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 0; left: 0;
-  width: 100vw; /* forcé sur viewport */
-  height: 100vh;
-  background-color: rgba(0,0,0,0.85);
-  padding: 0; /* supprime tout décalage */
-  overflow: hidden; /* important : empêche scroll horizontal ET vertical */
-  box-sizing: border-box;
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.85);
+      padding: 0;
+      overflow: hidden;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      max-width: 100vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 36px;
+      font-weight: bold;
+      color: #f4f6fc;
+      cursor: pointer;
+      z-index: 10000;
+    }
 
-  justify-content: center;
-  align-items: center;
-}
-
-
-.modal.active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  max-width: 100vw;  /* pas plus que le viewport */
-  max-height: 90vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.7);
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  font-size: 36px;
-  font-weight: bold;
-  color: #f4f6fc;
-  cursor: pointer;
-  z-index: 10000;
-}
-
+    /* ===================
+       Modal Care (Carte des soins)
+       =================== */
+    .modal-care {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      overflow: auto;
+    }
+    /* Ajustement : taille moins grande de la carte */
+    .modal-content-care {
+      max-width: 80vw;  /* au lieu de 90vw */
+      max-height: 80vh; /* au lieu de 90vh */
+      border-radius: 8px;
+      object-fit: contain;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      margin: auto;
+      display: block;
+    }
+    .close-care {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 36px;
+      font-weight: bold;
+      color: #f4f6fc;
+      cursor: pointer;
+      z-index: 10000;
+    }
 
     /* ===================
        Section Experts
@@ -469,24 +505,29 @@
        Avis Clients (en grille)
        =================== */
     .reviews-container {
+    max-width: 1000px;
+    margin: 0 auto;
       display: grid;
+      /* Réduction du gap pour moins d'espacement horizontal/vertical */
+      gap: 20px;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 30px;
       padding: 10px;
       margin-bottom: 20px;
-      justify-items: center; 
+      justify-items: center;
     }
     .review-card {
       background: #f4f6fc;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.15);
       padding: 20px;
-      text-align: center; 
+      text-align: center;
       transition: transform 0.3s;
       font-family: 'Sora', sans-serif;
       color: #444;
-      width: 92%;
-      max-width: 1000px; 
+      /* On retire width:92%; et max-width:1000px
+         pour éviter l'aspect trop large/carré */
+      width: 100%;
+      max-width: 500px; /* on limite la largeur d'une carte */
     }
     .review-card:hover {
       transform: scale(1.05);
@@ -580,7 +621,7 @@
       position: relative;
       width: 100%;
       max-width: 1000px;
-      margin: 20px auto;
+      margin-bottom: -60px;
       padding-bottom: 56.25%;
       height: 0;
     }
@@ -627,6 +668,24 @@
     .prev-btn:hover, .next-btn:hover {
       color: #fff;
     }
+    @media (max-width: 768px) {
+      .prev-btn, .next-btn {
+        font-size: 24px;
+        padding: 5px;
+        top: 45%;
+        background-color: rgba(255, 255, 255, 0.7);
+        color: #442a00;
+        border-radius: 50%;
+      }
+      .prev-btn {
+        left: -10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      }
+      .next-btn {
+        right: -10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      }
+    }
 
     /* =======================
        BOUTON BACK TO TOP
@@ -637,7 +696,7 @@
       right: 10px;
       width: 50px;
       height: 50px;
-      background-color: #442a00; 
+      background-color: #442a00;
       color: #f4f6fc;
       border: none;
       border-radius: 50%;
@@ -645,7 +704,7 @@
       font-size: 24px;
       line-height: 0;
       text-align: center;
-      z-index: 9999; 
+      z-index: 9999;
       transition: background-color 0.3s ease;
     }
     .back-to-top:hover {
@@ -656,7 +715,7 @@
        BOUTON CONTACT
        ======================= */
     .test-btn {
-      background-color: #442a00; 
+      background-color: #442a00;
       color: #f4f6fc;
       border: none;
       border-radius: 5px;
@@ -678,8 +737,10 @@
       display: none;
       position: fixed;
       z-index: 2000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0,0,0,0.8);
     }
     #testModalContent {
@@ -694,7 +755,8 @@
     }
     #testModalClose {
       position: absolute;
-      top: 10px; right: 15px;
+      top: 10px;
+      right: 15px;
       font-size: 28px;
       font-weight: bold;
       cursor: pointer;
@@ -704,7 +766,7 @@
        BOUTONS DANS L'INTRO (NAV BUTTONS)
        ======================= */
     .nav-btn {
-      background-color: #7B3F00; 
+      background-color: #7B3F00;
       color: #f4f6fc;
       border: none;
       border-radius: 5px;
@@ -714,7 +776,7 @@
       font-family: 'Sora', sans-serif;
       font-size: 14px;
       opacity: 0.9;
-      transition: background-color 0.3s ease, opacity 0.3s ease, transform 1s ease, opacity 1s ease;
+      transition: background-color 0.3s ease, opacity 0.3s ease, transform 1s ease;
       display: inline-block;
       transform: translateY(-50px);
       opacity: 0;
@@ -727,121 +789,49 @@
       opacity: 1;
       background-color: #8C4D00;
     }
-
-    @media (max-width: 768px) {
-  .prev-btn, .next-btn {
-    font-size: 24px;
-    padding: 5px;
-    top: 45%;
-    background-color: rgba(255, 255, 255, 0.7);
-    color: #442a00;
-    border-radius: 50%;
-  }
-
-  .prev-btn {
-    left: -10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
-
-  .next-btn {
-    right: -10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
-}
-
-.modal-care {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.85);
-  box-sizing: border-box;
-
-  justify-content: center;
-  align-items: center;
-
-  padding: 10px;
-  overflow: auto;
-}
-
-.modal-content-care {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 8px;
-  object-fit: contain;
-  box-shadow: 0 0 20px rgba(0,0,0,0.7);
-  margin: auto;
-  display: block;
-}
-
-.close-care {
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  font-size: 36px;
-  font-weight: bold;
-  color: #f4f6fc;
-  cursor: pointer;
-  z-index: 10000;
-}
-
-body.modal-open {
-  overflow: hidden;
-}
-
-
   </style>
 </head>
 <body>
   <!-- SECTION LOGO + VIDÉO -->
-  <div class="logo">
+  <header class="logo">
     <video id="introVideo" autoplay muted loop>
       <source src="videos/accueil-institute-1.mp4" data-random type="video/mp4">
       <source src="videos/accueil-institute-2.mp4" data-random type="video/mp4">
       <source src="videos/fallback.ogg" type="video/ogg">
       Votre navigateur ne supporte pas la vidéo HTML5.
     </video>
-    <img src="logos/logoInstitute.png" alt="Too Many Cooks. Institute">
+    <img src="logos/logoInstitute.png" alt="Logo Too Many Cooks Institute">
     <div class="arrow-down"><div></div></div>
-  </div>
+  </header>
 
   <!-- Ancre pour le Back to Top -->
   <div id="introAnchor"></div>
 
   <!-- MAIN CONTENT -->
-  <div class="main-wrapper">
+  <main class="main-wrapper">
     <!-- Section Intro -->
-    <div id="spa">
-      <img class="spa-logo" src="logos/spa.png" alt="Accueil">
-      <div class="spa-text" style="max-width: 2000px; margin: 0 auto; padding: 0 40px; text-align: justify; line-height: 1; letter-spacing: 0px;">
+    <section id="spa">
+      <img class="spa-logo" src="logos/spa.png" alt="Logo SPA">
+      <div class="spa-text" style="margin: 0 auto; padding: 0 40px; text-align: justify; line-height: 1; letter-spacing: 0px;">
         <p style="font-size: 18px; line-height: 1.8; text-align: center;">Bienvenue au Too Many Cooks. Institute</p>
         <p style="font-size: 18px; line-height: 1.8;">
-          Au cœur du quartier emblématique de la Goutte d’Or, niché entre les voies désaffectées du RER B et un repaire de crackheads encore actif, notre institut vous accueille dans un calme troublant. Venez parcourir ses couloirs végétalisés et ses salons aux décors authentiques.        </p>
+          Au cœur du quartier emblématique de la Goutte d’Or, niché entre les voies désaffectées du RER B et un repaire de crackheads encore actif, notre institut vous accueille dans un calme troublant. Venez parcourir ses couloirs végétalisés et ses salons aux décors authentiques.
+        </p>
       </div>
-
-      <!-- Séparateur au-dessus des boutons -->
       <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 80%;">
-
-      <!-- BOUTONS DE NAVIGATION -->
       <div id="navButtons" style="margin: 20px 0;">
-        <button class="nav-btn" onclick="document.getElementById('spa').scrollIntoView({behavior:'smooth'})">Nos Equipements</button>
-        <button class="nav-btn" onclick="document.getElementById('soins').scrollIntoView({behavior:'smooth'})">Nos Soins</button>
-        <button class="nav-btn" onclick="document.getElementById('praticiens').scrollIntoView({behavior:'smooth'})">Nos Experts</button>
-        <button class="nav-btn" onclick="document.getElementById('avis').scrollIntoView({behavior:'smooth'})">Vos Témoignages</button>
-        <button class="nav-btn" onclick="document.getElementById('info').scrollIntoView({behavior:'smooth'})">Infos - Contact</button>
+        <button class="nav-btn" data-target="spa">Nos Equipements</button>
+        <button class="nav-btn" data-target="soins">Nos Soins</button>
+        <button class="nav-btn" data-target="praticiens">Nos Experts</button>
+        <button class="nav-btn" data-target="avis">Vos Témoignages</button>
+        <button class="nav-btn" data-target="info">Infos - Contact</button>
       </div>
-
-      <!-- Séparateur en dessous des boutons -->
       <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 80%;">
-
-      <!-- LOGO EQUIPEMENTS -->
-      <img class="equipements-logo" src="logos/equipements.png" alt="Equipements">
-    </div>
+      <img class="equipements-logo" src="logos/equipements.png" alt="Logo Equipements">
+    </section>
 
     <!-- Section SPA (Hydrothermal, Fitness, Massage) -->
-    <div class="spa-section" style="margin-top: 50px;">
+    <section class="spa-section" style="margin-top: 50px;">
       <!-- Espace Hydrothermal -->
       <div class="spa-row">
         <div class="spa-text">
@@ -856,7 +846,6 @@ body.modal-open {
             Nous déclinons toute responsabilité en cas de décès.
           </p>
         </div>
-        <!-- Carrousel Hydrothermal -->
         <div class="spa-image carousel">
           <button class="prev-btn">&#10094;</button>
           <img src="images/hydro1.jpg" class="carousel-image" alt="Espace Hydrothermal">
@@ -866,7 +855,6 @@ body.modal-open {
 
       <!-- Espace Fitness -->
       <div class="spa-row">
-        <!-- Carrousel Fitness -->
         <div class="spa-image carousel right">
           <button class="prev-btn">&#10094;</button>
           <img src="images/fitness1.jpg" class="carousel-image" alt="Espace Fitness">
@@ -900,32 +888,31 @@ body.modal-open {
             Nous proposons une assurance décès et invalidité lors de la réservation. Voir conditions en magasin, jeu sans obligation d’achat.
           </p>
         </div>
-        <!-- Carrousel Massage -->
         <div class="spa-image carousel">
           <button class="prev-btn">&#10094;</button>
           <img src="images/massage1.jpg" class="carousel-image" alt="Espace Massage">
           <button class="next-btn">&#10095;</button>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Modal pour la Carte des Soins -->
     <div id="menuModal" class="modal-care">
       <span class="close-care">&times;</span>
-      <img class="modal-content-care" id="menuModalImg">
+      <img class="modal-content-care" id="menuModalImg" alt="Carte des soins">
     </div>
 
     <!-- Modal pour agrandir les images (Carrousel) -->
     <div id="carouselModal" class="modal">
       <span class="close" id="carouselModalClose">&times;</span>
-      <img class="modal-content" id="carouselModalImg">
+      <img class="modal-content" id="carouselModalImg" alt="Image agrandie">
       <button id="carouselPrev" style="position:absolute; top:50%; left:20px; transform:translateY(-50%); background:none; border:none; color:#f4f6fc; font-size:24px; cursor:pointer;">&#10094;</button>
       <button id="carouselNext" style="position:absolute; top:50%; right:20px; transform:translateY(-50%); background:none; border:none; color:#f4f6fc; font-size:24px; cursor:pointer;">&#10095;</button>
     </div>
 
     <!-- Section "Nos Soins" -->
-    <div class="section" id="soins">
-      <img class="soins-logo" src="logos/soins.webp" alt="Nos Soins">
+    <section class="section" id="soins">
+      <img class="soins-logo" src="logos/soins.webp" alt="Logo Soins">
       <div class="spa-row">
         <div class="spa-text left">
           <h2>Notre carte des Soins</h2>
@@ -946,15 +933,14 @@ body.modal-open {
           </a>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Section Praticiens ("Nos Experts") -->
-    <div class="section" id="praticiens">
-      <img class="praticiens-logo" src="logos/praticiens.png" alt="Nos Experts">
+    <section class="section" id="praticiens">
+      <img class="praticiens-logo" src="logos/praticiens.png" alt="Logo Praticiens">
       <p class="experts-intro">
         Nos praticiens disposent d’une expertise. Ce n’est peut-être pas celle que vous attendiez, mais elle est bien réelle. Leurs méthodes ne sont pas validées, mais leurs résultats ne laissent personne indemne.
       </p>
-      <!-- Premier expert : tout à droite -->
       <div class="expert-row right">
         <div class="expert-photo right">
           <img class="team-member-img" src="images/masseur1.jpg" alt="Titouan" tabindex="0">
@@ -969,7 +955,6 @@ body.modal-open {
           </p>
         </div>
       </div>
-      <!-- Deuxième expert : tout à gauche -->
       <div class="expert-row">
         <div class="expert-photo left">
           <img class="team-member-img" src="images/masseur2.jpg" alt="Josiane" tabindex="0">
@@ -984,11 +969,11 @@ body.modal-open {
           </p>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Section Avis (en grille) -->
-    <div class="section" id="avis">
-      <img class="avis-logo" src="logos/avis.png" alt="Avis">
+    <section class="section" id="avis">
+      <img class="avis-logo" src="logos/avis.png" alt="Logo Avis">
       <div class="reviews-container">
         <div class="review-card">
           <div class="stars">⭐⭐⭐⭐⭐</div>
@@ -1024,7 +1009,7 @@ body.modal-open {
           <div class="stars">⭐</div>
           <p>“Titouan m'a cassé la clavicule alors que j'avais réservé un massage des pieds. Je ne recommande pas.”</p>
           <p class="author">- Anonyme -</p>
-        </div>        
+        </div>
         <div class="review-card">
           <div class="stars">⭐⭐</div>
           <p>“Un praticien m’a simplement fait asseoir sur une chaise haute, et m’a dit : ‘Tu es déjà au sommet’. J’ai fondu en larmes.”</p>
@@ -1036,14 +1021,13 @@ body.modal-open {
           <p class="author">- Bernard K.-</p>
         </div>
       </div>
-
       <img class="avis-additional-logo" src="logos/avis-extra.webp" alt="Logo additionnel Avis">
+    </section>
 
     <!-- Section Info (FAQ + Contact + Maps) -->
-    <div class="section" id="info">
-      <img class="info-logo" src="logos/info.png" alt="Infos">
+    <section class="section" id="info">
+      <img class="info-logo" src="logos/info.png" alt="Logo Info">
       <div class="info-content">
-        <!-- FAQ à gauche -->
         <div class="info-faq">
           <h3>FAQ</h3>
           <div class="faq-item">
@@ -1083,29 +1067,27 @@ body.modal-open {
             </div>
           </div>
         </div>
-        <!-- Contact à droite -->
         <div class="info-contact">
           <h3>Contact</h3>
           <p>
             📞 Nous contacter : 0756892817 (2,02 € la minute)
-            📧 reservation@toomanycooks.lol<br>
-            Vous pouvez nous contacter à toute heure…
-            Mais le téléphone ne fonctionne plus depuis l’incident du 12 février.
+            <br>📧 reservation@toomanycooks.lol
+            <br>Vous pouvez nous contacter à toute heure… Mais le téléphone ne fonctionne plus depuis l’incident du 12 février.
           </p>
           <div style="text-align:center;">
-            <button class="test-btn" onclick="openTestModal()">Contacter immédiatement un expert</button>
+            <button class="test-btn" id="contactBtn">Contacter immédiatement un expert</button>
           </div>
           <p>
-            📌 Où nous trouver ?<br>
-            Depuis le parking de la Gare du Nord, niveau -3, suivez l'odeur d'urine des crackheads. Une fois dehors, traversez les voies ferrées sur 2 km vers le nord (faites vite, vous pourriez vous faire pincer très fort).
-            Descendez l’escalier central, situé au milieu des voies et jonché de seringues usagées, puis suivez les néons vacillants. Au bout du couloir, empruntez la porte sans poignée...
+            📌 Où nous trouver ?
+            <br>Depuis le parking de la Gare du Nord, niveau -3, suivez l'odeur d'urine des crackheads. Une fois dehors, traversez les voies ferrées sur 2 km vers le nord (faites vite, vous pourriez vous faire pincer très fort).
+            <br>Descendez l’escalier central, situé au milieu des voies et jonché de seringues usagées, puis suivez les néons vacillants. Au bout du couloir, empruntez la porte sans poignée...
           </p>
         </div>
       </div>
       <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.0951387926248!2d2.3533505767795675!3d48.89452399816246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f0065da028f%3A0xf835e1d356ed389f!2sToo%20Many%20Cooks.%20Institute!5e0!3m2!1sfr!2sbe!4v1743104976110!5m2!1sfr!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-    </div>
+    </section>
 
     <!-- MODAL POUR LE BOUTON CONTACT -->
     <div id="testModal">
@@ -1114,22 +1096,19 @@ body.modal-open {
         <p id="expertMessage">Désolé, tous nos experts sont actuellement en pleine séance de massage intensive. Réessayez demain, ou mieux, l'année prochaine.</p>
       </div>
     </div>
+  </main>
 
-    <!-- Footer -->
-    <div class="footer">
-      <!-- Logo gauche avec animation bounce -->
-      <a href="https://www.instagram.com/too.many.cooks.corp/" target="_blank">
-        <img class="footer-logo bounce" src="logos/reseaux.png" alt="Réseaux sociaux">
-      </a>
-      <!-- Logo "Accueil" existant -->
-      <img class="footer-logo" src="logos/home.png" alt="Accueil" onclick="window.location.href='index.html';">
-      <!-- Nouveau logo Crédits à droite -->
-      <img class="footer-logo extra" src="logos/credits.png" alt="Logo Crédits">
-    </div>
-  </div> <!-- Fin main-wrapper -->
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="https://www.instagram.com/too.many.cooks.corp/" target="_blank">
+      <img class="footer-logo bounce" src="logos/reseaux.png" alt="Réseaux sociaux">
+    </a>
+    <img class="footer-logo" src="logos/home.png" alt="Accueil" id="homeLogo">
+    <img class="footer-logo extra" src="logos/credits.png" alt="Crédits">
+  </footer>
 
-  <!-- BOUTON BACK TO TOP -->
-  <button class="back-to-top" onclick="document.getElementById('introAnchor').scrollIntoView({ behavior: 'smooth' });">↑</button>
+  <!-- Bouton Back to Top -->
+  <button class="back-to-top" id="backToTop">↑</button>
 
   <!-- Scripts -->
   <script>
@@ -1139,7 +1118,7 @@ body.modal-open {
       const texts = document.querySelectorAll('.spa-text, .expert-text, .experts-intro');
       const arrows = document.querySelectorAll('.prev-btn, .next-btn');
       const navButtons = document.querySelectorAll('.nav-btn');
-      
+
       function checkScroll() {
         images.forEach(el => {
           const rect = el.getBoundingClientRect();
@@ -1189,34 +1168,55 @@ body.modal-open {
         videoElement.load();
         videoElement.play();
       }
+
+      // Navigation : event listener pour chaque bouton via data-target
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-target');
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Bouton Back to Top
+      document.getElementById('backToTop').addEventListener('click', function() {
+        document.getElementById('introAnchor').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Logo "Accueil" dans le footer
+      document.getElementById('homeLogo').addEventListener('click', function() {
+        window.location.href = 'index.html';
+      });
     });
 
     // Modal pour la Carte des Soins
-const menuImage = document.querySelector('.menu-image');
-const menuModal = document.getElementById('menuModal');
-const menuModalImg = document.getElementById('menuModalImg');
-const closeCare = document.querySelector('.close-care');
+    const menuImage = document.querySelector('.menu-image');
+    const menuModal = document.getElementById('menuModal');
+    const menuModalImg = document.getElementById('menuModalImg');
+    const closeCare = document.querySelector('.close-care');
 
-if (menuImage) {
-  menuImage.addEventListener('click', function() {
-    menuModal.style.display = 'flex';
-    menuModalImg.src = menuImage.src;
-  });
-}
-if (closeCare) {
-  closeCare.addEventListener('click', function() {
-    menuModal.style.display = 'none';
-  });
-}
-if (menuModal) {
-  menuModal.addEventListener('click', function(e) {
-    if (e.target === menuModal) {
-      menuModal.style.display = 'none';
+    if (menuImage) {
+      menuImage.addEventListener('click', function() {
+        menuModal.style.display = 'flex';
+        menuModalImg.src = menuImage.src;
+      });
     }
-  });
-}
+    if (closeCare) {
+      closeCare.addEventListener('click', function() {
+        menuModal.style.display = 'none';
+      });
+    }
+    if (menuModal) {
+      menuModal.addEventListener('click', function(e) {
+        if (e.target === menuModal) {
+          menuModal.style.display = 'none';
+        }
+      });
+    }
 
-    // ========== Carrousel In-Page (flèches) ==========
+    // Carrousel In-Page (flèches)
     const carousels = document.querySelectorAll('.carousel');
     const carouselImages = [
       ["images/hydro1.jpg", "images/hydro2.jpg", "images/hydro3.jpg", "images/hydro4.jpg"],
@@ -1234,68 +1234,79 @@ if (menuModal) {
         imgElement.src = carouselImages[index][currentImageIndex];
       }
 
-      prevBtn.addEventListener('click', () => {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         currentImageIndex = (currentImageIndex - 1 + carouselImages[index].length) % carouselImages[index].length;
         updateImage();
       });
 
-      nextBtn.addEventListener('click', () => {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         currentImageIndex = (currentImageIndex + 1) % carouselImages[index].length;
         updateImage();
       });
     });
 
     let currentCarousel = 0;
-let currentImageIndex = 0;
+    let currentImageIndex = 0;
+    const carouselModal = document.getElementById('carouselModal');
+    const carouselModalImg = document.getElementById('carouselModalImg');
+    const carouselModalClose = document.getElementById('carouselModalClose');
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
 
-const carouselModal = document.getElementById('carouselModal');
-const carouselModalImg = document.getElementById('carouselModalImg');
-const carouselModalClose = document.getElementById('carouselModalClose');
-const carouselPrev = document.getElementById('carouselPrev');
-const carouselNext = document.getElementById('carouselNext');
+    // Ouverture du modal de carrousel uniquement sur écran large (≥768px)
+    document.querySelectorAll('.carousel-image').forEach((img) => {
+      img.addEventListener('click', () => {
+        if (window.innerWidth >= 768) {
+          const carouselContainer = img.closest('.carousel');
+          const allCarousels = Array.from(document.querySelectorAll('.carousel'));
+          currentCarousel = allCarousels.indexOf(carouselContainer);
+          currentImageIndex = carouselImages[currentCarousel].indexOf(img.src);
+          if (currentImageIndex < 0) currentImageIndex = 0;
+          carouselModal.classList.add('active');
+          carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
+          document.body.classList.add('modal-open');
+        }
+      });
+    });
 
-document.querySelectorAll('.carousel-image').forEach((img) => {
-  img.addEventListener('click', () => {
-    const carouselContainer = img.closest('.carousel');
-    const allCarousels = Array.from(document.querySelectorAll('.carousel'));
-    currentCarousel = allCarousels.indexOf(carouselContainer);
-    currentImageIndex = carouselImages[currentCarousel].indexOf(img.src);
-    if (currentImageIndex < 0) currentImageIndex = 0;
+    function closeCarouselModal() {
+      carouselModal.classList.remove('active');
+      document.body.classList.remove('modal-open');
+    }
 
-    carouselModal.classList.add('active');
-    carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
-  });
-});
+    carouselModalClose.addEventListener('click', closeCarouselModal);
+    carouselModal.addEventListener('click', (e) => {
+      if (e.target === carouselModal) {
+        closeCarouselModal();
+      }
+    });
 
-function closeCarouselModal() {
-  carouselModal.classList.remove('active');
-}
+    carouselPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentImageIndex = (currentImageIndex - 1 + carouselImages[currentCarousel].length) % carouselImages[currentCarousel].length;
+      carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
+    });
 
-carouselModalClose.addEventListener('click', closeCarouselModal);
-carouselModal.addEventListener('click', (e) => {
-  if (e.target === carouselModal) {
-    closeCarouselModal();
-  }
-});
+    carouselNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentImageIndex = (currentImageIndex + 1) % carouselImages[currentCarousel].length;
+      carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
+    });
 
-carouselPrev.addEventListener('click', () => {
-  currentImageIndex = (currentImageIndex - 1 + carouselImages[currentCarousel].length) % carouselImages[currentCarousel].length;
-  carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
-});
-
-carouselNext.addEventListener('click', () => {
-  currentImageIndex = (currentImageIndex + 1) % carouselImages[currentCarousel].length;
-  carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
-});
-
-
-    /* --- BOUTON CONTACT (POPUP) --- */
+    // Bouton Contact (Modal)
     const testModal = document.getElementById('testModal');
     const testModalClose = document.getElementById('testModalClose');
+    const contactBtn = document.getElementById('contactBtn');
+
     function openTestModal() {
       testModal.style.display = 'block';
     }
-    window.openTestModal = openTestModal; 
+
+    if (contactBtn) {
+      contactBtn.addEventListener('click', openTestModal);
+    }
     if (testModalClose) {
       testModalClose.onclick = function() {
         testModal.style.display = 'none';
