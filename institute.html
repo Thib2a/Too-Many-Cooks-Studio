@@ -1257,24 +1257,29 @@
 
     // Ouverture du modal de carrousel uniquement sur écran large (≥768px)
     document.querySelectorAll('.carousel-image').forEach((img) => {
-      img.addEventListener('click', () => {
-        if (window.innerWidth >= 768) {
-          const carouselContainer = img.closest('.carousel');
-          const allCarousels = Array.from(document.querySelectorAll('.carousel'));
-          currentCarousel = allCarousels.indexOf(carouselContainer);
-          currentImageIndex = carouselImages[currentCarousel].indexOf(img.src);
-          if (currentImageIndex < 0) currentImageIndex = 0;
-          carouselModal.classList.add('active');
-          carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
-          document.body.classList.add('modal-open');
-        }
-      });
-    });
+  img.addEventListener('click', () => {
+    // On ouvre toujours le modal, même sur mobile
+    const carouselContainer = img.closest('.carousel');
+    const allCarousels = Array.from(document.querySelectorAll('.carousel'));
+    currentCarousel = allCarousels.indexOf(carouselContainer);
+    currentImageIndex = carouselImages[currentCarousel].indexOf(img.src);
+    if (currentImageIndex < 0) currentImageIndex = 0;
 
-    function closeCarouselModal() {
-      carouselModal.classList.remove('active');
-      document.body.classList.remove('modal-open');
-    }
+    carouselModal.classList.add('active');
+    carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
+
+    // Désactiver le scroll en arrière-plan
+    document.body.classList.add('modal-open');
+    // On NE retire pas tout de suite la classe du body ici
+  });
+});
+
+// Et dans la fonction de fermeture du modal
+function closeCarouselModal() {
+  carouselModal.classList.remove('active');
+  // On réactive le scroll du body
+  document.body.classList.remove('modal-open');
+}
 
     carouselModalClose.addEventListener('click', closeCarouselModal);
     carouselModal.addEventListener('click', (e) => {
