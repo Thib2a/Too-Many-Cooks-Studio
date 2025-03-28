@@ -337,12 +337,17 @@
   position: fixed;
   z-index: 9999;
   top: 0; left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw; /* forcé sur viewport */
+  height: 100vh;
   background-color: rgba(0,0,0,0.85);
-  padding: 10px;
+  padding: 0; /* supprime tout décalage */
+  overflow: hidden; /* important : empêche scroll horizontal ET vertical */
   box-sizing: border-box;
+
+  justify-content: center;
+  align-items: center;
 }
+
 
 .modal.active {
   display: flex;
@@ -351,10 +356,12 @@
 }
 
 .modal-content {
-  max-width: 90vw;
-  max-height: 80vh;
-  border-radius: 8px;
+  max-width: 100vw;  /* pas plus que le viewport */
+  max-height: 90vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
+  border-radius: 8px;
   box-shadow: 0 0 20px rgba(0,0,0,0.7);
 }
 
