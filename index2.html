@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Too Many Cooks. Studio</title>
+    <title>TMC. Studio</title>
     <style>
         :root {
             --main-bg-color: #f0f0f0;
@@ -362,7 +362,7 @@
     </div>
     <div class="content">
         <div class="studio-productions">
-            <img src="logos/studio_productions.png" alt="Studio Productions">
+            <img src="logos/studio_productions.webp" alt="Studio Productions">
         </div>
         <div class="spacer" style="margin-bottom: 5%;"></div>
         <div class="posters">
@@ -380,8 +380,8 @@
                 <div class="caption">Mimi<br><em>Founder and Chief Executive Officer</em></div>
             </div>
             <div class="team-member">
-                <img src="images/tchibayoult.png" alt="Tchibayoult" tabindex="0">
-                <div class="caption">Tchibayoult<br><em>Chief Information and Security Officer</em></div>
+                <img src="images/tchibayoult.png" alt="Uncle Tchibayoult" tabindex="0">
+                <div class="caption">Uncle Tchibayoult<br><em>Chief Information and Security Officer</em></div>
             </div>
             <div class="team-member">
                 <img src="images/dave.png" alt="Uncle Bens" tabindex="0">
@@ -407,16 +407,26 @@
         </div>
         <div class="partners-logos-container">
             <div class="partners-logos" id="partnersLogos">
-                <img class="partner1" src="logos/partenaire1.png" alt="Partenaire 1" onclick="redirectAndRestartAnimation('https://www.the-escapers.com/profil/too-many-cooks-corp')">
-                <img class="partner2" src="logos/partenaire2.png" alt="Partenaire 2" onclick="redirectAndRestartAnimation('https://fr.bensoriginal.com/')">
-                <img class="partner3" src="logos/partenaire4.png" alt="Partenaire 3" onclick="redirectAndRestartAnimation('https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/')">
-                <img class="partner4" src="logos/partenaire3.png" alt="Partenaire 4" onclick="redirectAndRestartAnimation('https://www.youtube.com/watch?v=QrGrOK8oZG8')">
-                <img class="partner5" src="logos/partenaire5.png" alt="Partenaire 5" onclick="redirectAndRestartAnimation('https://www.secretcinema.com/')">
+                <a href="https://www.the-escapers.com/profil/too-many-cooks-corp" target="_blank" rel="noopener noreferrer">
+                    <img class="partner1" src="logos/partenaire1.webp" alt="Partenaire 1">
+                  </a>
+                  <a href="https://fr.bensoriginal.com/" target="_blank" rel="noopener noreferrer">
+                    <img class="partner2" src="logos/partenaire2.webp" alt="Partenaire 2">
+                  </a>
+                  <a href="https://www.escapegame.fr/profil/Too-Many-Cooks-Corp/" target="_blank" rel="noopener noreferrer">
+                    <img class="partner3" src="logos/partenaire4.webp" alt="Partenaire 3">
+                  </a>
+                  <a href="https://www.youtube.com/watch?v=QrGrOK8oZG8" target="_blank" rel="noopener noreferrer">
+                    <img class="partner4" src="logos/partenaire3.webp" alt="Partenaire 4">
+                  </a>
+                  <a href="https://www.secretcinema.com/" target="_blank" rel="noopener noreferrer">
+                    <img class="partner5" src="logos/partenaire5.png" alt="Partenaire 5">
+                  </a>                  
             </div>
         </div>
     </div>
     <div class="footer">
-        <img class="corner-logo reseaux" src="logos/reseaux.png" alt="Image reseaux" onclick="location.href='https://www.instagram.com/too.many.cooks.corp/'">
+        <img class="corner-logo reseaux" src="logos/reseaux.png" alt="Image reseaux" onclick="window.open('https://www.instagram.com/too.many.cooks.corp/', '_blank')">
         <img class="corner-logo droits" src="logos/droits.png" alt="Droits réservé">
     </div>
     <img src="images/ship2.png" alt="Hidden Ship" id="hiddenShip">
@@ -425,7 +435,6 @@
             const videoSources = [
                 'videos/accueil-1.mp4',
                 'videos/accueil-2.mp4',
-                'videos/accueil-3.mp4'
             ];
             const introVideo = document.getElementById('introVideo');
             const randomIndex = Math.floor(Math.random() * videoSources.length);
