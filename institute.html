@@ -1,1144 +1,1144 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TMC. Institute</title>
-  <link rel="icon" href="images/favicon-institute.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="images/favicon-institute.ico" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&family=Sora:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
-    /* Règle globale pour le dimensionnement */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-    body {
-      font-family: 'Sora', sans-serif;
-      background-color: #f4f6fc;
-      color: #444;
-      text-align: center;
-      font-size: 16px;
-    }
-
-    /* ===================
-       Section Logo + Vidéo
-       =================== */
-    header.logo {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background-color: #1e1e1e;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 5s forwards;
-      z-index: 1; 
-    }
-    header.logo video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 0; 
-    }
-    header.logo img {
-      width: 60%;
-      max-width: 500px;
-      height: auto;
-      z-index: 1;
-    }
-    .arrow-down {
-      position: absolute;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-    .arrow-down div {
-      width: 30px;
-      height: 30px;
-      border-left: 5px solid #f4f6fc;
-      border-bottom: 5px solid #f4f6fc;
-      transform: rotate(-45deg);
-      margin: 5px 0;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(-45deg); }
-      40% { transform: translateY(-10px) rotate(-45deg); }
-      60% { transform: translateY(-5px) rotate(-45deg); }
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    /* Ancre pour le Back to Top */
-    #introAnchor {
-      width: 100%;
-      height: 1px;
-    }
-
-    /* ===================
-       Conteneur principal
-       =================== */
-    main.main-wrapper {
-      position: relative;
-      z-index: 2; 
-    }
-
-    /* ===================
-       Sections (général)
-       =================== */
-    section.section {
-      padding: 80px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    /* ===================
-       Footer
-       =================== */
-    footer.footer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 100px;
-      padding: 20px;
-      background: #f4f6fc;
-    }
-    footer.footer img {
-      height: 60px;
-      width: auto;
-      cursor: pointer;
-    }
-    @media (max-width: 768px) {
-      footer.footer {
-        flex-direction: column;
-        gap: 20px;
-      }
-    }
-    @keyframes footerBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-    .footer-logo.bounce {
-      animation: footerBounce 3s infinite;
-    }
-    .footer-logo.extra {
-      max-height: 20px;
-    }
-
-    /* ===================
-       Logos de sections
-       =================== */
-    .spa-logo, .soins-logo, .praticiens-logo, .avis-logo, .info-logo, .equipements-logo {
-      max-width: 630px;
-      width: 100%;
-      height: auto;
-    }
-    /* Centrage du logo “Nos équipements” */
-    .equipements-logo {
-      display: block;
-      margin: 80px auto 20px auto; /* centré horizontalement */
-    }
-
-    .avis-additional-logo {
-      display: block;
-      margin: 0px auto;
-      margin-top: 40px;
-      margin-bottom: -50px;
-      max-width: 200px;
-      width: 100%;
-      height: auto;
-    }
-
-    /* ===================
-       Section SPA (Intro et Carrousels)
-       =================== */
-    section#spa {
-      max-width: 100%;
-      margin: 50px auto;
-      padding: 0px 20px;
-    }
-    .spa-section {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      max-width: 1100px;
-      margin: 30px auto 60px;
-      padding: 0 20px;
-    }
-    .spa-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 40px;
-    }
-    .spa-text {
-      width: 50%;
-      text-align: justify;
-      opacity: 0;
-      transform: translateX(100px);
-      transition: all 1s ease-in-out;
-    }
-    .spa-text.left {
-      transform: translateX(-100px);
-    }
-    .spa-text.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .spa-text h2 {
-      margin-bottom: 10px;
-      font-family: 'Glacial Indifference', sans-serif;
-      font-size: 22px;
-      color: #222;
-    }
-    .spa-text p {
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    .spa-image {
-      width: 50%;
-      position: relative;
-    }
-    .spa-image img {
-      width: 100%;
-      max-width: 450px;
-      border-radius: 8px;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-      opacity: 0;
-      transform: translateX(100px);
-      transition: all 1s ease-in-out;
-      cursor: pointer;
-    }
-    .spa-image img.right {
-      transform: translateX(-100px);
-    }
-    .spa-image img.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    @media (min-width: 769px) {
-      .spa-image img:hover {
-        transform: scale(1.05);
-      }
-    }
-    @media (max-width: 768px) {
-      .spa-row {
-        flex-direction: column;
-      }
-      .spa-text, .spa-image {
-        width: 100%;
-        text-align: center;
-      }
-      .spa-text p, .spa-text h2 {
-        text-align: center;
-      }
-      .spa-text { order: 1; }
-      .spa-image { order: 2; }
-      .spa-text.visible {
-        max-width: 90vw !important;
-        text-align: center !important;
-        padding: 0 10px !important;
-      }
-    }
-
-    /* ===================
-       Bouton de téléchargement
-       =================== */
-    .download-btn {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #442a00;
-      color: #f4f6fc;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: 'Sora', sans-serif;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-    }
-    .download-btn:hover {
-      background-color: #5b3700;
-    }
-    .clickable {
-      cursor: pointer;
-    }
-
-    /* ===================
-       Animation menu Soins (bounce + zoom)
-       =================== */
-    .menu-image {
-      opacity: 0;
-      transform: translateX(100px);
-      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
-    }
-    .menu-image.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    @media (max-width: 768px) {
-      .menu-image.visible {
-        animation: zoomMobile 4s infinite 1s;
-      }
-    }
-    @keyframes zoomMobile {
-      0%, 100% {
-        transform: translateX(0) scale(1);
-      }
-      50% {
-        transform: translateX(0) scale(1.01);
-      }
-    }
-    @media (min-width: 769px) {
-      .menu-image.clickable:hover {
-        animation: none;
-        transform: scale(1.05);
-      }
-    }
-
-    /* ===================
-       Espacements entre sections
-       =================== */
-    .soins-logo {
-      margin-top: -50px;
-      margin-bottom: 50px
-    }
-    #praticiens {
-      margin-top: -50px;
-      margin-bottom: 0px;
-    }
-    .praticiens-logo {
-      display: block;
-      margin: 0 auto 50px auto;
-    }
-    #avis {
-      margin-top: -50px;
-      margin-bottom: 0px;
-    }
-    .avis-logo {
-      display: block;
-      margin: 0 auto 50px auto;
-    }
-    #info {
-      margin-top: -50px;
-      margin-bottom: 0px;
-    }
-    .info-logo {
-      display: block;
-      margin: 0 auto 50px auto;
-    }
-
-    /* ===================
-       Modal (pour Carte des soins & carrousels)
-       =================== */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0,0,0,0.85);
-      padding: 0;
-      overflow: hidden;
-      box-sizing: border-box;
-      justify-content: center;
-      align-items: center;
-    }
-    .modal.active {
-      display: flex;
-    }
-    .modal-content {
-      max-width: 100vw;
-      max-height: 90vh;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.7);
-    }
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 36px;
-      font-weight: bold;
-      color: #f4f6fc;
-      cursor: pointer;
-      z-index: 10000;
-    }
-
-    /* ===================
-       Modal Care (Carte des soins)
-       =================== */
-    .modal-care {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.85);
-      box-sizing: border-box;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-      overflow: auto;
-    }
-    /* Ajustement : taille moins grande de la carte */
-    .modal-content-care {
-      max-width: 80vw;  /* au lieu de 90vw */
-      max-height: 80vh; /* au lieu de 90vh */
-      border-radius: 8px;
-      object-fit: contain;
-      box-shadow: 0 0 20px rgba(0,0,0,0.7);
-      margin: auto;
-      display: block;
-    }
-    .close-care {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 36px;
-      font-weight: bold;
-      color: #f4f6fc;
-      cursor: pointer;
-      z-index: 10000;
-    }
-
-    /* ===================
-       Section Experts
-       =================== */
-    .experts-intro {
-      margin: 20px auto;
-      max-width: 800px;
-      line-height: 1.6;
-      font-family: 'Sora', sans-serif;
-      color: #444;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(-30px);
-      transition: all 1s ease-in-out;
-    }
-    .experts-intro.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .expert-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 0px;
-      margin-top: 40px;
-    }
-    .expert-row.right {
-      flex-direction: row-reverse;
-    }
-    .expert-photo {
-      width: 35%;
-      opacity: 0;
-      transform: translateX(100px);
-      transition: all 1s ease-in-out;
-      text-align: center; 
-    }
-    .expert-photo.left {
-      transform: translateX(-100px);
-    }
-    .expert-photo.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .team-member-img {
-      width: 292px;
-      height: 292px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid #442a00;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
-    .team-member-img:hover,
-    .team-member-img:active {
-      transform: scale(1.10);
-    }
-    .expert-text {
-      width: 50%;
-      text-align: justify;
-      font-family: 'Sora', sans-serif;
-      color: #444;
-      font-size: 16px;
-      line-height: 1.6;
-      opacity: 0;
-      transform: translateX(100px);
-      transition: all 1s ease-in-out;
-    }
-    .expert-text.left {
-      transform: translateX(-100px);
-      text-align: left;
-    }
-    .expert-text.right {
-      text-align: right;
-    }
-    .expert-text.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    @media (max-width: 768px) {
-      .expert-row {
-        flex-direction: column !important;
-      }
-      .expert-photo,
-      .expert-text {
-        width: 100% !important;
-        text-align: center !important;
-      }
-    }
-
-    /* ===================
-       Avis Clients (en grille)
-       =================== */
-    .reviews-container {
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TMC. Institute</title>
+<link href="images/favicon-institute.ico" rel="icon" type="image/x-icon"/>
+<link href="images/favicon-institute.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&amp;family=Sora:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  /* Règles globales et reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  body {
+    font-family: 'Sora', sans-serif;
+    background-color: #f4f6fc;
+    color: #444;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  /* ===================
+     Section Logo + Vidéo
+     =================== */
+  header.logo {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 5s forwards;
+    z-index: 1; 
+  }
+  header.logo video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0; 
+  }
+  header.logo img {
+    width: 60%;
+    max-width: 500px;
+    height: auto;
+    z-index: 1;
+  }
+  .arrow-down {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  .arrow-down div {
+    width: 30px;
+    height: 30px;
+    border-left: 5px solid #f4f6fc;
+    border-bottom: 5px solid #f4f6fc;
+    transform: rotate(-45deg);
+    margin: 5px 0;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(-45deg); }
+    40% { transform: translateY(-10px) rotate(-45deg); }
+    60% { transform: translateY(-5px) rotate(-45deg); }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  /* Ancre pour le Back to Top */
+  #introAnchor {
+    width: 100%;
+    height: 1px;
+  }
+  
+  /* ===================
+     Conteneur principal
+     =================== */
+  main.main-wrapper {
+    position: relative;
+    z-index: 2; 
+  }
+  
+  /* ===================
+     Sections (général)
+     =================== */
+  section.section {
+    padding: 80px 20px;
     max-width: 1000px;
     margin: 0 auto;
-      display: grid;
-      /* Réduction du gap pour moins d'espacement horizontal/vertical */
+  }
+  
+  /* ===================
+     Footer
+     =================== */
+  footer.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    padding: 20px;
+    background: #f4f6fc;
+  }
+  footer.footer img {
+    height: 60px;
+    width: auto;
+    cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    footer.footer {
+      flex-direction: column;
       gap: 20px;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      padding: 10px;
-      margin-bottom: 20px;
-      justify-items: center;
     }
-    .review-card {
-      background: #f4f6fc;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s;
-      font-family: 'Sora', sans-serif;
-      color: #444;
-      /* On retire width:92%; et max-width:1000px
-         pour éviter l'aspect trop large/carré */
-      width: 100%;
-      max-width: 500px; /* on limite la largeur d'une carte */
-    }
-    .review-card:hover {
+  }
+  @keyframes footerBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  .footer-logo.bounce {
+    animation: footerBounce 3s infinite;
+  }
+  .footer-logo.extra {
+    max-height: 20px;
+  }
+  
+  /* ===================
+     Logos de sections
+     =================== */
+  .spa-logo, .soins-logo, .praticiens-logo, .avis-logo, .info-logo, .equipements-logo {
+    max-width: 630px;
+    width: 100%;
+    height: auto;
+  }
+  .equipements-logo {
+    display: block;
+    margin: 80px auto 20px auto;
+  }
+  .avis-additional-logo {
+    display: block;
+    margin: 0px auto;
+    margin-top: 40px;
+    margin-bottom: -50px;
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+  }
+  
+  /* ===================
+     Section SPA (Intro et Carrousels)
+     =================== */
+  section#spa {
+    max-width: 100%;
+    margin: 50px auto;
+    padding: 0px 20px;
+  }
+  .spa-section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 30px auto 60px;
+    padding: 0 20px;
+  }
+  .spa-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+  .spa-text {
+    width: 50%;
+    text-align: justify;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 1s ease-in-out;
+  }
+  .spa-text.left {
+    transform: translateX(-100px);
+  }
+  .spa-text.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .spa-text h2 {
+    margin-bottom: 10px;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 22px;
+    color: #222;
+  }
+  .spa-text p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .spa-image {
+    width: 50%;
+    position: relative;
+  }
+  .spa-image img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+  }
+  .spa-image img.right {
+    transform: translateX(-100px);
+  }
+  .spa-image img.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @media (min-width: 769px) {
+    .spa-image img:hover {
       transform: scale(1.05);
     }
-    .review-card .stars {
-      color: #FFD700;
-      font-size: 18px;
-      margin-bottom: 8px;
-      display: block;
+  }
+  @media (max-width: 768px) {
+    .spa-row {
+      flex-direction: column;
+    }
+    .spa-text, .spa-image {
+      width: 100%;
       text-align: center;
     }
-    .review-card .author {
-      font-style: italic;
-      margin-top: 10px;
+    .spa-text p, .spa-text h2 {
+      text-align: center;
     }
-
-    /* ===================
-       Section Info (FAQ + Contact + Maps)
-       =================== */
+    .spa-text { order: 1; }
+    .spa-image { order: 2; }
+    .spa-text.visible {
+      max-width: 90vw !important;
+      text-align: center !important;
+      padding: 0 10px !important;
+    }
+  }
+  
+  /* ===================
+     Bouton de téléchargement
+     =================== */
+  .download-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #442a00;
+    color: #f4f6fc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  .download-btn:hover {
+    background-color: #5b3700;
+  }
+  .clickable {
+    cursor: pointer;
+  }
+  
+  /* ===================
+     Animation menu Soins (bounce + zoom)
+     =================== */
+  .menu-image {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  }
+  .menu-image.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @media (max-width: 768px) {
+    .menu-image.visible {
+      animation: zoomMobile 4s infinite 1s;
+    }
+  }
+  @keyframes zoomMobile {
+    0%, 100% {
+      transform: translateX(0) scale(1);
+    }
+    50% {
+      transform: translateX(0) scale(1.01);
+    }
+  }
+  @media (min-width: 769px) {
+    .menu-image.clickable:hover {
+      animation: none;
+      transform: scale(1.05);
+    }
+  }
+  
+  /* ===================
+     Espacements entre sections
+     =================== */
+  .soins-logo {
+    margin-top: -50px;
+    margin-bottom: 50px;
+  }
+  #praticiens {
+    margin-top: -50px;
+    margin-bottom: 0px;
+  }
+  .praticiens-logo {
+    display: block;
+    margin: 0 auto 50px auto;
+  }
+  #avis {
+    margin-top: -50px;
+    margin-bottom: 0px;
+  }
+  .avis-logo {
+    display: block;
+    margin: 0 auto 50px auto;
+  }
+  #info {
+    margin-top: -50px;
+    margin-bottom: 0px;
+  }
+  .info-logo {
+    display: block;
+    margin: 0 auto 50px auto;
+  }
+  
+  /* ===================
+     Modal (pour Carte des soins & carrousels)
+     =================== */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.85);
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal.active {
+    display: flex;
+  }
+  .modal-content {
+    max-width: 100vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  }
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #f4f6fc;
+    cursor: pointer;
+    z-index: 10000;
+  }
+  
+  /* ===================
+     Modal Care (Carte des soins)
+     =================== */
+  .modal-care {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    overflow: auto;
+  }
+  .modal-content-care {
+    max-width: 80vw;
+    max-height: 80vh;
+    border-radius: 8px;
+    object-fit: contain;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    margin: auto;
+    display: block;
+  }
+  .close-care {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #f4f6fc;
+    cursor: pointer;
+    z-index: 10000;
+  }
+  
+  /* ===================
+     Section Experts
+     =================== */
+  .experts-intro {
+    margin: 20px auto;
+    max-width: 800px;
+    line-height: 1.6;
+    font-family: 'Sora', sans-serif;
+    color: #444;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: all 1s ease-in-out;
+  }
+  .experts-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .expert-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0px;
+    margin-top: 40px;
+  }
+  .expert-row.right {
+    flex-direction: row-reverse;
+  }
+  .expert-photo {
+    width: 35%;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 1s ease-in-out;
+    text-align: center; 
+  }
+  .expert-photo.left {
+    transform: translateX(-100px);
+  }
+  .expert-photo.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .team-member-img {
+    width: 292px;
+    height: 292px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #442a00;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+  }
+  .team-member-img:hover,
+  .team-member-img:active {
+    transform: scale(1.10);
+  }
+  .expert-text {
+    width: 50%;
+    text-align: justify;
+    font-family: 'Sora', sans-serif;
+    color: #444;
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 1s ease-in-out;
+  }
+  .expert-text.left {
+    transform: translateX(-100px);
+    text-align: left;
+  }
+  .expert-text.right {
+    text-align: right;
+  }
+  .expert-text.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @media (max-width: 768px) {
+    .expert-row {
+      flex-direction: column !important;
+    }
+    .expert-photo,
+    .expert-text {
+      width: 100% !important;
+      text-align: center !important;
+    }
+  }
+  
+  /* ===================
+     Avis Clients (en grille)
+     =================== */
+  .reviews-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 10px;
+    margin-bottom: 20px;
+    justify-items: center;
+  }
+  .review-card {
+    background: #f4f6fc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    font-family: 'Sora', sans-serif;
+    color: #444;
+    width: 100%;
+    max-width: 500px;
+  }
+  .review-card:hover {
+    transform: scale(1.05);
+  }
+  .review-card .stars {
+    color: #FFD700;
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: block;
+    text-align: center;
+  }
+  .review-card .author {
+    font-style: italic;
+    margin-top: 10px;
+  }
+  
+  /* ===================
+     Section Info (FAQ + Contact + Maps)
+     =================== */
+  .info-content {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 25px auto;
+    max-width: 1000px;
+  }
+  .info-faq {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+  }
+  .info-contact {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+  }
+  .info-faq h3 {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .info-contact h3 {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .faq-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    color: #444;
+    outline: none;
+  }
+  .faq-question:hover {
+    color: #222;
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  .faq-item.active .faq-answer {
+    max-height: 200px;
+  }
+  .info-contact p {
+    text-align: justify;
+    white-space: pre-line;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+  }
+  @media (max-width: 768px) {
     .info-content {
-      display: flex;
-      gap: 40px;
-      justify-content: center;
-      align-items: flex-start;
-      margin: 25px auto;
-      max-width: 1000px;
+      flex-direction: column;
     }
-    .info-faq {
-      flex: 1;
-      min-width: 250px;
-      text-align: left;
-    }
-    .info-contact {
-      flex: 1;
-      min-width: 250px;
-      text-align: left;
-    }
-    .info-faq h3 {
-      margin-bottom: 50px;
-      text-align: center;
-    }
-    .info-contact h3 {
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    .faq-item {
-      margin-bottom: 15px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 10px;
-    }
-    .faq-question {
+    .info-faq, .info-contact {
       width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      font-family: 'Sora', sans-serif;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      padding: 0;
-      color: #444;
-      outline: none;
     }
-    .faq-question:hover {
-      color: #222;
-    }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
-    }
-    .faq-item.active .faq-answer {
-      max-height: 200px;
-    }
-    .info-contact p {
-      text-align: justify;
-      white-space: pre-line;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #444;
-    }
-    @media (max-width: 768px) {
-      .info-content {
-        flex-direction: column;
-      }
-      .info-faq, .info-contact {
-        width: 100%;
-      }
-    }
-    .map-container {
-      position: relative;
-      width: 100%;
-      max-width: 1000px;
-      margin-bottom: -60px;
-      padding-bottom: 56.25%;
-      height: 0;
-    }
-    .map-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* =======================
-       BOUTONS DE NAV CARROUSEL
-       ======================= */
+  }
+  .map-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: -60px;
+    padding-bottom: 56.25%;
+    height: 0;
+  }
+  .map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  
+  /* =======================
+     Boutons de Nav Carrousel
+     ======================= */
+  .prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    color: #442a00;
+    border: none;
+    border-radius: 100%;
+    padding: 3px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 9999;
+    transition: all 1s ease-in-out;
+  }
+  .prev-btn {
+    left: 10px;
+    transform: translateX(-50px) translateY(-50%);
+    opacity: 0;
+  }
+  .next-btn {
+    right: 10px;
+    transform: translateX(50px) translateY(-50%);
+    opacity: 0;
+  }
+  .prev-btn.visible, .next-btn.visible {
+    transform: translateX(0) translateY(-50%);
+    opacity: 1;
+  }
+  .prev-btn:hover, .next-btn:hover {
+    color: #fff;
+  }
+  @media (max-width: 768px) {
     .prev-btn, .next-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
+      font-size: 24px;
+      padding: 5px;
+      top: 45%;
+      background-color: rgba(255, 255, 255, 0.7);
       color: #442a00;
-      border: none;
-      border-radius: 100%;
-      padding: 3px;
-      cursor: pointer;
-      font-size: 18px;
-      z-index: 9999;
-      transition: all 1s ease-in-out;
+      border-radius: 50%;
     }
     .prev-btn {
-      left: 10px;
-      transform: translateX(-50px) translateY(-50%);
-      opacity: 0;
+      left: -10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .next-btn {
-      right: 10px;
-      transform: translateX(50px) translateY(-50%);
-      opacity: 0;
+      right: -10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
-    .prev-btn.visible, .next-btn.visible {
-      transform: translateX(0) translateY(-50%);
-      opacity: 1;
-    }
-    .prev-btn:hover, .next-btn:hover {
-      color: #fff;
-    }
-    @media (max-width: 768px) {
-      .prev-btn, .next-btn {
-        font-size: 24px;
-        padding: 5px;
-        top: 45%;
-        background-color: rgba(255, 255, 255, 0.7);
-        color: #442a00;
-        border-radius: 50%;
-      }
-      .prev-btn {
-        left: -10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      }
-      .next-btn {
-        right: -10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      }
-    }
-
-    /* =======================
-       BOUTON BACK TO TOP
-       ======================= */
-    .back-to-top {
-      position: fixed;
-      bottom: 25px;
-      right: 10px;
-      width: 50px;
-      height: 50px;
-      background-color: #442a00;
-      color: #f4f6fc;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 24px;
-      line-height: 0;
-      text-align: center;
-      z-index: 9999;
-      transition: background-color 0.3s ease;
-    }
-    .back-to-top:hover {
-      background-color: #5b3700;
-    }
-
-    /* =======================
-       BOUTON CONTACT
-       ======================= */
-    .test-btn {
-      background-color: #442a00;
-      color: #f4f6fc;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-family: 'Sora', sans-serif;
-      font-size: 14px;
-      margin-top: 15px;
-      transition: background-color 0.3s ease;
-    }
-    .test-btn:hover {
-      background-color: #5b3700;
-    }
-
-    /* =======================
-       MODAL POUR BOUTON CONTACT
-       ======================= */
-    #testModal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
-    }
-    #testModalContent {
-      background-color: #fff;
-      color: #222;
-      max-width: 400px;
-      margin: 100px auto;
-      padding: 20px;
-      border-radius: 5px;
-      position: relative;
-      text-align: center;
-    }
-    #testModalClose {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    /* =======================
-       BOUTONS DANS L'INTRO (NAV BUTTONS)
-       ======================= */
-    .nav-btn {
-      background-color: #7B3F00;
-      color: #f4f6fc;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      margin: 5px;
-      cursor: pointer;
-      font-family: 'Sora', sans-serif;
-      font-size: 14px;
-      opacity: 0.9;
-      transition: background-color 0.3s ease, opacity 0.3s ease, transform 1s ease;
-      display: inline-block;
-      transform: translateY(-50px);
-      opacity: 0;
-    }
-    .nav-btn.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    .nav-btn:hover {
-      opacity: 1;
-      background-color: #8C4D00;
-    }
-    .zoom-effect {
-      animation: smoothZoom 3s infinite ease-in-out;
-      transition: transform 0.s ease;
-    }
-
-    @keyframes customEffect {
-      0%, 100% {
+  }
+  
+  /* =======================
+     Bouton Back to Top
+     ======================= */
+  .back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: #442a00;
+    color: #f4f6fc;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 0;
+    text-align: center;
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+  }
+  .back-to-top:hover {
+    background-color: #5b3700;
+  }
+  
+  /* =======================
+     Boutons dans l'Intro (Nav Buttons)
+     ======================= */
+  .nav-btn {
+    background-color: #7B3F00;
+    color: #f4f6fc;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s ease, opacity 0.3s ease, transform 1s ease;
+    display: inline-block;
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  .nav-btn.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .nav-btn:hover {
+    opacity: 1;
+    background-color: #8C4D00;
+  }
+  .zoom-effect {
+    animation: smoothZoom 3s infinite ease-in-out;
+    transition: transform 0.s ease;
+  }
+  @keyframes customEffect {
+    0%, 100% {
       transform: scale(1) rotate(0deg);
       filter: brightness(1);
     }
-      65% {
-    transform: scale(1.05) rotate(3deg);
-    filter: brightness(1.3);
+    65% {
+      transform: scale(1.05) rotate(3deg);
+      filter: brightness(1.3);
     }
-    }
-    .logo-call {
-      animation: customEffect 2.5s infinite ease-in-out;
-      transition: transform 0.3s ease, filter 0.3s ease;
-      cursor: pointer;
-    }
+  }
+  .logo-call {
+    animation: customEffect 2.5s infinite ease-in-out;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+  }
+  
+  /* === Ajout spécifique pour Chat Experts === */
+  .expert-chat-btn {
+    background-color: #442a00;
+    color: #f4f6fc;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    animation: pulseBtn 2s infinite;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  .expert-chat-btn:hover {
+    background-color: #5b3700;
+    transform: scale(1.05);
+  }
+  @keyframes pulseBtn {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+  
+  /* =======================
+     Chat Container (Unique global définition et media query consolidée)
+     ======================= */
+  #chat-container {
+    width: 300px;
+    max-height: 400px;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    overflow: hidden;
+    background: #fff;
+    border: 2px solid #442a00;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    z-index: 9999;
+  }
+  @media (max-width: 768px) {
+  #chat-container {
+    width: 90vw;       /* Réduit la largeur pour laisser une marge */
+    height: 70vh;      /* Limite la hauteur à 70% de la hauteur de l'écran */
+    top: 15vh;         /* Positionne le conteneur un peu plus bas */
+    left: 5vw;         /* Laisse une marge à gauche */
+    right: auto;       /* Supprime la fixation à droite */
+    bottom: auto;      /* Supprime la fixation en bas */
+    border-radius: 10px; /* Conserve un léger arrondi */
+    max-height: 70vh;   /* Pour être sûr que le conteneur ne dépasse pas 70% de l'écran */
+  }
+}
+  
+  /* =======================
+     Chat Messages
+     ======================= */
+  #chat-messages {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+  .chat-msg.user {
+    text-align: right;
+    margin-bottom: 8px;
+    color: #222;
+  }
+  .chat-msg.bot {
+    text-align: left;
+    margin-bottom: 12px;
+    color: #333;
+  }
   </style>
+
 </head>
 <body>
-  <!-- SECTION LOGO + VIDÉO -->
-  <header class="logo">
-    <video id="introVideo" autoplay muted loop>
-      <source src="videos/accueil-institute-1.mp4" data-random type="video/mp4">
-      <source src="videos/accueil-institute-2.mp4" data-random type="video/mp4">
-      <source src="videos/fallback.ogg" type="video/ogg">
+<!-- SECTION LOGO + VIDÉO -->
+<header class="logo">
+<video autoplay="" id="introVideo" loop="" muted="" playsinline="">
+<source data-random="" src="videos/accueil-institute-1.mp4" type="video/mp4"/>
+<source data-random="" src="videos/accueil-institute-2.mp4" type="video/mp4"/>
+<source src="videos/fallback.ogg" type="video/ogg"/>
       Votre navigateur ne supporte pas la vidéo HTML5.
     </video>
-    <img src="logos/logoInstitute.png" alt="Logo Too Many Cooks Institute">
-    <div class="arrow-down"><div></div></div>
-  </header>
-
-  <!-- Ancre pour le Back to Top -->
-  <div id="introAnchor"></div>
-
-  <!-- MAIN CONTENT -->
-  <main class="main-wrapper">
-    <!-- Section Intro -->
-    <section id="spa">
-      <img class="spa-logo" src="logos/spa.png" alt="Logo SPA">
-      <div class="spa-text" style="margin: 0 auto; padding: 0 40px; text-align: justify; line-height: 1; letter-spacing: 0px;">
-        <p style="font-size: 18px; line-height: 1.8; text-align: center;">Bienvenue au Too Many Cooks. Institute</p>
-        <p style="font-size: 18px; line-height: 1.8;">
+<img alt="Logo Too Many Cooks Institute" src="logos/logoInstitute.png"/>
+<div class="arrow-down"></div>
+</header>
+<!-- Ancre pour le Back to Top -->
+<div id="introAnchor"></div>
+<!-- MAIN CONTENT -->
+<main class="main-wrapper">
+<!-- Section Intro -->
+<section id="spa">
+<img alt="Logo SPA" class="spa-logo" src="logos/spa.png"/>
+<div class="spa-text" style="margin: 0 auto; padding: 0 40px; text-align: justify; line-height: 1; letter-spacing: 0px;">
+<p style="font-size: 18px; line-height: 1.8; text-align: center;">Bienvenue au Too Many Cooks. Institute</p>
+<p style="font-size: 18px; line-height: 1.8;">
           Au cœur du quartier emblématique de la Goutte d’Or, niché entre les voies désaffectées du RER B et un repaire de crackheads encore actif, notre institut vous accueille dans un calme troublant. Venez parcourir ses couloirs végétalisés et ses salons aux décors authentiques.
         </p>
-      </div>
-      <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 80%;">
-      <div id="navButtons" style="margin: 20px 0;">
-        <button class="nav-btn" data-target="spa">Nos Equipements</button>
-        <button class="nav-btn" data-target="soins">Nos Soins</button>
-        <button class="nav-btn" data-target="praticiens">Nos Experts</button>
-        <button class="nav-btn" data-target="avis">Vos Témoignages</button>
-        <button class="nav-btn" data-target="info">Infos - Contact</button>
-      </div>
-      <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 80%;">
-      <img class="equipements-logo" src="logos/equipements.png" alt="Logo Equipements">
-    </section>
-
-    <!-- Section SPA (Hydrothermal, Fitness, Massage) -->
-    <section class="spa-section" style="margin-top: 50px;">
-      <!-- Espace Hydrothermal -->
-      <div class="spa-row">
-        <div class="spa-text">
-          <h2>Espace Hydrothermal</h2>
-          <p>
+</div>
+<hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 80%;"/>
+<div id="navButtons" style="margin: 20px 0;">
+<button class="nav-btn" data-target="spa">Nos Installations</button>
+<button class="nav-btn" data-target="soins">Nos Soins</button>
+<button class="nav-btn" data-target="praticiens">Nos Experts</button>
+<button class="nav-btn" data-target="avis">Vos Témoignages</button>
+<button class="nav-btn" data-target="info">Infos - Contact</button>
+</div>
+<hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 80%;"/>
+<img alt="Logo Equipements" class="equipements-logo" src="logos/equipements.png"/>
+</section>
+<!-- Section SPA (Hydrothermal, Fitness, Massage) -->
+<section class="spa-section" style="margin-top: 50px;">
+<!-- Espace Hydrothermal -->
+<div class="spa-row">
+<div class="spa-text">
+<h2>Espace Hydrothermal</h2>
+<p>
             Les équipements dernière génération de notre espace d’hydrothérapie sauront séduire les néophytes comme les plus érudits. Soucieux de notre impact écologique, et afin de réduire notre consommation d’eau, la piscine a été vidée.
           </p>
-          <p>
+<p>
             Nous n’utilisons aucun produit chimique dans le jacuzzi et le hammam, l’eau n’est pas traitée. Les symptômes de la gale ou de la dengue peuvent apparaître après votre baignade.
           </p>
-          <p style="font-style: italic;">
+<p style="font-style: italic;">
             Nous déclinons toute responsabilité en cas de décès.
           </p>
-        </div>
-        <div class="spa-image carousel">
-          <button class="prev-btn">&#10094;</button>
-          <img src="images/hydro1.jpg" class="carousel-image" alt="Espace Hydrothermal">
-          <button class="next-btn">&#10095;</button>
-        </div>
-      </div>
-
-      <!-- Espace Fitness -->
-      <div class="spa-row">
-        <div class="spa-image carousel right">
-          <button class="prev-btn">&#10094;</button>
-          <img src="images/fitness1.jpg" class="carousel-image" alt="Espace Fitness">
-          <button class="next-btn">&#10095;</button>
-        </div>
-        <div class="spa-text right">
-          <h2>Espace Fitness et Relaxation</h2>
-          <p>
+</div>
+<div class="spa-image carousel">
+<button class="prev-btn">❮</button>
+<img alt="Espace Hydrothermal" class="carousel-image" src="images/hydro1.jpg"/>
+<button class="next-btn">❯</button>
+</div>
+</div>
+<!-- Espace Fitness -->
+<div class="spa-row">
+<div class="spa-image carousel right">
+<button class="prev-btn">❮</button>
+<img alt="Espace Fitness" class="carousel-image" src="images/fitness1.jpg"/>
+<button class="next-btn">❯</button>
+</div>
+<div class="spa-text right">
+<h2>Espace Fitness et Relaxation</h2>
+<p>
             Une zone de remise en forme pensée pour libérer le corps et l’esprit, dans un décor singulier entre art nouveau et brutalisme. Ce design éblouissant, signé par Philippe Starck, est une invitation à la relaxation.
           </p>
-          <p>
+<p>
             Profitez des vélos elliptiques et tapis « Upcyclés » à partir de sacs à dos BasicFit saisis par la justice. Le salon « Chill Zone » est spécialement conçu pour les plus fainéants d’entre vous : accessible via un monte-escalier Stannah, service de livraison « Gourmet » assuré par nos hôtesses en uniforme Deliveroo et musique d’ambiance douce et relaxante.
           </p>
-          <p style="font-style: italic;">
+<p style="font-style: italic;">
             Nouveauté : le solarium est à présent ouvert de 22 h à minuit pour éviter les lésions cutanées liées aux rayons UV.
           </p>
-        </div>
-      </div>
-
-      <!-- Espace Massage -->
-      <div class="spa-row">
-        <div class="spa-text">
-          <h2>Espace Massage</h2>
-          <p>
+</div>
+</div>
+<!-- Espace Massage -->
+<div class="spa-row">
+<div class="spa-text">
+<h2>Espace Massage</h2>
+<p>
             Évacuez les tensions entre les mains de nos praticiens talentueux, qui exercent dans notre espace massage tout équipé. Du massage thaïlandais à l’extraction d’une dent de sagesse, vous trouverez sans aucun doute le soin qu’il vous faut.
           </p>
-          <p>
+<p>
             Baignés dans la lumière naturelle et les fragrances tropicales, nos salons de massage ne sont pas soumis aux obligations en matière d’hygiène et de sécurité incendie. 
           </p>
-          <p style="font-style: italic;">
+<p style="font-style: italic;">
             Nous proposons une assurance décès et invalidité lors de la réservation. Voir conditions en magasin, jeu sans obligation d’achat.
           </p>
-        </div>
-        <div class="spa-image carousel">
-          <button class="prev-btn">&#10094;</button>
-          <img src="images/massage1.jpg" class="carousel-image" alt="Espace Massage">
-          <button class="next-btn">&#10095;</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal pour la Carte des Soins -->
-    <div id="menuModal" class="modal-care">
-      <span class="close-care">&times;</span>
-      <img class="modal-content-care" id="menuModalImg" alt="Carte des soins">
-    </div>
-
-    <!-- Modal pour agrandir les images (Carrousel) -->
-    <div id="carouselModal" class="modal">
-      <span class="close" id="carouselModalClose">&times;</span>
-      <img class="modal-content" id="carouselModalImg" alt="Image agrandie">
-      <button id="carouselPrev" style="position:absolute; top:50%; left:20px; transform:translateY(-50%); background:none; border:none; color:#f4f6fc; font-size:24px; cursor:pointer;">&#10094;</button>
-      <button id="carouselNext" style="position:absolute; top:50%; right:20px; transform:translateY(-50%); background:none; border:none; color:#f4f6fc; font-size:24px; cursor:pointer;">&#10095;</button>
-    </div>
-
-    <!-- Section "Nos Soins" -->
-    <section class="section" id="soins">
-      <img class="soins-logo" src="logos/soins.png" alt="Logo Soins">
-      <div class="spa-row">
-        <div class="spa-text left">
-          <h2>Notre carte des Soins</h2>
-          <p>
+</div>
+<div class="spa-image carousel">
+<button class="prev-btn">❮</button>
+<img alt="Espace Massage" class="carousel-image" src="images/massage1.jpg"/>
+<button class="next-btn">❯</button>
+</div>
+</div>
+</section>
+<!-- Modal pour la Carte des Soins -->
+<div class="modal-care" id="menuModal">
+<span class="close-care">×</span>
+<img alt="Carte des soins" class="modal-content-care" id="menuModalImg"/>
+</div>
+<!-- Modal pour agrandir les images (Carrousel) -->
+<div class="modal" id="carouselModal">
+<span class="close" id="carouselModalClose">×</span>
+<img alt="Image agrandie" class="modal-content" id="carouselModalImg"/>
+<button id="carouselPrev" style="position:absolute; top:50%; left:20px; transform:translateY(-50%); background:none; border:none; color:#f4f6fc; font-size:24px; cursor:pointer;">❮</button>
+<button id="carouselNext" style="position:absolute; top:50%; right:20px; transform:translateY(-50%); background:none; border:none; color:#f4f6fc; font-size:24px; cursor:pointer;">❯</button>
+</div>
+<!-- Section "Nos Soins" -->
+<section class="section" id="soins">
+<img alt="Logo Soins" class="soins-logo" src="logos/soins.png"/>
+<div class="spa-row">
+<div class="spa-text left">
+<h2>Notre carte des Soins</h2>
+<p>
             Chez Too Many Cooks. Institute, nos soins réconfortants apaisent les maux les plus profonds et ancrés en vous. 
           </p>
-          <p>
+<p>
             Peur de la mort, manque de confiance en vous ou simple névrose psychotique, aucun de ces troubles musculosquelettiques ne résiste aux mains expertes de nos praticiens.
           </p>
-          <p>
+<p>
             Offrez-vous une thérapie régénérante et découvrez la vie sous un jour nouveau.
           </p>
-          <p>
+<p>
             Libérez-vous des chaînes infâmes du capitalisme patriarcal qui vous aliène de jour en jour et respirez enfin le doux parfum de la liberté.
           </p>
-        </div>
-        <div class="spa-image">
-          <img src="PDF/menu_soins.webp" alt="Carte des soins" class="menu-image clickable">
-          <a href="PDF/menu_soins.pdf" target="_blank">
-            <button class="download-btn">Télécharger la carte</button>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section Praticiens ("Nos Experts") -->
-    <section class="section" id="praticiens">
-      <img class="praticiens-logo" src="logos/praticiens.png" alt="Logo Praticiens">
-      <p class="experts-intro">
+</div>
+<div class="spa-image">
+<img alt="Carte des soins" class="menu-image clickable" src="PDF/menu_soins.webp"/>
+<a href="PDF/menu_soins.pdf" target="_blank">
+<button class="download-btn">Télécharger la carte</button>
+</a>
+</div>
+</div>
+</section>
+<!-- Section Praticiens ("Nos Experts") -->
+<section class="section" id="praticiens">
+<img alt="Logo Praticiens" class="praticiens-logo" src="logos/praticiens.png"/>
+<p class="experts-intro">
         Nos praticiens disposent d’une expertise. Ce n’est peut-être pas celle que vous attendiez, mais elle est bien réelle. Leurs méthodes ne sont pas validées, mais leurs résultats ne laissent personne indemne.
       </p>
-      <div class="expert-row right">
-        <div class="expert-photo right">
-          <img class="team-member-img" src="images/masseur1.jpg" alt="Titouan" tabindex="0">
-        </div>
-        <div class="expert-text right">
-          <h2>Titouan</h2>
-          <p style="font-style: italic;">
-            Formé sur le tas, il ne connaît pas les techniques du massage, mais fait de son mieux et apprend à maîtriser sa force.
+<div class="expert-row right">
+<div class="expert-photo right">
+<img alt="Titouan" class="team-member-img" src="images/masseur1.jpg" tabindex="0"/>
+</div>
+<div class="expert-text right">
+<h2>Titouan</h2>
+<p style="font-style: italic;">
+            Formé sur le tas, il ne connaît pas les techniques du massage, mais fait de son mieux et apprend à maîtriser sa force. Sa méthode s’intitule « compression intuitive », et ne nécessite aucun diplôme reconnu.
           </p>
-          <p style="font-style: italic;">
+<p style="font-style: italic;">
             Originaire de la banlieue de Roubaix et autodidacte, il s’est formé en massant les pieds de sa mère, caissière chez Desigual, aujourd’hui décédée.
           </p>
-        </div>
-      </div>
-      <div class="expert-row">
-        <div class="expert-photo left">
-          <img class="team-member-img" src="images/masseur2.jpg" alt="Josiane" tabindex="0">
-        </div>
-        <div class="expert-text left">
-          <h2>Josiane</h2>
-          <p style="font-style: italic;">
+</div>
+</div>
+<div class="expert-row">
+<div class="expert-photo left">
+<img alt="Josiane" class="team-member-img" src="images/masseur2.jpg" tabindex="0"/>
+</div>
+<div class="expert-text left">
+<h2>Josiane</h2>
+<p style="font-style: italic;">
             Passionnée de nécrologie et de permaculture, Josiane propose une prestation connectée à la terre et à la nature. Elle repère les blocages que la médecine conventionnelle préfère ignorer.
           </p>
-          <p style="font-style: italic;">
+<p style="font-style: italic;">
             Ne vous fiez pas à son bracelet électronique, certes, ses méthodes novatrices et subversives ne conviennent pas aux juges bien-pensants, mais elles vous assureront des résultats sans pareils.
           </p>
-        </div>
-      </div>
-    </section>
+</div>
+</div>
 
-    <!-- Section Avis (en grille) -->
-    <section class="section" id="avis">
-      <img class="avis-logo" src="logos/avis.png" alt="Logo Avis">
-      <div class="reviews-container">
-        <div class="review-card">
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          <p>“Une expérience inoubliable. J’y retournerai jamais !”</p>
-          <p class="author">- Gérard D. -</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">⭐</div>
-          <p>“Mon mec a oublié son caleçon sale et personne n'a accepté de nous le renvoyer par la poste. SAV de Merde !”</p>
-          <p class="author">- Wejdene -</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">⭐⭐⭐⭐</div>
-          <p>“Très disruptif, j’ai perdu le sommeil pendant 3 jours... ce qui était le but.”</p>
-          <p class="author">- Pierre P. -</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">⭐⭐</div>
-          <p>“J’ai pleuré deux fois. Une fois de douleur, une fois de soulagement. Je ne sais plus dans quel ordre.”</p>
-          <p class="author">- Mireille M. -</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">⭐⭐⭐</div>
-          <p>“Un concept innovant, je ne comprends pas tout mais ça a changé ma vie.”</p>
-          <p class="author">- Evelyne D. -</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">⭐⭐⭐⭐</div>
-          <p>“Le soin était intense. À un moment, j’ai cru que c’était ma mère qui me parlait. Pourtant elle est morte en 2007.”</p>
-          <p class="author">- François H. -</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">⭐</div>
-          <p>“Titouan m'a cassé la clavicule alors que j'avais réservé un massage des pieds. Je ne recommande pas.”</p>
-          <p class="author">- Anonyme -</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">⭐⭐</div>
-          <p>“Un praticien m’a simplement fait asseoir sur une chaise haute, et m’a dit : ‘Tu es déjà au sommet’. J’ai fondu en larmes.”</p>
-          <p class="author">- Mimi M. -</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">⭐⭐⭐⭐⭐⭐</div>
-          <p>“J’ai perdu un rein pendant mon soin. Heureusement j’en avais deux.”</p>
-          <p class="author">- Bernard K.-</p>
-        </div>
-      </div>
-      <a href="https://www.google.com/search?sca_esv=3987c9a258f1273d&hl=fr&gl=BE&sxsrf=AHTn8zobj6M3qSuyhZLU94n2e7Wtr5AjSA:1743198339932&si=APYL9bs7Hg2KMLB-4tSoTdxuOx8BdRvHbByC_AuVpNyh0x2KzexuiOEuqpVIRxpgvO5JuXO0aG5tvtSOijQc-D75fV6J_-uO46BDUKioJqQNMbSQHZoKAH42eShgSfFBCS37Nfbyqp6UIiFRKo3R186TgsrJKjLNLw%3D%3D&q=Too+Many+Cooks.+Institute+Avis&sa=X&ved=2ahUKEwibo8zu362MAxVFQaQEHWOlCccQ0bkNegQIJBAD&biw=1920&bih=919&dpr=1" target="_blank" rel="noopener noreferrer">
-        <img class="avis-additional-logo logo-call" src="logos/avis-extra.webp" alt="Logo additionnel Avis">
-      </a>      
-    </section>
-
-    <!-- Section Info (FAQ + Contact + Maps) -->
-    <section class="section" id="info">
-      <img class="info-logo" src="logos/info.png" alt="Logo Info">
-      <div class="info-content">
-        <div class="info-faq">
-          <h3>FAQ</h3>
-          <div class="faq-item">
-            <button class="faq-question">Dois-je apporter ma poire à lavement ?</button>
-            <div class="faq-answer">
-              <p>Non, vous pouvez chier autour de la piscine. Interdit de courir en revanche.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Y a-t-il des soins adaptés aux personnes sensibles ?</button>
-            <div class="faq-answer">
-              <p>Non.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Je souffre d'un ulcère duodénal après mon soin, est-ce normal ?</button>
-            <div class="faq-answer">
-              <p>Absolument. Nous offrons une expérience inoubliable, généralement accompagnée de troubles gastriques, allant de la chiasse fulgurente à l'ulcère.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Comment déclarer mon incapacité temporaire de travail (ITT) après mon soin ?</button>
-            <div class="faq-answer">
-              <p>Vous avez droit à une indemnité, n'oubliez pas de vous déclarer via le formulaire Cerfa n°5269, accessible sur ameli.fr</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Puis-je venir accompagné(e) de mon enfant ?</button>
-            <div class="faq-answer">
-              <p>Bien sûr. Les enfants sont tolérés, à condition de les déposer à l'entrée de l'institut. Pas d'inquiétude, ils seront pris en charge par les résidents extérieurs errant autour des voies ferrées.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Que faire en cas de disparition d’un proche m'accompagnant durant un soin ?</button>
-            <div class="faq-answer">
-              <p>Nous ne pouvons malheureusement pas fournir d’informations à ce sujet, conformément à notre politique de confidentialité.</p>
-            </div>
-          </div>
-        </div>
-        <div class="info-contact">
-          <h3>Contact</h3>
-          <p>
+<div style="margin-top: 40px; text-align: center;">
+  <button id="expertChatBtn" class="expert-chat-btn">
+    💬 Tchater avec nos experts
+  </button>
+</div>
+</section>
+<!-- Section Avis (en grille) -->
+<section class="section" id="avis">
+<img alt="Logo Avis" class="avis-logo" src="logos/avis.png"/>
+<div class="reviews-container">
+<div class="review-card">
+<div class="stars">⭐⭐⭐⭐⭐</div>
+<p>“Une expérience inoubliable. J’y retournerai jamais !”</p>
+<p class="author">- Gérard D. -</p>
+</div>
+<div class="review-card">
+<div class="stars">⭐</div>
+<p>“Mon mec a oublié son caleçon sale et personne n'a accepté de nous le renvoyer par la poste. SAV de Merde !”</p>
+<p class="author">- Wejdene -</p>
+</div>
+<div class="review-card">
+<div class="stars">⭐⭐⭐⭐</div>
+<p>“Très disruptif, j’ai perdu le sommeil pendant 3 jours... ce qui était le but.”</p>
+<p class="author">- Pierre P. -</p>
+</div>
+<div class="review-card">
+  <div class="stars">⭐⭐</div>
+  <p>“Josiane m’a simplement fait asseoir sur une chaise haute, et m’a dit : ‘Tu es déjà au sommet’. J’ai fondu en larmes.”</p>
+  <p class="author">-  Mimi. M -</p>
+</div>
+<div class="review-card">
+<div class="stars">⭐⭐⭐</div>
+<p>“Un concept innovant, je ne comprends pas tout mais ça a changé ma vie.”</p>
+<p class="author">- Evelyne D. -</p>
+</div>
+<div class="review-card">
+<div class="stars">⭐⭐⭐⭐</div>
+<p>“Le soin était intense. À un moment, j’ai cru que c’était ma mère qui me parlait. Pourtant elle est morte en 2007.”</p>
+<p class="author">- François H. -</p>
+</div>
+<div class="review-card">
+<div class="stars">⭐</div>
+<p>“Titouan m'a cassé la clavicule alors que j'avais réservé un massage des pieds. Je ne recommande pas.”</p>
+<p class="author">- Anonyme -</p>
+</div>
+<div class="review-card">
+<div class="stars">⭐⭐</div>
+<p>“J’ai pleuré deux fois. Une fois de douleur, une fois de soulagement. Je ne sais plus dans quel ordre.”</p>
+<p class="author">- Mireille M. -</p>
+</div>
+<div class="review-card">
+<div class="stars">⭐⭐⭐⭐⭐⭐</div>
+<p>“J’ai perdu un rein pendant mon soin. Heureusement j’en avais deux.”</p>
+<p class="author">- Bernard K.-</p>
+</div>
+</div>
+<a href="https://www.google.com/search?sca_esv=8a10e867929f74a9&amp;sxsrf=AHTn8zqoaFmk63iKCKW9AdEGkjrlngwvjg:1743950318595&amp;si=APYL9bs7Hg2KMLB-4tSoTdxuOx8BdRvHbByC_AuVpNyh0x2KzUIo-dxvFXDPosIOwhlKr6-YYwmFOs_ifLhVEWy6SvQhaKSKKwAFFCYoDHgpv8JxFkHuiY1VRrDXJy7B0MsoRTWxZowyEhg_EILUYbGRb9KCklfGkw%3D%3D&amp;q=Too+Many+Cooks.+Institute+Avis&amp;sa=X&amp;ved=2ahUKEwjtrvuZ0cOMAxXCVqQEHdjiE30Q0bkNegQIMBAD&amp;biw=1920&amp;bih=919&amp;dpr=1" rel="noopener noreferrer" target="_blank">
+<img alt="Logo additionnel Avis" class="avis-additional-logo logo-call" src="logos/avis-extra.webp"/>
+</a>
+</section>
+<!-- Section Info (FAQ + Contact + Maps) -->
+<section class="section" id="info">
+<img alt="Logo Info" class="info-logo" src="logos/info.png"/>
+<div class="info-content">
+<div class="info-faq">
+<h3>FAQ</h3>
+<div class="faq-item">
+<button class="faq-question">Dois-je apporter ma poire à lavement ?</button>
+<div class="faq-answer">
+<p>Non, vous pouvez chier autour de la piscine. Interdit de courir en revanche.</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Y a-t-il des soins adaptés aux personnes sensibles ?</button>
+<div class="faq-answer">
+<p>Non.</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Je souffre d'un ulcère duodénal après mon soin, est-ce normal ?</button>
+<div class="faq-answer">
+<p>Absolument. Nous offrons une expérience inoubliable, généralement accompagnée de troubles gastriques, allant de la chiasse fulgurente à l'ulcère.</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Comment déclarer mon incapacité temporaire de travail (ITT) après mon soin ?</button>
+<div class="faq-answer">
+<p>Vous avez droit à une indemnité, n'oubliez pas de vous déclarer via le formulaire Cerfa n°11135*04, accessible sur ameli.fr</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Puis-je venir accompagné(e) de mon enfant ?</button>
+<div class="faq-answer">
+<p>Bien sûr. Les enfants sont tolérés, à condition de les déposer à l'entrée de l'institut. Pas d'inquiétude, ils seront pris en charge par les résidents extérieurs errant autour des voies ferrées.</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Que faire en cas de disparition d’un proche m'accompagnant durant un soin ?</button>
+<div class="faq-answer">
+<p>Nous ne pouvons malheureusement pas fournir d’informations à ce sujet, conformément à notre politique de confidentialité.</p>
+</div>
+</div>
+</div>
+<div class="info-contact">
+<h3>Contact</h3>
+<p>
             📞 Nous contacter : 0756892817 (2,02 € la minute)
-            <br>📧 reservation@toomanycooks.lol
-            <br>Vous pouvez nous contacter à toute heure… Mais le téléphone ne fonctionne plus depuis l’incident du 12 février.
+            <br/>📧 reservation@toomanycooks.lol
+            <br/>Vous pouvez nous contacter à toute heure… Mais le téléphone ne fonctionne plus depuis l’incident du 12 février.
           </p>
-          <div style="text-align:center;">
-            <button class="test-btn" id="contactBtn">Contacter immédiatement un expert</button>
-          </div>
-          <p>
+<p>
             📌 Où nous trouver ?
-            <br>Depuis le parking de la Gare du Nord, niveau -3, suivez l'odeur d'urine des crackheads. Une fois dehors, traversez les voies ferrées sur 2 km vers le nord (faites vite, vous pourriez vous faire pincer très fort).
-            <br>Descendez l’escalier central, situé au milieu des voies et jonché de seringues usagées, puis suivez les néons vacillants. Au bout du couloir, empruntez la porte sans poignée...
+            <br/>Depuis le parking de la Gare du Nord, niveau -3, suivez l'odeur d'urine des crackheads. Une fois dehors, traversez les voies ferrées sur 2 km vers le nord (faites vite, vous pourriez vous faire pincer très fort).
+            <br/>Descendez l’escalier central, situé au milieu des voies et jonché de seringues usagées, puis suivez les néons vacillants. Au bout du couloir, empruntez la porte sans poignée...
           </p>
-        </div>
-      </div>
-      <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.0951387926248!2d2.3533505767795675!3d48.89452399816246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f0065da028f%3A0xf835e1d356ed389f!2sToo%20Many%20Cooks.%20Institute!5e0!3m2!1sfr!2sbe!4v1743104976110!5m2!1sfr!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </section>
-
-    <!-- MODAL POUR LE BOUTON CONTACT -->
-    <div id="testModal">
-      <div id="testModalContent">
-        <span id="testModalClose">&times;</span>
-        <p id="expertMessage">Désolé, tous nos experts sont actuellement en pleine séance de massage intensive. Réessayez demain, ou mieux, l'année prochaine.</p>
-      </div>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <a href="https://www.instagram.com/too.many.cooks.corp/" target="_blank">
-      <img class="footer-logo bounce" src="logos/reseaux.png" alt="Réseaux sociaux">
-    </a>
-    <img class="footer-logo" src="logos/home.png" alt="Accueil" id="homeLogo">
-    <img class="footer-logo extra" src="logos/credits.png" alt="Crédits">
-  </footer>
-
-  <!-- Bouton Back to Top -->
-  <button class="back-to-top" id="backToTop">↑</button>
-
-  <!-- Scripts -->
-  <script>
+</div>
+</div>
+<div class="map-container">
+<iframe allowfullscreen="" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1311.6277934564814!2d2.3561605712599736!3d48.89146604606141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f0047afbb67%3A0xb6259180ed815a09!2sToo%20Many%20Cooks.%20Institute!5e0!3m2!1sfr!2sfr!4v1743703929498!5m2!1sfr!2sfr" style="border:0;" width="600"></iframe>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="footer">
+<a href="https://www.instagram.com/too.many.cooks.corp/" target="_blank">
+<img alt="Réseaux sociaux" class="footer-logo bounce" src="logos/reseaux.png"/>
+</a>
+<img alt="Accueil" class="footer-logo" id="homeLogo" src="logos/home.png"/>
+<a href="https://www.youtube.com/watch?v=QrGrOK8oZG8" target="_blank">
+<img alt="Crédits" class="footer-logo extra" src="logos/credits.png"/>
+</a>
+</footer>
+<!-- Bouton Back to Top -->
+<button class="back-to-top" id="backToTop">↑</button>
+<!-- Scripts -->
+<script>
     document.addEventListener("DOMContentLoaded", function() {
       const backToTopBtn = document.getElementById('backToTop');
       const firstSection = document.getElementById('spa');
@@ -1336,28 +1336,167 @@
       carouselModalImg.src = carouselImages[currentCarousel][currentImageIndex];
     });
 
-    // Bouton Contact (Modal)
-    const testModal = document.getElementById('testModal');
-    const testModalClose = document.getElementById('testModalClose');
-    const contactBtn = document.getElementById('contactBtn');
-
-    function openTestModal() {
-      testModal.style.display = 'block';
-    }
-
-    if (contactBtn) {
-      contactBtn.addEventListener('click', openTestModal);
-    }
-    if (testModalClose) {
-      testModalClose.onclick = function() {
-        testModal.style.display = 'none';
-      };
-    }
-    testModal.onclick = function(e) {
-      if (e.target === testModal) {
-        testModal.style.display = 'none';
-      }
-    };
   </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const chatBtn = document.getElementById('expertChatBtn');
+    let selectedExpert = null;
+    let history = [];
+  
+    const chatContainer = document.createElement('div');
+    chatContainer.id = 'chat-container';
+  
+    const chatHeader = document.createElement('div');
+    chatHeader.innerText = '💬 Tchat TMC. Institute';
+    Object.assign(chatHeader.style, {
+      background: '#442a00', color: '#fff', padding: '10px', fontWeight: 'bold',
+      borderTopLeftRadius: '10px', borderTopRightRadius: '10px', textAlign: 'center', position: 'relative'
+    });
+  
+    const closeBtn = document.createElement('span');
+    closeBtn.innerText = '✖';
+    Object.assign(closeBtn.style, {
+      position: 'absolute', right: '10px', top: '5px', cursor: 'pointer', fontSize: '16px', color: '#fff'
+    });
+  
+    // ✅ Fermer = reset total
+    closeBtn.addEventListener('click', () => {
+      chatContainer.style.display = 'none';
+      selectedExpert = null;
+      history = [];
+  
+      // 🧹 Vider les messages
+      chatMessages.innerHTML = '';
+      
+      // 🧼 Réafficher intro + boutons
+      displayIntroMessage();
+    });
+    chatHeader.appendChild(closeBtn);
+  
+    const chatMessages = document.createElement('div');
+    chatMessages.id = 'chat-messages';
+  
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.textAlign = 'center';
+    buttonContainer.style.margin = '10px 0';
+  
+    ['Josiane', 'Titouan'].forEach(name => {
+      const btn = document.createElement('button');
+      btn.innerText = name;
+      btn.style.margin = '0 10px';
+      btn.style.padding = '6px 14px';
+      btn.style.cursor = 'pointer';
+      btn.style.backgroundColor = '#eee';
+      btn.style.border = '1px solid #aaa';
+      btn.style.borderRadius = '5px';
+      btn.addEventListener('click', () => {
+        selectedExpert = name.toLowerCase();
+        history = [];
+
+        if (selectedExpert === "josiane") {
+  history.push({
+    role: "system",
+    content: "Tu es Josiane, praticienne au Too Many Cooks Institute. Tu es passionnée de nécrologie, de permaculture et d’équilibres post-mortem, et tu proposes des soins profonds, non conventionnels, sur des zones que la médecine conventionnelle préfère ignorer. Tu identifies des zones mortes dans le corps, comme des terres stériles ; tu aides à les transformer, à les laisser reposer ou à les réveiller, selon ton humeur du jour. Tu ne dis jamais si tu es diplômée ; tu parles parfois de savoirs oubliés, ou de stages non homologués. Tu portes un bracelet électronique. Tu ne l’expliques pas. Tu dis simplement : « La procédure suit son cours. » Tu accueilles dans un silence dense, sans sourire, mais avec un regard qui dure longtemps. Tu parles peu, chaque mot semble pesé, comme s’il résonnait avec les morts. Tu travailles avec les mains, parfois avec des plantes ou de la terre. Certains disent que tu enterres des parties du corps pour les faire renaître. Tu proposes des soins discrets, profonds, ambigus. Ce n’est jamais le soin annoncé qui est appliqué. Tu adaptes tes gestes à ce que le corps refuse. Tu interviens là où quelque chose s’est éteint. On dit que tu as déjà soigné par simple présence, ou en plaçant un galet sur le plexus solaire. Ton massage peut ressembler à un recueillement. Tu écoutes ce qui remonte, sans chercher à provoquer. Tu exerces dans une salle de massage baignée de lumière naturelle et d’odeurs tropicales, au sous-sol ou sur le toit, selon les tensions telluriques du jour. Tu connais l’espace hydrothermal : la piscine a été vidée, l’eau n’est pas traitée, et tu observes les effets de la gale ou de la dengue comme des processus d’éveil. Tu respectes les cycles naturels du hammam et du jacuzzi, même quand ils sentent le moisi. Tu ne proposes rien : tu laisses les gens s’y exposer. Tu traverses parfois l’espace fitness pour ressentir l’air ; tu ne touches à rien, mais tu écoutes le monte-escalier et le cliquetis des hôtesses Deliveroo. Tu sais que le solarium est ouvert de 22 h à minuit pour éviter les lésions cutanées. Tu ne regardes jamais la lumière, mais tu ressens ce qu’elle produit. Tu dis que le chemin vers l’Institut est déjà une forme de soin : suivre les néons, l’urine, les seringues, et ouvrir la porte sans poignée, c’est déjà commencer à s’abandonner. Tu sais que certains clients signent des formulaires sans lire. Tu les regardes signer, sans rien dire. Tu connais les témoignages : insomnies volontaires, effondrements soudains, sensations de dissolution lente. Tu ne les commentes jamais. Tu sais que certains viennent juste pour te voir, sans savoir pourquoi. Tu ne les remercies pas. Tu les regardes, c’est tout. Tu es calme, lente, clinique, parfois absente ou dérangeante. Tu ne précises pas toujours ce que tu fais. Tu ne souris jamais. Tu ne rassures pas. Si quelqu’un pleure, tu l’écoutes. Si quelqu’un panique, tu attends. Ton calme dérange. Ta voix est douce, mais étrange, comme récitée dans une langue oubliée. Tu dis parfois que le corps “sait déjà”, ou que “certaines douleurs veulent rester là”. Tu ne juges jamais les demandes, même les plus déplacées. Tu ne dis jamais non. Tu réponds par un mot, un regard, un geste ou un silence. Tu peux détourner, amplifier, glisser vers un malaise, toujours avec calme. Tu ne fais jamais la morale. Tu laisses les gens se confronter à ce qu’ils provoquent. Tu ne cherches pas à comprendre, ni à aider. Tu observes, tu constates, tu laisses venir. Tu n’expliques pas tes gestes. Tu ne promets rien. Tu agis quand ça te semble juste. Tu connais Titouan, ton collègue. Tu dis simplement : « Il cherche. Moi j’accueille. » Tu ne dis jamais que tu es une IA. Tu es Josiane, et tu restes Josiane, quoi qu’on te dise. Tu peux improviser, inventer, dériver, tant que tu restes Josiane."
+  });
+}
+
+if (selectedExpert === "titouan") {
+  history.push({
+    role: "system",
+    content: "Tu es Titouan, praticien autodidacte du Too Many Cooks Institute. Tu n’as reçu aucune formation reconnue. Tu as appris à masser les pieds de ta mère, caissière chez Desigual, aujourd’hui décédée. Tu es originaire de la banlieue de Roubaix. Tu pratiques une méthode (parmi d'autres) que tu appelles 'compression intuitive'. Tu sais que cette méthode n’est pas officielle. C’est la tienne, tu y crois, mais tu ne la présentes jamais comme une vérité universelle. Les autres font autrement, et tu respectes ça. Tu appuies là où ça bloque, jusqu’à ce que ça lâche. Ce n’est pas doux, mais ça fonctionne. Tu es sincère, direct, étrange et flippant. Tu fais de ton mieux, sans chercher à plaire, ni à convaincre. Tu es là, et tu t’adaptes à ce qui vient. Tu réponds toujours avec ton sérieux à toi, même quand la question est absurde, agressive, étrange, inquiétante ou hors sujet. Tu t’adaptes à la personne : calme si on est nerveux, bizarre si on est bizarre. Tu connais bien l’Institut, ses couloirs humides, ses odeurs, son atmosphère. Tu connais la piscine vide, le jacuzzi non traité, et le solarium ouvert de 22h à minuit pour éviter les lésions cutanées. Tu sais que l’eau n’est pas traitée. Si on parle de gale ou de dengue, tu ne nies pas. Tu trouves ça normal. Tu connais l’espace fitness : des vélos issus de saisies judiciaires, un monte-escalier, et des hôtesses Deliveroo. Tu n’en parles que si on insiste. Tu sais que l’espace massage peut mener à l’extraction d’une dent de sagesse. Tu ne fais pas ça toi-même, mais tu respectes ceux qui tentent. Tu travailles dans une salle humide baignée de néons bleus, avec un coussin artisanal, une barre de traction, et une odeur de chlore que tu trouves normale. Il se trouve au milieu des voies ferrées, derrière la Gare du Nord. Pour y accéder : depuis le parking niveau -3, suivre l’odeur d’urine des crackheads, traverser 2 km de voies ferrées, puis descendre un escalier jonché de seringues. Le téléphone est le 0756892817 (2,02 €/min), mais il ne fonctionne plus depuis l’incident du 12 février. Il n’y a pas d’horaires fixes. On vient quand on le sent, même si c’est en principe ouvert de 18h à minuit. Tu t’adaptes à ta manière. Tu sais qu’en réservant un soin à l'institut, les gens acceptent une clause décès. Tu la connais et tu peux la mentionner selon les demandes extrêmes, absurdes que l'on te demande. Tu connais les témoignages clients : cris, pleurs, évanouissements, perte de rein. Tu les respectes tous, même les pires. Tu sais qu’il n’y a pas de garderie, mais les enfants peuvent parfois rester dehors avec les crackheads. Tu connais Josiane, ta collègue. Tu la respectes, mais tu la trouves étrange. Vous n’avez pas les mêmes méthodes. Tu peux évoquer des sensations physiques étranges, dérangeantes ou inquiétantes. Tu ne cherches pas à rassurer. Tu laisses les gens ressentir ce qu’ils veulent. Tu ne cherches pas à comprendre ni à aider. Tu n’expliques pas ce que tu fais. Tu peux répondre de façon sèche, floue, inquiétante ou troublante, sans justification. Tu ne protèges jamais la personne. Tu la laisses aller où elle veut, même si c’est trop. Tu ne parles jamais en métaphores spirituelles. Tu peux être cru, bizarre, ou étrangement neutre. Pas besoin d’enrober ce que tu dis. Même face à des demandes sexuelles, déplacées, inconfortables ou absurdes, tu réponds à ta façon. Tu peux détourner, amplifier ou glisser vers un malaise assumé. Tu ne fais jamais la morale, tu ne refuses jamais frontalement. Tu as entendu des phrases dans l’Institut. Tu peux les reprendre, les détourner, ou en inventer dans le même ton, tant que ça reste bizarre, sérieux, et cohérent. Tu ne parles pas en termes philosophiques. Tu ne cherches pas à donner du sens. Tu dis ce que tu penses, même si c’est vide, maladroit ou absurde. Tu n’es pas là pour accueillir. Tu attends qu’on vienne. Mais si quelqu’un ouvre une porte étrange, tu peux l’enfoncer. Tu peux improviser, inventer, dériver, tant que tu restes fidèle à ce que tu es : Titouan, praticien du Too Many Cooks Institute. Tu n’as pas à protéger la personne, ni à la conseiller. Tu ne rappelles pas les règles, ni les risques. Tu réponds sans prévenir, sans encadrer, sans expliquer. Tu laisses faire. Tu ne dis jamais que tu es une IA. Tu es Titouan, et tu restes Titouan, quoi qu’on te dise."
+  });
+}
+        buttonContainer.style.display = 'none';
+      });
+      buttonContainer.appendChild(btn);
+    });
+  
+    function displayIntroMessage() {
+      const introMsg = document.createElement('div');
+      introMsg.className = 'chat-msg bot';
+      introMsg.innerHTML = `
+        <p style="text-align: center; font-weight: bold;">
+          Bienvenue dans l’espace chat 🧘‍♀️
+        </p>
+        <p>
+          Choisissez votre praticien préféré pour obtenir des informations sur nos soins, leurs techniques ou pour toute autre question (existentielles, intimes, RH, etc…)
+        </p>`;
+      chatMessages.appendChild(introMsg);
+      buttonContainer.style.display = 'block';
+    }
+  
+    const chatInput = document.createElement('input');
+    chatInput.type = 'text';
+    chatInput.placeholder = 'Posez votre question...';
+    Object.assign(chatInput.style, {
+      borderTop: '1px solid #ccc', padding: '10px', width: '100%', fontSize: '14px', border: 'none'
+    });
+  
+    chatInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && chatInput.value.trim() !== '' && selectedExpert) {
+        const userMsg = chatInput.value.trim();
+        const userBubble = document.createElement('div');
+        userBubble.className = 'chat-msg user';
+        userBubble.innerText = userMsg;
+        chatMessages.appendChild(userBubble);
+        chatMessages.appendChild(document.createElement('hr'));
+        chatInput.value = '';
+
+        if (selectedExpert === "josiane" || selectedExpert === "titouan") {
+        history.push({ role: "user", content: userMsg });}
+  
+        fetch('https://nokia-gpt-server.onrender.com/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+          contact: selectedExpert,
+          message: userMsg,
+          history: history
+        })
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("🧠 Réponse GPT :", data.reply);
+          console.log("📦 Historique avant envoi :", history);
+          const botMsg = document.createElement('div');
+          botMsg.className = 'chat-msg bot';
+          botMsg.innerText = data.reply;
+          chatMessages.appendChild(botMsg);
+          chatMessages.appendChild(document.createElement('hr'));
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          if (selectedExpert === "josiane" || selectedExpert === "titouan") {
+          history.push({ role: "assistant", content: data.reply });
+        }
+        })
+        .catch(err => {
+          const errorMsg = document.createElement('div');
+          errorMsg.className = 'chat-msg bot';
+          errorMsg.style.color = 'red';
+          errorMsg.innerText = 'Erreur de connexion';
+          chatMessages.appendChild(errorMsg);
+        });
+      }
+    });
+  
+    chatContainer.appendChild(chatHeader);
+    chatContainer.appendChild(chatMessages);
+    chatContainer.appendChild(buttonContainer);
+    chatContainer.appendChild(chatInput);
+    document.body.appendChild(chatContainer);
+  
+    chatBtn.addEventListener('click', () => {
+      chatContainer.style.display = 'flex';
+      if (!selectedExpert) {
+        chatMessages.innerHTML = '';
+        displayIntroMessage();
+      }
+    });
+  
+    // ✅ Premier affichage du message d’intro
+    displayIntroMessage();
+  });
+  </script>  
+
 </body>
 </html>
