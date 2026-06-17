@@ -175,7 +175,7 @@
     .gate-status{
       min-height:18px;
       color:var(--glow);
-      font-size:12.5px;
+      font-size:13.5px;
       margin-top:14px;
       letter-spacing:.5px;
       display:flex;
@@ -228,7 +228,7 @@
       margin-bottom:6px;
     }
     .passenger-card{
-      width:144px;
+      width:166px;
       flex:0 0 auto;
       padding:8px 6px 10px;
       border-radius:12px;
@@ -248,7 +248,7 @@
     }
     .passenger-card img{
       width:100%;
-      max-width:116px;
+      max-width:133px;
       aspect-ratio:1/1;
       border-radius:10px;
       object-fit:cover;
@@ -265,7 +265,7 @@
     .passenger-msg{
       margin-top:16px;
       min-height:20px;
-      font-size:13px;
+      font-size:14px;
       color:var(--glow);
       max-width:480px;
     }
@@ -284,12 +284,33 @@
       margin-bottom:14px;
     }
     .q-passenger img{
-      width:72px; height:72px;
+      width:133px; height:133px;
       border-radius:10px;
       object-fit:cover;
       border:2px solid var(--gold-light);
       display:block;
       margin-bottom:6px;
+      cursor:zoom-in;
+      transition:transform .2s ease;
+    }
+    .q-passenger img:hover{ transform:scale(1.04); }
+    .portrait-zoom-overlay{
+      position:fixed; inset:0;
+      background:rgba(2,8,23,.85);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      cursor:zoom-out;
+      padding:24px;
+    }
+    .portrait-zoom-overlay.open{ display:flex; }
+    .portrait-zoom-overlay img{
+      max-width:min(90vw,360px);
+      max-height:80vh;
+      border-radius:14px;
+      border:2px solid var(--gold-light);
+      box-shadow:0 20px 50px rgba(0,0,0,.6);
     }
     .q-passenger span{
       font-family:'Playfair Display', serif;
@@ -342,9 +363,9 @@
     .ack-msg{
       margin-top:14px;
       min-height:16px;
-      font-size:12px;
+      font-size:13px;
       font-style:italic;
-      color:var(--muted);
+      color:var(--glow);
     }
     .q-progress{
       font-size:11px;
@@ -796,6 +817,10 @@
     Toute réclamation d’ordre psychologique devra être adressée à votre thérapeute.
   </footer>
 
+  <div class="portrait-zoom-overlay" id="portraitZoomOverlay">
+    <img id="portraitZoomImg" src="" alt="">
+  </div>
+
   <div class="modal" id="modal">
     <button class="modal-close" id="modalClose">&times;</button>
     <div class="modal-inner">
@@ -946,6 +971,20 @@
     const qProgress = document.getElementById('qProgress');
     const qPassenger = document.getElementById('qPassenger');
     let qIndex = 0;
+
+    /* ===== Zoom portrait (étape Formalités avant départ) ===== */
+    const portraitZoomOverlay = document.getElementById('portraitZoomOverlay');
+    const portraitZoomImg = document.getElementById('portraitZoomImg');
+    qPassenger.addEventListener('click', (e) => {
+      const img = e.target.closest('img');
+      if(!img) return;
+      portraitZoomImg.src = img.src;
+      portraitZoomImg.alt = img.alt;
+      portraitZoomOverlay.classList.add('open');
+    });
+    portraitZoomOverlay.addEventListener('click', () => {
+      portraitZoomOverlay.classList.remove('open');
+    });
 
     function renderQuestion(){
       if(qIndex >= questions.length){
@@ -1197,22 +1236,22 @@
       }
     }
 
-    function launchConfetti(){
+    function spawnConfettiBatch(count){
       const colors = ['#38bdf8', '#e0ad55', '#edf0f0', '#2563eb'];
-      for(let i=0; i<60; i++){
+      for(let i=0; i<count; i++){
         const c = document.createElement('div');
         c.style.position = 'fixed';
         c.style.top = '-10px';
         c.style.left = Math.random()*100 + 'vw';
-        c.style.width = (4+Math.random()*5) + 'px';
-        c.style.height = (4+Math.random()*5) + 'px';
+        c.style.width = (4+Math.random()*6) + 'px';
+        c.style.height = (4+Math.random()*6) + 'px';
         c.style.background = colors[i % colors.length];
         c.style.opacity = .9;
         c.style.borderRadius = Math.random()<.5 ? '50%' : '2px';
         c.style.zIndex = 60;
         c.style.pointerEvents = 'none';
-        const fall = 2.4 + Math.random()*1.6;
-        const drift = (Math.random()-0.5)*120;
+        const fall = 3.5 + Math.random()*2.5;
+        const drift = (Math.random()-0.5)*160;
         c.style.transition = `transform ${fall}s ease-in, opacity ${fall}s ease-in`;
         document.body.appendChild(c);
         requestAnimationFrame(()=>{
@@ -1220,6 +1259,13 @@
           c.style.opacity = 0;
         });
         setTimeout(()=> c.remove(), fall*1000 + 200);
+      }
+    }
+
+    function launchConfetti(){
+      const waves = 5;
+      for(let w=0; w<waves; w++){
+        setTimeout(()=> spawnConfettiBatch(70), w*500);
       }
     }
 
