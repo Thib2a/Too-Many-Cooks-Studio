@@ -40,25 +40,6 @@
       clip:rect(0,0,0,0);white-space:nowrap;border:0;
     }
 
-    /* Bandeau image — vraie image + zoom natif */
-    .image-container{
-      width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      /* pas d’overflow hidden -> laisse zoomer/déborder si on zoome fort */
-      background:#0f172a;         /* halo discret autour, inchangé */
-      padding:0;
-    }
-    .image-container img{
-      display:block;
-      width:100%;
-      height:auto;                 /* ✅ pas figée */
-      max-height:100svh;           /* occupe l’écran au chargement */
-      object-fit:contain;          /* toujours entière */
-      touch-action:pinch-zoom;     /* ✅ pinch-zoom direct sur l’image */
-    }
-
     /* Carte contact */
     .contact-wrapper{ display:grid; place-items:center; padding: clamp(16px, 4vw, 32px); }
     .contact-section{
@@ -144,17 +125,16 @@
 </head>
 <body>
 
-  <!-- Image pleine page et zoomable -->
-  <div class="image-container" aria-label="Présentation Too Many Cooks — visuel d'introduction">
-    <img src="fonds/a_propos.webp" alt="Présentation Too Many Cooks — visuel d'introduction">
-  </div>
-
   <!-- Section Contact -->
   <section class="contact-wrapper">
     <div class="contact-section" role="region" aria-labelledby="contact-title">
       <h2 id="contact-title">Nous contacter</h2>
 
-      <form class="contact-form" onsubmit="redirectToHome(event)">
+      <form class="contact-form" action="https://formsubmit.co/suret.thibault@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nouveau message — Too Many Cooks Corp">
+        <input type="hidden" name="_template" value="box">
+        <input type="hidden" name="_captcha" value="true">
+
         <label class="sr-only" for="name">Nom / Pseudonyme</label>
         <input class="input" id="name" name="Nom" type="text" inputmode="text" autocomplete="name" required
                placeholder="Indiquez votre véritable identité, ou un pseudo inspiré d’un fromage méconnu.">
@@ -201,12 +181,6 @@
         }
       });
     })();
-
-    // Redirection : on garde ta cible d’origine (error.html)
-    function redirectToHome(event){
-      event.preventDefault();
-      window.location.href = 'error.html';
-    }
   </script>
 </body>
 </html>
